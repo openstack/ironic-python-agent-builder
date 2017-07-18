@@ -1,0 +1,13 @@
+===========================
+Ironic Python Agent Builder
+===========================
+
+Tools and scripts to build a deployment, cleaning or inspection ramdisk
+based on `Ironic Python Agent`_.
+
+* Free software: Apache license
+* Documentation: https://docs.openstack.org/ironic-python-agent-builder
+* Source: https://git.openstack.org/cgit/openstack/ironic-python-agent-builder
+* Bugs: https://bugs.launchpad.net/ironic-python-agent
+
+.. _Ironic Python Agent: https://docs.openstack.org/ironic-python-agent

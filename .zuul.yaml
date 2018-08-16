@@ -1,0 +1,14 @@
+- project:
+    templates:
+      - publish-openstack-sphinx-docs
+      - check-requirements
+      - release-notes-jobs
+    check:
+      jobs:
+        - openstack-tox-pep8
+    gate:
+      jobs:
+        - openstack-tox-pep8
+    post:
+      jobs:
+        - publish-openstack-python-branch-tarball

@@ -1,8 +1,8 @@
 - project:
     templates:
-      - publish-openstack-sphinx-docs
+      - publish-openstack-docs-pti
       - check-requirements
-      - release-notes-jobs
+      - release-notes-jobs-python3
     check:
       jobs:
         - openstack-tox-pep8

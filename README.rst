@@ -7,7 +7,7 @@ based on `Ironic Python Agent`_.
 
 * Free software: Apache license
 * Documentation: https://docs.openstack.org/ironic-python-agent-builder
-* Source: https://git.openstack.org/cgit/openstack/ironic-python-agent-builder
+* Source: https://opendev.org/openstack/ironic-python-agent-builder
 * Bugs: https://storyboard.openstack.org/#!/project/948
 
 .. _Ironic Python Agent: https://docs.openstack.org/ironic-python-agent

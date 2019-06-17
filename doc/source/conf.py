@@ -37,13 +37,11 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'ironic-python-agent-builder'
 copyright = u'2017, OpenStack Developers'
 
 # openstackdocstheme options
 repository_name = 'openstack/ironic-python-agent-builder'
-bug_project = 'ironic-python-agent'
-bug_tag = ''
+use_storyboard = True
 
 # If true, '()' will be appended to :func: etc. cross-reference text.
 add_function_parentheses = True
@@ -66,14 +64,14 @@ html_theme = 'openstackdocs'
 html_last_updated_fmt = '%Y-%m-%d %H:%M'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = '%sdoc' % project
+htmlhelp_basename = 'ironic-python-agent-builderdoc'
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass
 # [howto/manual]).
 latex_documents = [
     ('index',
-     '%s.tex' % project,
+     'doc-ironic-python-agent-builder.tex',
      u'Ironic Python Agent Builder Documentation',
      u'OpenStack Developers', 'manual'),
 ]

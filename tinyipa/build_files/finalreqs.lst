@@ -5,14 +5,14 @@ gdisk.tcz
 glib2.tcz
 hdparm.tcz
 iproute2.tcz
-ipv6-4.8.17-tinycore64.tcz
+ipv6-4.14.10-tinycore64.tcz
 libxml2.tcz
 mdadm.tcz
 parted.tcz
 popt.tcz
 pciutils.tcz
-raid-dm-4.8.17-tinycore64.tcz
-scsi-4.8.17-tinycore64.tcz
+raid-dm-4.14.10-tinycore64.tcz
+scsi-4.14.10-tinycore64.tcz
 smartmontools.tcz
 udev-lib.tcz
 util-linux.tcz

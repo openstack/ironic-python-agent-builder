@@ -2,7 +2,7 @@
 
 S="Linux"
 N="box"
-R="4.8.17-tinycore64"
+R="4.14.10-tinycore64"
 P="unknown"
 V="#2017 SMP"
 M="x86_64"

@@ -168,6 +168,9 @@ sudo sed -i "s/%UDEV_SETTLE_TIMEOUT%/$TINYIPA_UDEV_SETTLE_TIMEOUT/" "$FINALDIR/e
 sudo sed -i '/# Main/a NOZSWAP=1' "$FINALDIR/etc/init.d/tc-config"
 # sudo cp $WORKDIR/build_files/tc-config $FINALDIR/etc/init.d/tc-config
 
+# Place ipv6 modprobe config so the kernel support loads.
+sudo cp "$WORKDIR/build_files/modprobe.conf" "$FINALDIR/etc/modproble.conf"
+
 if $PYOPTIMIZE_TINYIPA; then
     # Precompile all python
     if [[ $USE_PYTHON3 == "True" ]]; then

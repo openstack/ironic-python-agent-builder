@@ -6,6 +6,7 @@
     check:
       jobs:
         - openstack-tox-pep8
+        - ironic-standalone-ipa-src
         - ipa-tempest-partition-bios-ipmi-direct-tinyipa-src
         - ipa-tempest-partition-bios-ipmi-iscsi-tinyipa-src
         - ipa-tempest-wholedisk-bios-ipmi-direct-tinyipa-src
@@ -14,6 +15,7 @@
     gate:
       jobs:
         - openstack-tox-pep8
+        - ironic-standalone-ipa-src
         - ipa-tempest-partition-bios-ipmi-direct-tinyipa-src
         - ipa-tempest-partition-bios-ipmi-iscsi-tinyipa-src
         - ipa-tempest-wholedisk-bios-ipmi-direct-tinyipa-src

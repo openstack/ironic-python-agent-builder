@@ -59,8 +59,8 @@ mkdir "$BUILDDIR"
 sudo sh -c "echo $TINYCORE_MIRROR_URL > $BUILDDIR/opt/tcemirror"
 
 # Download TGT, Qemu-utils, Biosdevname and IPMItool source
-clone_and_checkout "https://github.com/fujita/tgt.git" "${BUILDDIR}/tmp/tgt" "v1.0.62"
-clone_and_checkout "https://github.com/qemu/qemu.git" "${BUILDDIR}/tmp/qemu" "v2.5.0"
+clone_and_checkout "https://github.com/fujita/tgt.git" "${BUILDDIR}/tmp/tgt" "v1.0.79"
+clone_and_checkout "https://github.com/qemu/qemu.git" "${BUILDDIR}/tmp/qemu" "v3.1.1"
 clone_and_checkout "https://github.com/lyonel/lshw.git" "${BUILDDIR}/tmp/lshw" "B.02.18"
 if $TINYIPA_REQUIRE_BIOSDEVNAME; then
     wget -N -O - https://linux.dell.com/biosdevname/biosdevname-0.7.2/biosdevname-0.7.2.tar.gz | tar -xz -C "${BUILDDIR}/tmp" -f -

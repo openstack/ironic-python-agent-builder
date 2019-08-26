@@ -17,7 +17,10 @@ import sys
 
 
 LOCATIONS = [
-    '.',
+    os.path.abspath('.'),
+    # This accounts for pip installations on Ubuntu that go into /usr/local
+    os.path.abspath(os.path.basename(sys.argv[0])),
+    # This accounts for system-wide installations to /usr
     os.path.join(sys.prefix, 'share', 'ironic-python-agent-builder'),
 ]
 
@@ -29,7 +32,7 @@ def find_elements_path():
             return final
 
     sys.exit('ironic-python-agent-ramdisk element has not been found in any '
-             'of the following locations: %s' % ', '.join(LOCATIONS))
+             'of the following locations: %s' % ', '.join(set(LOCATIONS)))
 
 
 def main():

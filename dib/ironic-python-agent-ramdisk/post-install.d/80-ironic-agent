@@ -10,6 +10,9 @@ install-packages -e cloud-init
 
 rm -rf /tmp/ironic-python-agent
 
+# Make sure rescue works
+mkdir -p /etc/ipa-rescue-config
+
 case "$DIB_INIT_SYSTEM" in
     upstart)
         if [ -f /etc/init/ufw.conf ]; then

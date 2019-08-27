@@ -7,7 +7,7 @@ set -eu
 set -o pipefail
 
 SCRIPTDIR=$(dirname $0)
-IPADIR=/usr/share/ironic-python-agent
+IPADIR=/tmp/ironic-python-agent
 
 # Generate upper-constraints
 $IPADIR/imagebuild/common/generate_upper_constraints.sh $IPADIR/upper-constraints.txt

@@ -1,0 +1,16 @@
+- name: Generate image name
+  set_fact:
+    image_name: ipa-{{ image_distro }}-{{ ipa_branch_path }}
+
+- name: Build a DIB image
+  command: |
+    ironic-python-agent-builder -e dhcp-all-interfaces -o {{ image_name }} {{ image_distro }}
+  environment:
+    # Use repositories checked out by Zuul
+    DIB_REPOLOCATION_ironic_python_agent: '{{ ipa_source_path }}'
+    DIB_REPOREF_ironic_python_agent: HEAD
+
+- name: Move the resulting files
+  shell: |
+    tar -czf "{{ ipa_tar_dir }}/{{ image_name }}.tar.gz" {{ image_name }}*
+    mv {{ image_name }}* "{{ ipa_raw_dir }}"

@@ -18,8 +18,12 @@ import sys
 
 LOCATIONS = [
     os.path.abspath('.'),
-    # This accounts for pip installations on Ubuntu that go into /usr/local
-    os.path.abspath(os.path.basename(sys.argv[0])),
+    # This accounts for pip installations on Ubuntu that go into /usr/local.
+    # This logic converts e.g. /usr/local/bin/ironic-python-agent-builder
+    # into /usr/local/share/ironic-python-agent-builder.
+    os.path.abspath(os.path.join(os.path.dirname(sys.argv[0]),
+                                 '..', 'share',
+                                 'ironic-python-agent-builder')),
     # This accounts for system-wide installations to /usr
     os.path.join(sys.prefix, 'share', 'ironic-python-agent-builder'),
 ]

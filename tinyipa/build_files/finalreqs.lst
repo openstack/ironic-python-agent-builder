@@ -6,6 +6,7 @@ glib2.tcz
 hdparm.tcz
 iproute2.tcz
 ipv6-4.8.17-tinycore64.tcz
+libxml2.tcz
 mdadm.tcz
 parted.tcz
 popt.tcz

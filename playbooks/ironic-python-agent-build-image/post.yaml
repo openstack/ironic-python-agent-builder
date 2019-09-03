@@ -1,9 +1,5 @@
 - hosts: all
 
-  vars:
-    ipa_raw_dir: '{{ ansible_user_dir }}/src/opendev.org/openstack/ironic-python-agent/UPLOAD_RAW'
-    ipa_tar_dir: '{{ ansible_user_dir }}/src/opendev.org/openstack/ironic-python-agent/UPLOAD_TAR'
-
   tasks:
 
     - name: Ensure artifacts directory exists
@@ -12,7 +8,7 @@
         state: directory
       delegate_to: localhost
 
-    - name: Copy files from {{ ansible_user_dir }}/src/opendev.org/openstack/ironic-python-agent on node
+    - name: Copy files from {{ ipa_raw_dir }} on node
       synchronize:
         src: '{{ ipa_raw_dir }}/'
         dest: '{{ zuul.executor.work_root }}/artifacts/{{ image_type }}/files/'
@@ -23,7 +19,7 @@
           - --include=/*
           - --prune-empty-dirs
 
-    - name: Copy files from {{ ansible_user_dir }}/src/opendev.org/openstack/ironic-python-agent on node
+    - name: Copy files from {{ ipa_tar_dir }} on node
       synchronize:
         src: '{{ ipa_tar_dir }}/'
         dest: '{{ zuul.executor.work_root }}/artifacts/{{ image_type }}/'

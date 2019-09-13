@@ -1,0 +1,7 @@
+- hosts: all
+  tasks:
+
+    - import_role:
+        name: ipa-build-dib-image
+        tasks_from: install.yaml
+      when: image_type == 'dib'

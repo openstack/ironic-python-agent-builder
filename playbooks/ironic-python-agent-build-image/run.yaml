@@ -1,0 +1,25 @@
+- hosts: all
+
+  vars:
+    ipa_raw_dir: '{{ ansible_user_dir }}/src/opendev.org/openstack/ironic-python-agent/UPLOAD_RAW'
+    ipa_tar_dir: '{{ ansible_user_dir }}/src/opendev.org/openstack/ironic-python-agent/UPLOAD_TAR'
+
+  tasks:
+
+    - name: Create a target directory for raw images
+      file:
+        path: '{{ ipa_raw_dir }}'
+        state: directory
+
+    - name: Create a target directory for tarballs
+      file:
+        path: '{{ ipa_tar_dir }}'
+        state: directory
+
+    - import_role:
+        name: ipa-build-tinyipa-image
+      when: image_type == 'tinyipa'
+
+    - import_role:
+        name: ipa-build-dib-image
+      when: image_type == 'dib'

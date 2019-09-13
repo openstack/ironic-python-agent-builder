@@ -1,0 +1,4 @@
+ipa_branch_path: '{{ zuul.branch | replace("/", "-") }}'
+ipa_raw_dir: '{{ ansible_user_dir }}/src/opendev.org/openstack/ironic-python-agent/UPLOAD_RAW'
+ipa_tar_dir: '{{ ansible_user_dir }}/src/opendev.org/openstack/ironic-python-agent/UPLOAD_TAR'
+tinyipa_dir: '{{ ansible_user_dir }}/src/opendev.org/openstack/ironic-python-agent-builder/tinyipa'

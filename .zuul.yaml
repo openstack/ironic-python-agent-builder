@@ -1,3 +1,58 @@
+- job:
+    name: ironic-python-agent-build-image-base
+    parent: publish-openstack-artifacts
+    pre-run: playbooks/ironic-python-agent-build-image/pre.yaml
+    run: playbooks/ironic-python-agent-build-image/run.yaml
+    post-run: playbooks/ironic-python-build-image/post.yaml
+    timeout: 1800
+    required-projects:
+      - openstack/requirements
+      - openstack/ironic-python-agent
+      - openstack/ironic-python-agent-builder
+
+- job:
+    name: ironic-python-agent-build-image-tinyipa
+    parent: ironic-python-agent-build-image-base
+    vars:
+      image_type: 'tinyipa'
+
+- job:
+    name: ironic-python-agent-build-image-dib-centos7
+    parent: ironic-python-agent-build-image-base
+    required-projects:
+      # NOTE(dtantsur): used for bindep only
+      - openstack/diskimage-builder
+    vars:
+      image_type: 'dib'
+      image_distro: 'centos7'
+
+- job:
+    name: ironic-python-agent-check-image-base
+    parent: base
+    pre-run: playbooks/ironic-python-agent-build-image/pre.yaml
+    run: playbooks/ironic-python-agent-build-image/run.yaml
+    timeout: 1800
+    required-projects:
+      - openstack/requirements
+      - openstack/ironic-python-agent
+      - openstack/ironic-python-agent-builder
+
+- job:
+    name: ironic-python-agent-check-image-tinyipa
+    parent: ironic-python-agent-check-image-base
+    vars:
+      image_type: 'tinyipa'
+
+- job:
+    name: ironic-python-agent-check-image-dib-centos7
+    parent: ironic-python-agent-check-image-base
+    required-projects:
+      # NOTE(dtantsur): used for bindep only
+      - openstack/diskimage-builder
+    vars:
+      image_type: 'dib'
+      image_distro: 'centos7'
+
 - project:
     templates:
       - publish-openstack-docs-pti
@@ -12,6 +67,8 @@
         - ipa-tempest-wholedisk-bios-ipmi-direct-tinyipa-src
         - ipa-tempest-wholedisk-bios-ipmi-iscsi-tinyipa-src
         - ipa-tempest-ironic-inspector-src
+        - ironic-python-agent-check-image-tinyipa
+        - ironic-python-agent-check-image-dib-centos7
     gate:
       jobs:
         - openstack-tox-pep8
@@ -21,13 +78,10 @@
         - ipa-tempest-wholedisk-bios-ipmi-direct-tinyipa-src
         - ipa-tempest-wholedisk-bios-ipmi-iscsi-tinyipa-src
         - ipa-tempest-ironic-inspector-src
+        - ironic-python-agent-check-image-tinyipa
+        - ironic-python-agent-check-image-dib-centos7
     post:
       jobs:
         - publish-openstack-python-branch-tarball
-        - ipa-builder-buildimage-tinyipa
-
-- job:
-    name: ipa-builder-buildimage-tinyipa
-    parent: ironic-python-agent-buildimage-base
-    vars:
-      image_name: 'tinyipa'
+        - ironic-python-agent-build-image-tinyipa
+        - ironic-python-agent-build-image-dib-centos7

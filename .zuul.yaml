@@ -3,7 +3,7 @@
     parent: publish-openstack-artifacts
     pre-run: playbooks/ironic-python-agent-build-image/pre.yaml
     run: playbooks/ironic-python-agent-build-image/run.yaml
-    post-run: playbooks/ironic-python-build-image/post.yaml
+    post-run: playbooks/ironic-python-agent-build-image/post.yaml
     timeout: 1800
     required-projects:
       - openstack/requirements

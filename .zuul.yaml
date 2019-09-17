@@ -66,9 +66,12 @@
         - ipa-tempest-partition-bios-ipmi-iscsi-tinyipa-src
         - ipa-tempest-wholedisk-bios-ipmi-direct-tinyipa-src
         - ipa-tempest-wholedisk-bios-ipmi-iscsi-tinyipa-src
-        - ipa-tempest-ironic-inspector-src
         - ironic-python-agent-check-image-tinyipa
         - ironic-python-agent-check-image-dib-centos7
+        - ipa-tempest-wholedisk-bios-ipmi-direct-dib-src:
+            voting: false
+        - ipa-tempest-ironic-inspector-src:
+            voting: false
     gate:
       jobs:
         - openstack-tox-pep8
@@ -77,7 +80,6 @@
         - ipa-tempest-partition-bios-ipmi-iscsi-tinyipa-src
         - ipa-tempest-wholedisk-bios-ipmi-direct-tinyipa-src
         - ipa-tempest-wholedisk-bios-ipmi-iscsi-tinyipa-src
-        - ipa-tempest-ironic-inspector-src
         - ironic-python-agent-check-image-tinyipa
         - ironic-python-agent-check-image-dib-centos7
     post:

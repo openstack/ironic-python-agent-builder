@@ -205,7 +205,7 @@ echo "Symlink all from /usr/local/sbin to /usr/sbin"
 pushd "$FINALDIR/usr/local/sbin"
 for target in *; do
     if [ ! -f "$FINALDIR/usr/sbin/$target" ]; then
-        $CHROOT_CMD ln -s "/usr/local/sbin/$target" "/usr/sbin/$target"
+        $CHROOT_CMD ln -sf "/usr/local/sbin/$target" "/usr/sbin/$target"
     fi
 done
 popd
@@ -214,7 +214,7 @@ echo "Symlink all from /usr/local/bin to /usr/bin"
 pushd "$FINALDIR/usr/local/bin"
 for target in *; do
     if [ ! -f "$FINALDIR/usr/bin/$target" ]; then
-        $CHROOT_CMD ln -s "/usr/local/bin/$target" "/usr/bin/$target"
+        $CHROOT_CMD ln -sf "/usr/local/bin/$target" "/usr/bin/$target"
     fi
 done
 popd

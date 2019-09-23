@@ -8,14 +8,14 @@
 
     - name: Ensure artifacts directory exists
       file:
-        path: '{{ zuul.executor.work_root }}/artifacts/{{ image_name }}/files'
+        path: '{{ zuul.executor.work_root }}/artifacts/{{ image_type }}/files'
         state: directory
       delegate_to: localhost
 
     - name: Copy files from {{ ansible_user_dir }}/src/opendev.org/openstack/ironic-python-agent on node
       synchronize:
         src: '{{ ipa_raw_dir }}'
-        dest: '{{ zuul.executor.work_root }}/artifacts/{{ image_name }}/files/'
+        dest: '{{ zuul.executor.work_root }}/artifacts/{{ image_type }}/files/'
         mode: pull
         copy_links: true
         verify_host: true
@@ -26,7 +26,7 @@
     - name: Copy files from {{ ansible_user_dir }}/src/opendev.org/openstack/ironic-python-agent on node
       synchronize:
         src: '{{ ipa_tar_dir }}'
-        dest: '{{ zuul.executor.work_root }}/artifacts/{{ image_name }}/'
+        dest: '{{ zuul.executor.work_root }}/artifacts/{{ image_type }}/'
         mode: pull
         copy_links: true
         verify_host: true

@@ -14,7 +14,7 @@
 
     - name: Copy files from {{ ansible_user_dir }}/src/opendev.org/openstack/ironic-python-agent on node
       synchronize:
-        src: '{{ ipa_raw_dir }}'
+        src: '{{ ipa_raw_dir }}/'
         dest: '{{ zuul.executor.work_root }}/artifacts/{{ image_type }}/files/'
         mode: pull
         copy_links: true
@@ -25,7 +25,7 @@
 
     - name: Copy files from {{ ansible_user_dir }}/src/opendev.org/openstack/ironic-python-agent on node
       synchronize:
-        src: '{{ ipa_tar_dir }}'
+        src: '{{ ipa_tar_dir }}/'
         dest: '{{ zuul.executor.work_root }}/artifacts/{{ image_type }}/'
         mode: pull
         copy_links: true

@@ -8,30 +8,31 @@ set -o pipefail
 
 SCRIPTDIR=$(dirname $0)
 IPADIR=/tmp/ironic-python-agent
+VENVDIR=/opt/ironic-python-agent
 
 # Generate upper-constraints
 $IPADIR/imagebuild/common/generate_upper_constraints.sh $IPADIR/upper-constraints.txt
 
 # create the virtual environment
-virtualenv $IPADIR/venv
+virtualenv $VENVDIR
 
 # pip might be an older version which does not support the -c option, therefore upgrade first
-$IPADIR/venv/bin/pip install pip --upgrade
+$VENVDIR/bin/pip install pip --upgrade
 
 # install IPA inside the virtual environment
-$IPADIR/venv/bin/pip install -c $IPADIR/upper-constraints.txt $IPADIR
+$VENVDIR/bin/pip install -c $IPADIR/upper-constraints.txt $IPADIR
 
 # FIXME(lucasagomes): Figure out how we can use the "--install-option"
 # parameter for pip install so we don't have to manually create a symlink
 # create the launcher link so services can use it
-ln -s $IPADIR/venv/bin/ironic-python-agent /usr/local/bin/ironic-python-agent
+ln -s $VENVDIR/bin/ironic-python-agent /usr/local/bin/ironic-python-agent
 
 case "$DIB_INIT_SYSTEM" in
     upstart)
         install -D -g root -o root -m 0755 ${SCRIPTDIR}/ironic-python-agent.conf /etc/init/ironic-python-agent.conf
         ;;
     systemd)
-        install -D -g root -o root -m 0755 ${SCRIPTDIR}/ironic-python-agent.service /usr/lib/systemd/system/ironic-python-agent.service
+        install -D -g root -o root -m 0644 ${SCRIPTDIR}/ironic-python-agent.service /usr/lib/systemd/system/ironic-python-agent.service
         ;;
     sysv)
         install -D -g root -o root -m 0755 ${SCRIPTDIR}/ironic-python-agent.init /etc/init.d/ironic-python-agent.init
@@ -45,5 +46,5 @@ esac
 
 # Copying the self signed certificate for request library
 if [ -f /tmp/in_target.d/ipa-trusted-cert.pem ]; then
-    cat /tmp/in_target.d/ipa-trusted-cert.pem >> $($IPADIR/venv/bin/python -c "import requests; print requests.certs.where()")
+    cat /tmp/in_target.d/ipa-trusted-cert.pem >> $($VENVDIR/bin/python -c "import requests; print requests.certs.where()")
 fi

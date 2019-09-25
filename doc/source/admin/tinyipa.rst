@@ -103,13 +103,13 @@ Advanced options
 (De)Optimizing the image
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you want the build script to preinstall everything into the ramdisk,
-instead of loading some things at runtime (this results in a slightly bigger
-ramdisk), before running ``make`` or ``build-tinyipa.sh`` set:
+If you do not want the build script to preinstall everything into the ramdisk,
+and instead load some things at runtime (this results in a slightly smaller
+ramdisk), before running ``make`` or ``finalise-tinyipa.sh`` set:
 
 .. code-block:: bash
 
-    export BUILD_AND_INSTALL_TINYIPA=true
+    export BUILD_AND_INSTALL_TINYIPA=false
 
 By default, building tinyIPA will compile most of the Python code to
 optimized ``*.pyo`` files, completely remove most of ``*.py`` and ``*.pyc``

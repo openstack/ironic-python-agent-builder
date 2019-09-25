@@ -36,6 +36,14 @@
       - openstack/requirements
       - openstack/ironic-python-agent
       - openstack/ironic-python-agent-builder
+    irrelevant-files:
+      - ^.*\.rst$
+      - ^doc/.*$
+      - ^releasenotes/.*$
+      - ^setup.cfg$
+      - ^test-requirements.txt$
+      - ^tools/.*$
+      - ^tox.ini$
 
 - job:
     name: ironic-python-agent-check-image-tinyipa

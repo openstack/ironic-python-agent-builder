@@ -4,7 +4,6 @@
     chdir: '{{ tinyipa_dir }}'
   environment:
     BRANCH_PATH: '{{ ipa_branch_path }}'
-    BUILD_AND_INSTALL_TINYIPA: True
     IPA_SOURCE_DIR: '{{ ansible_user_dir }}/src/opendev.org/openstack/ironic-python-agent'
 
 - name: Move resulting files

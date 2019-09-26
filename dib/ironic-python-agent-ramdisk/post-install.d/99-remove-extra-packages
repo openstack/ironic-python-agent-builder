@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [ "${DIB_DEBUG_TRACE:-0}" -gt 0 ]; then
+    set -x
+fi
+set -eu
+set -o pipefail
+
+rm -rf /tmp/ironic-python-agent
+
+# TODO(dtantsur): implement the same for debian-based systems
+case "$DISTRO_NAME" in
+    fedora|centos|centos7|rhel|rhel7)
+        ${YUM:-yum} clean all
+        # Rebuilding the rpm database after removing packages will reduce
+        # its size
+        rpm --rebuilddb
+        ;;
+esac

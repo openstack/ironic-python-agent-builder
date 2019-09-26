@@ -8,10 +8,6 @@ set -o pipefail
 
 DIB_IPA_ENABLE_RESCUE=${DIB_IPA_ENABLE_RESCUE:-true}
 
-install-packages -e cloud-init
-
-rm -rf /tmp/ironic-python-agent
-
 if $DIB_IPA_ENABLE_RESCUE; then
     # Make sure rescue works
     mkdir -p /etc/ipa-rescue-config

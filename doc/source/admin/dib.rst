@@ -68,6 +68,20 @@ To use a specific branch of ironic-python-agent, use:
 
     export DIB_REPOREF_ironic_python_agent=origin/stable/queens
 
+ISO Images
+~~~~~~~~~~
+
+Additionally, the IPA ramdisk can be packaged inside of an ISO for use with
+some virtual media drivers. Use the ``iso-image-create`` utility, passing it
+the initrd and the kernel, for example:
+
+.. code-block:: console
+
+  ./tools/iso-image-create -o /path/to/output.iso -i /path/to/ipa.initrd -k /path/to/ipa.kernel
+
+This is a generic tool that can be used to combine any initrd and kernel into
+a suitable ISO for booting, and so should work against any IPA ramdisk.
+
 Advanced options
 ----------------
 

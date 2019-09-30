@@ -13,8 +13,8 @@ VENVDIR=/opt/ironic-python-agent
 # Generate upper-constraints
 $IPADIR/imagebuild/common/generate_upper_constraints.sh $IPADIR/upper-constraints.txt
 
-# create the virtual environment
-virtualenv $VENVDIR
+# create the virtual environment using the default python
+$DIB_PYTHON -m virtualenv -- $VENVDIR
 
 # pip might be an older version which does not support the -c option, therefore upgrade first
 $VENVDIR/bin/pip install pip --upgrade

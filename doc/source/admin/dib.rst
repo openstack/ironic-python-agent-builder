@@ -16,19 +16,17 @@ To build an image using diskimage-builder_, run:
 
     ironic-python-agent-builder <distribution, e.g. ubuntu>
 
-You can add other diskimage-builder_ elements via the ``-e`` flag. For example,
-dhcp-all-interfaces_ is required for automatic DHCP on some operating systems
-(e.g. CentOS 7):
+You can add other diskimage-builder_ elements via the ``-e`` flag:
 
 .. code-block:: shell
 
-    ironic-python-agent-builder -e dhcp-all-interfaces centos7
+    ironic-python-agent-builder -e <extra-element> centos7
 
 You can specify the base name of the target images:
 
 .. code-block:: shell
 
-    ironic-python-agent-builder -o my-ipa -e dhcp-all-interfaces centos7
+    ironic-python-agent-builder -o my-ipa centos7
 
 ... with diskimage-builder
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -112,6 +110,5 @@ The *devuser* element allows creating a user at build time, for example:
   disk-image-create debian ironic-python-agent-ramdisk devuser
 
 .. _diskimage-builder: https://docs.openstack.org/diskimage-builder
-.. _dhcp-all-interfaces: https://docs.openstack.org/diskimage-builder/latest/elements/dhcp-all-interfaces/README.html
 .. _dynamic-login: https://docs.openstack.org/diskimage-builder/latest/elements/dynamic-login/README.html
 .. _devuser: https://docs.openstack.org/diskimage-builder/latest/elements/devuser/README.html

@@ -67,6 +67,36 @@
       image_type: 'dib'
       image_distro: 'centos7'
 
+- job:
+    name: ironic-python-agent-check-image-dib-fedora
+    parent: ironic-python-agent-check-image-base
+    required-projects:
+      # NOTE(dtantsur): used for bindep only
+      - openstack/diskimage-builder
+    vars:
+      image_type: 'dib'
+      image_distro: 'fedora'
+
+- job:
+    name: ironic-python-agent-check-image-dib-debian
+    parent: ironic-python-agent-check-image-base
+    required-projects:
+      # NOTE(dtantsur): used for bindep only
+      - openstack/diskimage-builder
+    vars:
+      image_type: 'dib'
+      image_distro: 'debian'
+
+- job:
+    name: ironic-python-agent-check-image-dib-ubuntu
+    parent: ironic-python-agent-check-image-base
+    required-projects:
+      # NOTE(dtantsur): used for bindep only
+      - openstack/diskimage-builder
+    vars:
+      image_type: 'dib'
+      image_distro: 'ubuntu'
+
 - project:
     templates:
       - publish-openstack-docs-pti
@@ -82,6 +112,12 @@
         - ipa-tempest-wholedisk-bios-ipmi-iscsi-tinyipa-src
         - ironic-python-agent-check-image-tinyipa
         - ironic-python-agent-check-image-dib-centos7
+        - ironic-python-agent-check-image-dib-fedora:
+            voting: false
+        - ironic-python-agent-check-image-dib-ubuntu:
+            voting: false
+        - ironic-python-agent-check-image-dib-debian:
+            voting: false
         - ipa-tempest-wholedisk-bios-ipmi-direct-dib-src:
             voting: false
         - ipa-tempest-ironic-inspector-src:

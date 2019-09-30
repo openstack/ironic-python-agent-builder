@@ -85,6 +85,17 @@ a suitable ISO for booting, and so should work against any IPA ramdisk.
 Advanced options
 ----------------
 
+Disabling rescue
+~~~~~~~~~~~~~~~~
+
+By default rescue mode is enabled in the images. Since it allows to set root
+password on the ramdisk by anyone on the network, you may disable it if the
+rescue feature is not supported. Set the following before building the image:
+
+.. code-block:: bash
+
+    export DIB_IPA_ENABLE_RESCUE=false
+
 SSH access
 ~~~~~~~~~~
 

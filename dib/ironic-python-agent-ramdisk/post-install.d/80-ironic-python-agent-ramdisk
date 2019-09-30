@@ -6,12 +6,16 @@ fi
 set -eu
 set -o pipefail
 
+DIB_IPA_ENABLE_RESCUE=${DIB_IPA_ENABLE_RESCUE:-true}
+
 install-packages -e cloud-init
 
 rm -rf /tmp/ironic-python-agent
 
-# Make sure rescue works
-mkdir -p /etc/ipa-rescue-config
+if $DIB_IPA_ENABLE_RESCUE; then
+    # Make sure rescue works
+    mkdir -p /etc/ipa-rescue-config
+fi
 
 case "$DIB_INIT_SYSTEM" in
     upstart)
@@ -27,7 +31,9 @@ case "$DIB_INIT_SYSTEM" in
             systemctl disable iptables.service
         fi
         systemctl enable $(svc-map ironic-python-agent).service
-        systemctl enable ironic-agent-create-rescue-user.path
+        if $DIB_IPA_ENABLE_RESCUE; then
+            systemctl enable ironic-agent-create-rescue-user.path
+        fi
         ;;
     sysv)
         update-rc.d iptables disable

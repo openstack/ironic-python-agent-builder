@@ -24,15 +24,13 @@ Beyond installing the ironic-python-agent, this element does the following:
   ``DIB_IPA_COMPRESS_CMD``, which is 'gzip' by default. This command should
   listen for raw data from stdin and write compressed data to stdout. Command
   can be with arguments.
+* Configures rescue mode if ``DIB_IPA_ENABLE_RESCUE`` is not set to ``false``.
 
 This element outputs three files:
 
 - ``$IMAGE-NAME.initramfs``: The deploy ramdisk file containing the
   ironic-python-agent (IPA) service.
 - ``$IMAGE-NAME.kernel``: The kernel binary file.
-- ``$IMAGE-NAME.vmlinuz``: A hard link pointing to the ``$IMAGE-NAME.kernel``
-  file; this is just a backward compatibility layer, please do not rely
-  on this file.
 
 .. note::
    The package based install currently only enables the service when using the

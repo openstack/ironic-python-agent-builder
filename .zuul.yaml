@@ -9,6 +9,9 @@
       - openstack/requirements
       - openstack/ironic-python-agent
       - openstack/ironic-python-agent-builder
+    vars:
+      ipa_raw_dir: '{{ ansible_user_dir }}/src/opendev.org/openstack/ironic-python-agent/UPLOAD_RAW'
+      ipa_tar_dir: '{{ ansible_user_dir }}/src/opendev.org/openstack/ironic-python-agent/UPLOAD_TAR'
 
 - job:
     name: ironic-python-agent-build-image-tinyipa
@@ -44,6 +47,9 @@
       - ^test-requirements.txt$
       - ^tools/.*$
       - ^tox.ini$
+    vars:
+      ipa_raw_dir: '{{ ansible_user_dir }}/src/opendev.org/openstack/ironic-python-agent/UPLOAD_RAW'
+      ipa_tar_dir: '{{ ansible_user_dir }}/src/opendev.org/openstack/ironic-python-agent/UPLOAD_TAR'
 
 - job:
     name: ironic-python-agent-check-image-tinyipa

@@ -4,7 +4,7 @@
 
 - name: Build a DIB image
   command: |
-    ironic-python-agent-builder -e dhcp-all-interfaces -o {{ image_name }} {{ image_distro }}
+    ironic-python-agent-builder -o {{ image_name }} {{ image_distro }}
   environment:
     # Use repositories checked out by Zuul
     DIB_REPOLOCATION_ironic_python_agent: '{{ ipa_source_path }}'

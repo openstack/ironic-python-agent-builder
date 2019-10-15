@@ -42,6 +42,7 @@ def find_elements_path():
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("distribution", help="Distribution to use")
+    parser.add_argument("-r", "--release", help="Distribution release to use")
     parser.add_argument("-o", "--output", help="Output base file name",
                         default="ironic-python-agent")
     parser.add_argument("-e", "--element", action='append', default=[],
@@ -54,6 +55,8 @@ def main():
         # size of the image.
         os.environ['DIB_INSTALLTYPE_pip_and_virtualenv'] = 'package'
     args = parser.parse_args()
+    if args.release:
+        os.environ['DIB_RELEASE'] = args.release
     try:
         subprocess.check_call(['disk-image-create', '-o', args.output,
                                'ironic-python-agent-ramdisk',

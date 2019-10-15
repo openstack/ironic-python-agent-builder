@@ -4,7 +4,9 @@
 
 - name: Build a DIB image
   command: |
-    ironic-python-agent-builder -o {{ image_name }} {{ image_distro }}
+    ironic-python-agent-builder -o {{ image_name }}
+        {{ "-r {}".format(image_release) if image_release else '' }}
+        {{ image_distro }}
   environment:
     # Increase from the default value of 30
     DIB_DHCP_TIMEOUT: 60

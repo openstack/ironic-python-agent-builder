@@ -47,6 +47,9 @@ def main():
                         default="ironic-python-agent")
     parser.add_argument("-e", "--element", action='append', default=[],
                         help="Additional DIB element to use")
+    parser.add_argument("-b", "--branch",
+                        help="If set, override the branch that is used for "
+                        "ironic-python-agent and requirements")
     # TODO(dtantsur): handle distribution == tinyipa
     os.environ['ELEMENTS_PATH'] = find_elements_path()
     if not os.environ.get('DIB_INSTALLTYPE_pip_and_virtualenv'):
@@ -57,6 +60,9 @@ def main():
     args = parser.parse_args()
     if args.release:
         os.environ['DIB_RELEASE'] = args.release
+    if args.branch:
+        os.environ['DIB_REPOREF_ironic_python_agent'] = args.branch
+        os.environ['DIB_REPOREF_requirements'] = args.branch
     try:
         subprocess.check_call(['disk-image-create', '-o', args.output,
                                'ironic-python-agent-ramdisk',

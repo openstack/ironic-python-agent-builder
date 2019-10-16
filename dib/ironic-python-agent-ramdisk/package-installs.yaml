@@ -18,3 +18,44 @@ kmod:
 psmisc:
 dosfstools:
 mdadm:
+
+# Unnecessary packages to remove. We run all removals in pre-install phase, to
+# avoid breaking installs that happen in install phase.
+
+cloud-init:
+    phase: pre-install.d
+    uninstall: true
+git:
+    phase: pre-install.d
+    uninstall: true
+kbd:
+    phase: pre-install.d
+    uninstall: true
+man-db:
+    phase: pre-install.d
+    uninstall: true
+rsync:
+    phase: pre-install.d
+    uninstall: true
+
+# Distro-specific uninstalls
+cronie:
+    phase: pre-install.d
+    uninstall: true
+    when: IPA_DISTRO_FAMILY = rh
+kernel-debug-devel:
+    phase: pre-install.d
+    uninstall: true
+    when: IPA_DISTRO_FAMILY = rh
+plymouth:
+    phase: pre-install.d
+    uninstall: true
+    when: IPA_DISTRO_FAMILY = rh
+teamd:
+    phase: pre-install.d
+    uninstall: true
+    when: IPA_DISTRO_FAMILY = rh
+yum:
+    phase: pre-install.d
+    uninstall: true
+    when: DISTRO_NAME = fedora

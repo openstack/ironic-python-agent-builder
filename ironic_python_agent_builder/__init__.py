@@ -48,6 +48,11 @@ def main():
                         help="Additional DIB element to use")
     # TODO(dtantsur): handle distribution == tinyipa
     os.environ['ELEMENTS_PATH'] = find_elements_path()
+    if not os.environ.get('DIB_INSTALLTYPE_pip_and_virtualenv'):
+        # DIB updates these to latest versions from source. However, we do the
+        # same in our virtualenv, so it's not needed and just increases the
+        # size of the image.
+        os.environ['DIB_INSTALLTYPE_pip_and_virtualenv'] = 'package'
     args = parser.parse_args()
     try:
         subprocess.check_call(['disk-image-create', '-o', args.output,

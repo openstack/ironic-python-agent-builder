@@ -2,5 +2,6 @@ image_distro: centos7
 image_release:
 ipa_branch_path: '{{ zuul.branch | replace("/", "-") }}'
 ipa_source_path: '{{ ansible_user_dir }}/src/opendev.org/openstack/ironic-python-agent'
+requirements_path: '{{ ansible_user_dir }}/src/opendev.org/openstack/requirements'
 ipa_raw_dir: '{{ ansible_user_dir }}/src/opendev.org/openstack/ironic-python-agent/UPLOAD_RAW'
 ipa_tar_dir: '{{ ansible_user_dir }}/src/opendev.org/openstack/ironic-python-agent/UPLOAD_TAR'

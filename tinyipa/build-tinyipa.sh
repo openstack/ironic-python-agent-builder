@@ -106,7 +106,7 @@ if [ -n "$PYTHON_EXTRA_SOURCES_DIR_LIST" ]; then
     done
 fi
 
-imagebuild/common/generate_upper_constraints.sh upper-constraints.txt
+$WORKDIR/generate_upper_constraints.sh upper-constraints.txt
 if [ -n "$IRONIC_LIB_SOURCE" ]; then
     sed -i '/ironic-lib/d' upper-constraints.txt $BUILDDIR/tmp/ipa-requirements.txt
 fi

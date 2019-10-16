@@ -8,10 +8,8 @@ set -o pipefail
 
 SCRIPTDIR=$(dirname $0)
 IPADIR=/tmp/ironic-python-agent
+UPPER_CONSTRAINTS=/tmp/requirements/upper-constraints.txt
 VENVDIR=/opt/ironic-python-agent
-
-# Generate upper-constraints
-$IPADIR/imagebuild/common/generate_upper_constraints.sh $IPADIR/upper-constraints.txt
 
 # create the virtual environment using the default python
 $DIB_PYTHON -m virtualenv -- $VENVDIR
@@ -20,7 +18,7 @@ $DIB_PYTHON -m virtualenv -- $VENVDIR
 $VENVDIR/bin/pip install pip --upgrade
 
 # install IPA inside the virtual environment
-$VENVDIR/bin/pip install -c $IPADIR/upper-constraints.txt $IPADIR --install-option="--install-scripts=/usr/local/bin/"
+$VENVDIR/bin/pip install -c $UPPER_CONSTRAINTS $IPADIR --install-option="--install-scripts=/usr/local/bin/"
 
 case "$DIB_INIT_SYSTEM" in
     upstart)

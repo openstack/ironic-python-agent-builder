@@ -13,6 +13,8 @@
     # Use repositories checked out by Zuul
     DIB_REPOLOCATION_ironic_python_agent: '{{ ipa_source_path }}'
     DIB_REPOREF_ironic_python_agent: HEAD
+    DIB_REPOLOCATION_requirements: '{{ requirements_path }}'
+    DIB_REPOREF_requirements: HEAD
 
 - name: Move the resulting files
   shell: |

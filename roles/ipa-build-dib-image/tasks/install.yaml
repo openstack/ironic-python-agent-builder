@@ -9,8 +9,3 @@
     name: "{{ ansible_user_dir }}/{{ zuul.projects['opendev.org/openstack/ironic-python-agent-builder'].src_dir }}"
     extra_args: -c "{{ ansible_user_dir }}/{{ zuul.projects['opendev.org/openstack/requirements'].src_dir }}/upper-constraints.txt"
   become: true
-
-- name: FIXME temporary raise diskimage-builder
-  pip:
-    name: diskimage-builder>=2.28.2
-  become: true

@@ -6,6 +6,8 @@
   command: |
     ironic-python-agent-builder -o {{ image_name }} {{ image_distro }}
   environment:
+    # Increase from the default value of 30
+    DIB_DHCP_TIMEOUT: 60
     # Use repositories checked out by Zuul
     DIB_REPOLOCATION_ironic_python_agent: '{{ ipa_source_path }}'
     DIB_REPOREF_ironic_python_agent: HEAD

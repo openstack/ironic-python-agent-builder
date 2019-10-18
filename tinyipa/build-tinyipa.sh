@@ -11,6 +11,9 @@ IRONIC_LIB_SOURCE=${IRONIC_LIB_SOURCE:-}
 USE_PYTHON3=${USE_PYTHON3:-True}
 TC_RELEASE="9.x"
 
+# PYTHON_EXTRA_SOURCES_DIR_LIST is a csv list of python package dirs to include
+PYTHON_EXTRA_SOURCES_DIR_LIST=${PYTHON_EXTRA_SOURCES_DIR_LIST:-}
+
 CHROOT_PATH="/tmp/overides:/usr/local/sbin:/usr/local/bin:/apps/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 CHROOT_CMD="sudo chroot $BUILDDIR /usr/bin/env -i PATH=$CHROOT_PATH http_proxy=$http_proxy https_proxy=$https_proxy no_proxy=$no_proxy"
 
@@ -89,6 +92,20 @@ if [ -n "$IRONIC_LIB_SOURCE" ]; then
     popd
 fi
 
+if [ -n "$PYTHON_EXTRA_SOURCES_DIR_LIST" ]; then
+    IFS="," read -ra PKGDIRS <<< "$PYTHON_EXTRA_SOURCES_DIR_LIST"
+    for PKGDIR in "${PKGDIRS[@]}"; do
+        PKG=$(cd "$PKGDIR" ; python setup.py --name)
+        pushd "$PKGDIR"
+        rm -rf *.egg-info
+        python setup.py sdist --dist-dir "$BUILDDIR/tmp/localpip" --quiet
+        if [[ -r requirements.txt ]]; then
+            cp requirements.txt $BUILDDIR/tmp/${PKG}-requirements.txt
+        fi
+        popd
+    done
+fi
+
 imagebuild/common/generate_upper_constraints.sh upper-constraints.txt
 if [ -n "$IRONIC_LIB_SOURCE" ]; then
     sed -i '/ironic-lib/d' upper-constraints.txt $BUILDDIR/tmp/ipa-requirements.txt
@@ -156,6 +173,18 @@ if [ -n "$IRONIC_LIB_SOURCE" ]; then
     $CHROOT_CMD ${PIP_COMMAND} wheel -c /tmp/upper-constraints.txt --wheel-dir /tmp/wheels -r /tmp/ironic-lib-requirements.txt
     $CHROOT_CMD ${PIP_COMMAND} wheel -c /tmp/upper-constraints.txt --no-index --pre --wheel-dir /tmp/wheels --find-links=/tmp/localpip --find-links=/tmp/wheels ironic-lib
 fi
+
+if [ -n "$PYTHON_EXTRA_SOURCES_DIR_LIST" ]; then
+    IFS="," read -ra PKGDIRS <<< "$PYTHON_EXTRA_SOURCES_DIR_LIST"
+    for PKGDIR in "${PKGDIRS[@]}"; do
+        PKG=$(cd "$PKGDIR" ; python setup.py --name)
+        if [[ -r $BUILDDIR/tmp/${PKG}-requirements.txt ]]; then
+            $CHROOT_CMD ${PIP_COMMAND} wheel -c /tmp/upper-constraints.txt --wheel-dir /tmp/wheels -r /tmp/${PKG}-requirements.txt
+        fi
+        $CHROOT_CMD ${PIP_COMMAND} wheel -c /tmp/upper-constraints.txt --no-index --pre --wheel-dir /tmp/wheels --find-links=/tmp/localpip --find-links=/tmp/wheels ${PKG}
+    done
+fi
+
 $CHROOT_CMD ${PIP_COMMAND} wheel -c /tmp/upper-constraints.txt --no-index --pre --wheel-dir /tmp/wheels --find-links=/tmp/localpip --find-links=/tmp/wheels ironic-python-agent
 echo Resulting wheels:
 ls -1 $BUILDDIR/tmp/wheels

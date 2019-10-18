@@ -19,8 +19,20 @@ TINYIPA_REQUIRE_IPMITOOL=${TINYIPA_REQUIRE_IPMITOOL:-true}
 TINYIPA_UDEV_SETTLE_TIMEOUT=${TINYIPA_UDEV_SETTLE_TIMEOUT:-20}
 USE_PYTHON3=${USE_PYTHON3:-True}
 
+PYTHON_EXTRA_SOURCES_DIR_LIST=${PYTHON_EXTRA_SOURCES_DIR_LIST:-}
 
 echo "Finalising tinyipa:"
+
+if [ -n "$PYTHON_EXTRA_SOURCES_DIR_LIST" ]; then
+    IFS="," read -ra PKGDIRS <<< "$PYTHON_EXTRA_SOURCES_DIR_LIST"
+    for PKGDIR in "${PKGDIRS[@]}"; do
+        PKG=$(cd "$PKGDIR" ; python setup.py --name)
+        if [[ "$PKG" == "hardware" ]]; then
+            # hardware depends upon numpy which can't be optimised
+            PYOPTIMIZE_TINYIPA=false
+        fi
+    done
+fi
 
 if $AUTHORIZE_SSH ; then
     echo "Validating location of public SSH key"
@@ -140,7 +152,16 @@ $CHROOT_CMD ${TINYIPA_PYTHON_EXE} -m ensurepip --upgrade
 
 # If flag is set install python now
 if $BUILD_AND_INSTALL_TINYIPA ; then
+    if [ -n "$PYTHON_EXTRA_SOURCES_DIR_LIST" ]; then
+        IFS="," read -ra PKGDIRS <<< "$PYTHON_EXTRA_SOURCES_DIR_LIST"
+        for PKGDIR in "${PKGDIRS[@]}"; do
+            PKG=$(cd "$PKGDIR" ; python setup.py --name)
+            $CHROOT_CMD $PIP_COMMAND install --no-index --find-links=file:///tmp/wheelhouse --pre $PKG
+        done
+    fi
+
     $CHROOT_CMD $PIP_COMMAND install --no-index --find-links=file:///tmp/wheelhouse --pre ironic_python_agent
+
     rm -rf $FINALDIR/tmp/wheelhouse
 fi
 

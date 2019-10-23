@@ -5,3 +5,4 @@ ipa_source_path: '{{ ansible_user_dir }}/src/opendev.org/openstack/ironic-python
 requirements_path: '{{ ansible_user_dir }}/src/opendev.org/openstack/requirements'
 ipa_raw_dir: '{{ ansible_user_dir }}/src/opendev.org/openstack/ironic-python-agent/UPLOAD_RAW'
 ipa_tar_dir: '{{ ansible_user_dir }}/src/opendev.org/openstack/ironic-python-agent/UPLOAD_TAR'
+dib_extra_args:

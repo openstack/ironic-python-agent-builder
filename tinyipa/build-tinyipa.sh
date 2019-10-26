@@ -20,9 +20,8 @@ CHROOT_CMD="sudo chroot $BUILDDIR /usr/bin/env -i PATH=$CHROOT_PATH http_proxy=$
 TC=1001
 STAFF=50
 
-# NOTE(moshele): Git < 1.7.10 requires a separate checkout, see LP #1590912
-function clone_and_checkout {
-    git clone $1 $2 --depth=1 --branch $3; cd $2; git checkout $3; cd -
+function clone_single_branch {
+    git clone --branch $3 --depth=1 $1 $2
 }
 
 echo "Building tinyipa:"
@@ -62,9 +61,9 @@ mkdir "$BUILDDIR"
 sudo sh -c "echo $TINYCORE_MIRROR_URL > $BUILDDIR/opt/tcemirror"
 
 # Download TGT, Qemu-utils, Biosdevname and IPMItool source
-clone_and_checkout "https://github.com/fujita/tgt.git" "${BUILDDIR}/tmp/tgt" "v1.0.79"
-clone_and_checkout "https://github.com/qemu/qemu.git" "${BUILDDIR}/tmp/qemu" "v3.1.1"
-clone_and_checkout "https://github.com/lyonel/lshw.git" "${BUILDDIR}/tmp/lshw" "B.02.18"
+clone_single_branch "https://github.com/fujita/tgt.git" "${BUILDDIR}/tmp/tgt" "v1.0.79"
+clone_single_branch "https://github.com/qemu/qemu.git" "${BUILDDIR}/tmp/qemu" "v3.1.1"
+clone_single_branch "https://github.com/lyonel/lshw.git" "${BUILDDIR}/tmp/lshw" "B.02.18"
 if $TINYIPA_REQUIRE_BIOSDEVNAME; then
     wget -N -O - https://linux.dell.com/biosdevname/biosdevname-0.7.2/biosdevname-0.7.2.tar.gz | tar -xz -C "${BUILDDIR}/tmp" -f -
 fi

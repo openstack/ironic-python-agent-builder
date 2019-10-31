@@ -12,6 +12,7 @@
 
 import argparse
 import os
+import shlex
 import subprocess
 import sys
 
@@ -50,6 +51,10 @@ def main():
     parser.add_argument("-b", "--branch",
                         help="If set, override the branch that is used for "
                         "ironic-python-agent and requirements")
+    parser.add_argument("-v", "--verbose", action='store_true',
+                        help="Enable verbose logging in diskimage-builder")
+    parser.add_argument("--extra-args",
+                        help="Extra arguments to pass to diskimage-builder")
     # TODO(dtantsur): handle distribution == tinyipa
     os.environ['ELEMENTS_PATH'] = find_elements_path()
     if not os.environ.get('DIB_INSTALLTYPE_pip_and_virtualenv'):
@@ -63,10 +68,13 @@ def main():
     if args.branch:
         os.environ['DIB_REPOREF_ironic_python_agent'] = args.branch
         os.environ['DIB_REPOREF_requirements'] = args.branch
+    extra_args = shlex.split(args.extra_args) if args.extra_args else []
+    if args.verbose:
+        extra_args.append("-x")
     try:
         subprocess.check_call(['disk-image-create', '-o', args.output,
                                'ironic-python-agent-ramdisk',
-                               args.distribution] + args.element)
+                               args.distribution] + args.element + extra_args)
     except (EnvironmentError, subprocess.CalledProcessError) as exc:
         sys.exit(str(exc))
     except KeyboardInterrupt:

@@ -19,3 +19,16 @@
   shell: |
     tar -czf "{{ ipa_tar_dir }}/{{ image_name }}.tar.gz" {{ image_name }}*
     mv {{ image_name }}* "{{ ipa_raw_dir }}"
+
+- name: Generate image checksums
+  shell:
+    cmd: sha256sum "{{ image_name }}.{{ item }}" > "{{ image_name }}.{{ item }}.sha256"
+    chdir: "{{ ipa_raw_dir }}"
+  with_items:
+    - kernel
+    - initramfs
+
+- name: Generate tarball checksum
+  shell:
+    cmd: sha256sum "{{ image_name }}.tar.gz" > "{{ image_name }}.tar.gz.sha256"
+    chdir: "{{ ipa_tar_dir }}"

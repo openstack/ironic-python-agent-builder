@@ -30,6 +30,17 @@
       image_distro: 'centos7'
 
 - job:
+    name: ironic-python-agent-build-image-dib-centos8
+    parent: ironic-python-agent-build-image-base
+    required-projects:
+      # NOTE(dtantsur): used for bindep only
+      - openstack/diskimage-builder
+    vars:
+      image_type: 'dib'
+      image_distro: 'centos-minimal'
+      image_release: 8
+
+- job:
     name: ironic-python-agent-check-image-base
     parent: base
     pre-run: playbooks/ironic-python-agent-build-image/pre.yaml
@@ -122,9 +133,7 @@
         - ipa-tempest-wholedisk-bios-ipmi-direct-tinyipa-src
         - ipa-tempest-wholedisk-bios-ipmi-iscsi-tinyipa-src
         - ironic-python-agent-check-image-tinyipa
-        - ironic-python-agent-check-image-dib-centos7
-        - ironic-python-agent-check-image-dib-centos8:
-            voting: false
+        - ironic-python-agent-check-image-dib-centos8
         - ironic-python-agent-check-image-dib-fedora:
             voting: false
         - ironic-python-agent-check-image-dib-ubuntu:
@@ -144,9 +153,9 @@
         - ipa-tempest-wholedisk-bios-ipmi-direct-tinyipa-src
         - ipa-tempest-wholedisk-bios-ipmi-iscsi-tinyipa-src
         - ironic-python-agent-check-image-tinyipa
-        - ironic-python-agent-check-image-dib-centos7
+        - ironic-python-agent-check-image-dib-centos8
     post:
       jobs:
         - publish-openstack-python-branch-tarball
         - ironic-python-agent-build-image-tinyipa
-        - ironic-python-agent-build-image-dib-centos7
+        - ironic-python-agent-build-image-dib-centos8

@@ -57,7 +57,7 @@ create_rescue_user() {
 
 # Setup DHCP network
 configure_dhcp_network() {
-    for pidfile in `ls /var/run/udhcpc/*.pid`; do
+    for pidfile in `ls /var/run/udhcpc*.pid`; do
         kill `cat $pidfile`
     done
 

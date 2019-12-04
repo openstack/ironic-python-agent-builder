@@ -28,6 +28,14 @@ You can specify the base name of the target images:
 
     ironic-python-agent-builder -o my-ipa centos7
 
+You can specify the arch of the target image by setting ``ARCH`` environment
+variable (default is amd64):
+
+.. code-block:: shell
+
+    export ARCH=aarch64
+    ironic-python-agent-builder -o my-ipa fedora
+
 ... with diskimage-builder
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -65,6 +73,15 @@ To use a specific branch of ironic-python-agent, use:
 .. code-block:: bash
 
     export DIB_REPOREF_ironic_python_agent=origin/stable/queens
+
+To build image for architectures other than amd64, you can either set the
+``ARCH`` environment variable or use ``-a`` to specify the target
+architecture:
+
+.. code-block:: shell
+
+    disk-image-create -a arm64 -o ironic-python-agent \
+        ironic-python-agent-ramdisk fedora
 
 ISO Images
 ~~~~~~~~~~

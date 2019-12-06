@@ -11,6 +11,13 @@ IRONIC_LIB_SOURCE=${IRONIC_LIB_SOURCE:-}
 USE_PYTHON3=${USE_PYTHON3:-True}
 TC_RELEASE="10.x"
 
+TGT_RELEASE="v1.0.79"
+QEMU_RELEASE="v3.1.1"
+LSHW_RELEASE="B.02.18"
+
+BIOSDEVNAME_RELEASE="0.7.2"
+IPMITOOL_RELASE="1_8_18"
+
 # PYTHON_EXTRA_SOURCES_DIR_LIST is a csv list of python package dirs to include
 PYTHON_EXTRA_SOURCES_DIR_LIST=${PYTHON_EXTRA_SOURCES_DIR_LIST:-}
 
@@ -61,14 +68,14 @@ mkdir "$BUILDDIR"
 sudo sh -c "echo $TINYCORE_MIRROR_URL > $BUILDDIR/opt/tcemirror"
 
 # Download TGT, Qemu-utils, Biosdevname and IPMItool source
-clone_single_branch "https://github.com/fujita/tgt.git" "${BUILDDIR}/tmp/tgt" "v1.0.79"
-clone_single_branch "https://github.com/qemu/qemu.git" "${BUILDDIR}/tmp/qemu" "v3.1.1"
-clone_single_branch "https://github.com/lyonel/lshw.git" "${BUILDDIR}/tmp/lshw" "B.02.18"
+clone_single_branch "https://github.com/fujita/tgt.git" "${BUILDDIR}/tmp/tgt" "$TGT_RELEASE"
+clone_single_branch "https://github.com/qemu/qemu.git" "${BUILDDIR}/tmp/qemu" "$QEMU_RELEASE"
+clone_single_branch "https://github.com/lyonel/lshw.git" "${BUILDDIR}/tmp/lshw" "$LSHW_RELEASE"
 if $TINYIPA_REQUIRE_BIOSDEVNAME; then
-    wget -N -O - https://linux.dell.com/biosdevname/biosdevname-0.7.2/biosdevname-0.7.2.tar.gz | tar -xz -C "${BUILDDIR}/tmp" -f -
+    wget -N -O - https://linux.dell.com/biosdevname/biosdevname-${BIOSDEVNAME_RELEASE}/biosdevname-${BIOSDEVNAME_RELEASE}.tar.gz | tar -xz -C "${BUILDDIR}/tmp" -f -
 fi
 if $TINYIPA_REQUIRE_IPMITOOL; then
-    wget -N -O - https://github.com/ipmitool/ipmitool/archive/IPMITOOL_1_8_18.tar.gz | tar -xz -C "${BUILDDIR}/tmp" -f -
+    wget -N -O - https://github.com/ipmitool/ipmitool/archive/IPMITOOL_${IPMITOOL_RELASE}.tar.gz | tar -xz -C "${BUILDDIR}/tmp" -f -
 fi
 
 # Create directory for python local mirror

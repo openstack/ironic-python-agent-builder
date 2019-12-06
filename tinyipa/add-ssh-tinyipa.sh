@@ -29,6 +29,11 @@ TINYIPA_RAMDISK_FILE=${TINYIPA_RAMDISK_FILE:-}
 
 SSH_PUBLIC_KEY=${SSH_PUBLIC_KEY:-}
 
+SSHD_CONFIG_PATH="/usr/local/etc/ssh/sshd_config"
+SSH_RSA_KEY_PATH="/usr/local/etc/ssh/ssh_host_rsa_key"
+SSH_DSA_KEY_PATH="/usr/local/etc/ssh/ssh_host_dsa_key"
+SSH_ED25519_KEY_PATH="/usr/local/etc/ssh/ssh_host_ed25519_key"
+
 function validate_params {
     echo "Validating location of public SSH key"
     if [ -n "$SSH_PUBLIC_KEY" ]; then
@@ -73,21 +78,21 @@ function unpack_ramdisk {
 }
 
 function install_ssh {
-    if [ ! -f "$REBUILDDIR/usr/local/etc/ssh/sshd_config" ]; then
+    if [ ! -f "${REBUILDDIR}${SSHD_CONFIG_PATH}" ]; then
         # tinyipa was built without SSH server installed
         # Install and configure bare minimum for SSH access
         $TC_CHROOT_CMD tce-load -wic openssh
         # Configure OpenSSH
-        $CHROOT_CMD cp /usr/local/etc/ssh/sshd_config.orig /usr/local/etc/ssh/sshd_config
-        echo "PasswordAuthentication no" | $CHROOT_CMD tee -a /usr/local/etc/ssh/sshd_config
+        $CHROOT_CMD cp ${SSHD_CONFIG_PATH}.orig $SSHD_CONFIG_PATH
+        echo "PasswordAuthentication no" | $CHROOT_CMD tee -a $SSHD_CONFIG_PATH
         # Generate and configure host keys - RSA, DSA, Ed25519
         # NOTE(pas-ha) ECDSA host key will still be re-generated fresh on every image boot
-        $CHROOT_CMD ssh-keygen -q -t rsa -N "" -f /usr/local/etc/ssh/ssh_host_rsa_key
-        $CHROOT_CMD ssh-keygen -q -t dsa -N "" -f /usr/local/etc/ssh/ssh_host_dsa_key
-        $CHROOT_CMD ssh-keygen -q -t ed25519 -N "" -f /usr/local/etc/ssh/ssh_host_ed25519_key
-        echo "HostKey /usr/local/etc/ssh/ssh_host_rsa_key" | $CHROOT_CMD tee -a /usr/local/etc/ssh/sshd_config
-        echo "HostKey /usr/local/etc/ssh/ssh_host_dsa_key" | $CHROOT_CMD tee -a /usr/local/etc/ssh/sshd_config
-        echo "HostKey /usr/local/etc/ssh/ssh_host_ed25519_key" | $CHROOT_CMD tee -a /usr/local/etc/ssh/sshd_config
+        $CHROOT_CMD ssh-keygen -q -t rsa -N "" -f $SSH_RSA_KEY_PATH
+        $CHROOT_CMD ssh-keygen -q -t dsa -N "" -f $SSH_DSA_KEY_PATH
+        $CHROOT_CMD ssh-keygen -q -t ed25519 -N "" -f $SSH_ED25519_KEY_PATH
+        echo "HostKey ${SSH_RSA_KEY_PATH}" | $CHROOT_CMD tee -a $SSHD_CONFIG_PATH
+        echo "HostKey ${SSH_DSA_KEY_PATH}" | $CHROOT_CMD tee -a $SSHD_CONFIG_PATH
+        echo "HostKey ${SSH_ED25519_KEY_PATH}" | $CHROOT_CMD tee -a $SSHD_CONFIG_PATH
     fi
 
     # setup new user SSH keys anyway
@@ -103,7 +108,7 @@ function fix_python_optimize {
     if grep -q "PYTHONOPTIMIZE=1" "$REBUILDDIR/opt/bootlocal.sh"; then
         # tinyipa was built with optimized Python environment, apply fixes
         echo "PYTHONOPTIMIZE=1" | $TC_CHROOT_CMD tee -a /home/tc/.ssh/environment
-        echo "PermitUserEnvironment yes" | $CHROOT_CMD tee -a /usr/local/etc/ssh/sshd_config
+        echo "PermitUserEnvironment yes" | $CHROOT_CMD tee -a $SSHD_CONFIG_PATH
         echo 'Defaults env_keep += "PYTHONOPTIMIZE"' | $CHROOT_CMD tee -a /etc/sudoers
     fi
 }

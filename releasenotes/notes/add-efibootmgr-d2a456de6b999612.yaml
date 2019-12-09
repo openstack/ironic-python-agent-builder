@@ -1,0 +1,4 @@
+---
+upgrade:
+  - |
+    The efibootmgr package was added to tinyipa and dib images.

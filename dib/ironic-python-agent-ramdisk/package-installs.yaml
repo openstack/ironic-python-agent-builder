@@ -18,6 +18,7 @@ kmod:
 psmisc:
 dosfstools:
 mdadm:
+efibootmgr:
 
 # Unnecessary packages to remove. We run all removals in pre-install phase, to
 # avoid breaking installs that happen in install phase.

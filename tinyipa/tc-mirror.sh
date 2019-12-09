@@ -8,19 +8,23 @@
 # - those that were unavailable are moved to the bottom of the list
 # - those that already responded with 404 are moved to the very bottom
 
-# List generated on 12-Dec-2016
+# List Updated on 9-Dec-2019
 TC_MIRRORS="http://repo.tinycorelinux.net
-http://distro.ibiblio.org/tinycorelinux
 http://mirror.cedia.org.ec/tinycorelinux
 http://mirror.epn.edu.ec/tinycorelinux
-http://mirrors.163.com/tinycorelinux
-http://kambing.ui.ac.id/tinycorelinux
-http://ftp.nluug.nl/os/Linux/distr/tinycorelinux
 http://ftp.vim.org/os/Linux/distr/tinycorelinux
-http://www.gtlib.gatech.edu/pub/tinycore
-http://tinycore.mirror.uber.com.au
-http://l4u-00.jinr.ru/LinuxArchive/Ftp/tinycorelinux"
+http://mirrors.163.com/tinycorelinux
+"
 
+# NOTE(TheJulia): Removed mirrors because they are out
+# of date
+# http://distro.ibiblio.org/tinycorelinux ~1.5 months out of sync.
+# http://mirrors.163.com/tinycorelinux - Two weeks out of date
+# ftp.vim.org and ftp.nluug.nl are the same host.
+# http://www.gtlib.gatech.edu/pub/tinycore - No longer mirrors tinycore
+# http://l4u-00.ninr.ru no longer mirrors.
+# http://kambing.ui.ac.id/tinycorelinux - Stopped mirroring at 9.x
+# http://tinycore.mirror.uber.com.au - Unreachable?
 function probe_url {
     wget -q --spider --tries 1 --timeout 10 "$1" 2>&1
 }

@@ -1,9 +1,10 @@
 bash.tcz
 coreutils.tcz
 dmidecode.tcz
+efibootmgr.tcz
+file.tcz
 gdisk.tcz
 glib2.tcz
-file.tcz
 haveged.tcz
 hdparm.tcz
 iproute2.tcz

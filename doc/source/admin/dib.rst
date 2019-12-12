@@ -10,7 +10,7 @@ Building
 ... with the helper script
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To build an image using diskimage-builder_, run:
+To build an image using ``ironic-python-agent-builder``, run:
 
 .. code-block:: shell
 

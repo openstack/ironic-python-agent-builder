@@ -70,6 +70,8 @@ configure_dhcp_network() {
         pidfile="/var/run/udhcpc/${interface}.pid"
         /sbin/udhcpc -b -p ${pidfile} -i ${interface} -s /opt/udhcpc.script >> /var/log/udhcpc.log 2>&1
     done
+    echo "Completed DHCP client restart"
+    ip addr && true
 }
 
 if [ -f /etc/ipa-rescue-config/ipa-rescue-password ]; then

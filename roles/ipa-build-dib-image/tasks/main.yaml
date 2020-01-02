@@ -1,6 +1,20 @@
+- name: Default to CentOS 8
+  set_fact:
+    image_release: 8
+  when:
+    - image_distro == "centos-minimal"
+    - not image_release
+
+- name: Generate a nice target name for CentOS
+  set_fact:
+    image_target_name: centos{{ image_release }}
+  when:
+    - image_distro == "centos-minimal"
+    - not image_target_name
+
 - name: Generate image name
   set_fact:
-    image_name: ipa-{{ image_distro }}-{{ ipa_branch_path }}
+    image_name: ipa-{{ image_target_name | default(image_distro, true) }}-{{ ipa_branch_path }}
 
 - name: Build a DIB image
   command: |

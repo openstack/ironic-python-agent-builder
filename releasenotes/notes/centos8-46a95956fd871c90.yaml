@@ -1,0 +1,11 @@
+---
+deprecations:
+  - |
+    Building images for CentOS 7 and other distribution releases that default
+    to Python 2 is deprecated.
+other:
+  - |
+    Since ironic-python-agent has removed support for Python 2, CentOS 8 images
+    are now built and published on https://tarballs.openstack.org instead of
+    CentOS 7 ones. The CentOS 7 images should not be used for Ussuri and later
+    releases.

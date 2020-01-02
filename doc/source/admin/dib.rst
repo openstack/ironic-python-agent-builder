@@ -20,13 +20,13 @@ You can add other diskimage-builder_ elements via the ``-e`` flag:
 
 .. code-block:: shell
 
-    ironic-python-agent-builder -e <extra-element> centos7
+    ironic-python-agent-builder -e <extra-element> --release 8 centos-minimal
 
 You can specify the base name of the target images:
 
 .. code-block:: shell
 
-    ironic-python-agent-builder -o my-ipa centos7
+    ironic-python-agent-builder -o my-ipa --release 8 centos-minimal
 
 You can specify the arch of the target image by setting ``ARCH`` environment
 variable (default is amd64):
@@ -65,8 +65,9 @@ for example:
 
 .. code-block:: shell
 
+    export DIB_RELEASE=8
     disk-image-create -o ironic-python-agent \
-        ironic-python-agent-ramdisk centos7 dhcp-all-interfaces
+        ironic-python-agent-ramdisk centos-minimal
 
 To use a specific branch of ironic-python-agent, use:
 

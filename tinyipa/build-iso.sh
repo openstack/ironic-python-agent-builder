@@ -2,7 +2,7 @@
 
 set -ex
 WORKDIR=$(readlink -f $0 | xargs dirname)
-SYSLINUX_VERSION="4.06"
+SYSLINUX_VERSION="6.03"
 SYSLINUX_URL="https://www.kernel.org/pub/linux/utils/boot/syslinux/syslinux-${SYSLINUX_VERSION}.tar.gz"
 
 cd $WORKDIR/build_files

@@ -2,6 +2,7 @@ bash.tcz
 coreutils.tcz
 dmidecode.tcz
 efibootmgr.tcz
+efivar.tcz
 file.tcz
 gdisk.tcz
 glib2.tcz

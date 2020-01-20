@@ -127,6 +127,8 @@
         - ipa-tempest-wholedisk-bios-ipmi-iscsi-tinyipa-src
         - ironic-python-agent-check-image-tinyipa
         - ironic-python-agent-check-image-dib-centos8
+        - ironic-python-agent-check-image-dib-centos7:
+            voting: false
         - ironic-python-agent-check-image-dib-fedora:
             voting: false
         - ironic-python-agent-check-image-dib-ubuntu:

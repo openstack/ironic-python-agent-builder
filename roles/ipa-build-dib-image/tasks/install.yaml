@@ -9,3 +9,19 @@
     name: "{{ ansible_user_dir }}/{{ zuul.projects['opendev.org/openstack/ironic-python-agent-builder'].src_dir }}"
     extra_args: -c "{{ ansible_user_dir }}/{{ zuul.projects['opendev.org/openstack/requirements'].src_dir }}/upper-constraints.txt"
   become: true
+
+# NOTE(dtantsur): installing requirements separately since DIB itself is in
+# upper-constraints and source installations cannot be constrained.
+
+- name: Install requirements for DIB (if installing from source)
+  pip:
+    requirements: "{{ ansible_user_dir }}/{{ zuul.projects['opendev.org/openstack/diskimage-builder'].src_dir }}/requirements.txt"
+    extra_args: -c "{{ ansible_user_dir }}/{{ zuul.projects['opendev.org/openstack/requirements'].src_dir }}/upper-constraints.txt"
+  become: true
+  when: dib_from_source
+
+- name: Install DIB (if installing from source)
+  pip:
+    name: "{{ ansible_user_dir }}/{{ zuul.projects['opendev.org/openstack/diskimage-builder'].src_dir }}"
+  become: true
+  when: dib_from_source

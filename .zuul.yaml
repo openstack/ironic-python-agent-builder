@@ -23,7 +23,6 @@
     name: ironic-python-agent-build-image-dib-centos7
     parent: ironic-python-agent-build-image-base
     required-projects:
-      # NOTE(dtantsur): used for bindep only
       - openstack/diskimage-builder
     vars:
       image_type: 'dib'
@@ -33,7 +32,6 @@
     name: ironic-python-agent-build-image-dib-centos8
     parent: ironic-python-agent-build-image-base
     required-projects:
-      # NOTE(dtantsur): used for bindep only
       - openstack/diskimage-builder
     vars:
       image_type: 'dib'
@@ -72,7 +70,6 @@
     name: ironic-python-agent-check-image-dib-centos7
     parent: ironic-python-agent-check-image-base
     required-projects:
-      # NOTE(dtantsur): used for bindep only
       - openstack/diskimage-builder
     vars:
       image_type: 'dib'
@@ -82,7 +79,6 @@
     name: ironic-python-agent-check-image-dib-centos8
     parent: ironic-python-agent-check-image-base
     required-projects:
-      # NOTE(dtantsur): used for bindep only
       - openstack/diskimage-builder
     vars:
       image_type: 'dib'
@@ -93,7 +89,6 @@
     name: ironic-python-agent-check-image-dib-fedora
     parent: ironic-python-agent-check-image-base
     required-projects:
-      # NOTE(dtantsur): used for bindep only
       - openstack/diskimage-builder
     vars:
       image_type: 'dib'
@@ -103,7 +98,6 @@
     name: ironic-python-agent-check-image-dib-debian
     parent: ironic-python-agent-check-image-base
     required-projects:
-      # NOTE(dtantsur): used for bindep only
       - openstack/diskimage-builder
     vars:
       image_type: 'dib'
@@ -113,7 +107,6 @@
     name: ironic-python-agent-check-image-dib-ubuntu
     parent: ironic-python-agent-check-image-base
     required-projects:
-      # NOTE(dtantsur): used for bindep only
       - openstack/diskimage-builder
     vars:
       image_type: 'dib'

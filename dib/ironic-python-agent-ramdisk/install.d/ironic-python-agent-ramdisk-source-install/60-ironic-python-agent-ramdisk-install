@@ -14,7 +14,11 @@ UPPER_CONSTRAINTS=/tmp/requirements/upper-constraints.txt
 VENVDIR=/opt/ironic-python-agent
 
 # create the virtual environment using the default python
-$DIB_PYTHON -m virtualenv -- $VENVDIR
+if [ $DIB_PYTHON_VERSION == 3 ]; then
+  $DIB_PYTHON -m venv $VENVDIR
+else
+  $DIB_PYTHON -m virtualenv $VENVDIR
+fi
 
 # pip might be an older version which does not support the -c option, therefore upgrade first
 $VENVDIR/bin/pip install pip --upgrade

@@ -6,6 +6,8 @@ fi
 set -eu
 set -o pipefail
 
+export LC_ALL=C.UTF-8
+
 SCRIPTDIR=$(dirname $0)
 IPADIR=/tmp/ironic-python-agent
 UPPER_CONSTRAINTS=/tmp/requirements/upper-constraints.txt

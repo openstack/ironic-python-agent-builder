@@ -20,8 +20,9 @@ else
   $DIB_PYTHON -m virtualenv $VENVDIR
 fi
 
-# pip might be an older version which does not support the -c option, therefore upgrade first
-$VENVDIR/bin/pip install pip --upgrade
+# pip might be an older version which does not support the -c option, therefore
+# upgrade it first. This is no-op when a new enough version is available.
+$VENVDIR/bin/pip install 'pip>=7.1'
 
 # install IPA inside the virtual environment
 $VENVDIR/bin/pip install -c $UPPER_CONSTRAINTS $IPADIR --install-option="--install-scripts=/usr/local/bin/"

@@ -112,29 +112,6 @@
       image_type: 'dib'
       image_distro: 'ubuntu'
 
-# NOTE(ianw) 2020-01-31 : this is just for infra testing uploading
-# artifacts to AFS instead of a static partition.
-- job:
-    name: ironic-python-agent-build-image-base-publish-to-afs
-    parent: publish-openstack-artifacts-with-afs
-    pre-run: playbooks/ironic-python-agent-build-image/pre.yaml
-    run: playbooks/ironic-python-agent-build-image/run.yaml
-    post-run: playbooks/ironic-python-agent-build-image/post.yaml
-    timeout: 1800
-    required-projects:
-      - openstack/requirements
-      - openstack/ironic-python-agent
-      - openstack/ironic-python-agent-builder
-    vars:
-      ipa_raw_dir: '{{ ansible_user_dir }}/src/opendev.org/openstack/ironic-python-agent/UPLOAD_RAW'
-      ipa_tar_dir: '{{ ansible_user_dir }}/src/opendev.org/openstack/ironic-python-agent/UPLOAD_TAR'
-
-- job:
-    name: ironic-python-agent-build-image-tinyipa-publish-to-afs
-    parent: ironic-python-agent-build-image-base-publish-to-afs
-    vars:
-      image_type: 'tinyipa'
-
 - project:
     templates:
       - publish-openstack-docs-pti
@@ -179,4 +156,3 @@
         - publish-openstack-python-branch-tarball
         - ironic-python-agent-build-image-tinyipa
         - ironic-python-agent-build-image-dib-centos8
-        - ironic-python-agent-build-image-tinyipa-publish-to-afs

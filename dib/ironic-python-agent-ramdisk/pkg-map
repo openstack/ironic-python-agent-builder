@@ -34,7 +34,8 @@
     },
     "debian": {
       "tgt": "tgt",
-      "curl": "curl"
+      "curl": "curl",
+      "python-dev": "python3-dev"
     }
   },
   "default": {

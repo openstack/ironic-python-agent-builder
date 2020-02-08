@@ -17,6 +17,7 @@ popt.tcz
 pciutils.tcz
 raid-dm-4.14.10-tinycore64.tcz
 scsi-4.14.10-tinycore64.tcz
+filesystems-4.14.10-tinycore64.tcz
 smartmontools.tcz
 udev-lib.tcz
 util-linux.tcz

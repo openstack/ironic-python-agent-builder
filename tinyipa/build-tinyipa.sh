@@ -154,6 +154,8 @@ $CHROOT_CMD chmod a+rwx /etc/sysconfig/tcuser
 mkdir $BUILDDIR/tmp/overides
 cp $WORKDIR/build_files/fakeuname $BUILDDIR/tmp/overides/uname
 
+sudo cp $WORKDIR/build_files/ntpdate $BUILDDIR/bin/ntpdate
+
 PY_REQS="buildreqs_python2.lst"
 if [[ $USE_PYTHON3 == "True" ]]; then
     PY_REQS="buildreqs_python3.lst"

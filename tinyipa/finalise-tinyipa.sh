@@ -92,6 +92,8 @@ fi
 mkdir $FINALDIR/tmp/overides
 cp $WORKDIR/build_files/fakeuname $FINALDIR/tmp/overides/uname
 
+sudo cp $WORKDIR/build_files/ntpdate $FINALDIR/bin/ntpdate
+sudo chmod 755 $FINALDIR/bin/ntpdate
 PY_REQS="finalreqs_python2.lst"
 if [[ $USE_PYTHON3 == "True" ]]; then
     PY_REQS="finalreqs_python3.lst"

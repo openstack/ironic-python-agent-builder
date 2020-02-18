@@ -1,0 +1,7 @@
+---
+features:
+  - |
+    Adds packages required for ``ironic-python-agent`` to
+    synchronize the system clock, namely ntpdate. The other
+    dependency of the agent requires is ``hwclock``, however
+    that package is provided by util-linux.

@@ -20,6 +20,7 @@ dosfstools:
 mdadm:
 efibootmgr:
 efivar:
+chrony:
 
 # Unnecessary packages to remove. We run all removals in pre-install phase, to
 # avoid breaking installs that happen in install phase.

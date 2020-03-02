@@ -22,6 +22,7 @@
 - job:
     name: ironic-python-agent-build-image-dib-centos7
     parent: ironic-python-agent-build-image-base
+    override-branch: stable/train
     required-projects:
       - openstack/diskimage-builder
     vars:
@@ -69,6 +70,7 @@
 - job:
     name: ironic-python-agent-check-image-dib-centos7
     parent: ironic-python-agent-check-image-base
+    override-branch: stable/train
     required-projects:
       - openstack/diskimage-builder
     vars:
@@ -127,9 +129,8 @@
         - ipa-tempest-wholedisk-bios-ipmi-iscsi-tinyipa-src
         - ironic-python-agent-check-image-tinyipa
         - ironic-python-agent-check-image-dib-centos8
+        - ironic-python-agent-check-image-dib-centos7
         # Non-voting jobs
-        - ironic-python-agent-check-image-dib-centos7:
-            voting: false
         - ironic-python-agent-check-image-dib-fedora:
             voting: false
         - ironic-python-agent-check-image-dib-debian:
@@ -152,6 +153,7 @@
         - ipa-tempest-wholedisk-bios-ipmi-iscsi-tinyipa-src
         - ironic-python-agent-check-image-tinyipa
         - ironic-python-agent-check-image-dib-centos8
+        - ironic-python-agent-check-image-dib-centos7
     post:
       jobs:
         - publish-openstack-python-branch-tarball

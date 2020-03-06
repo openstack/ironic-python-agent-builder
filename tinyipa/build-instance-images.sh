@@ -22,10 +22,6 @@ setup_tce $DST_DIR
 # NOTE(rpittau) change ownership of the tce info dir to prevent writing issues
 sudo chown $TC:$STAFF $DST_DIR/usr/local/tce.installed
 
-# NOTE(rpittau) patch tce-load to adapt to changes in squashfs module in
-# latest kernel
-sudo patch ${DST_DIR}/usr/bin/tce-load < patches/tce-load_squashfs.patch
-
 $TC_CHROOT_CMD tce-load -wci grub2-multi.tcz
 
 cleanup_tce $DST_DIR

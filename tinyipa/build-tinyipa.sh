@@ -9,10 +9,10 @@ TINYIPA_REQUIRE_BIOSDEVNAME=${TINYIPA_REQUIRE_BIOSDEVNAME:-false}
 TINYIPA_REQUIRE_IPMITOOL=${TINYIPA_REQUIRE_IPMITOOL:-true}
 IRONIC_LIB_SOURCE=${IRONIC_LIB_SOURCE:-}
 USE_PYTHON3=${USE_PYTHON3:-True}
-TC_RELEASE="10.x"
+TC_RELEASE="11.x"
 
 TGT_RELEASE="v1.0.79"
-QEMU_RELEASE="v3.1.1"
+QEMU_RELEASE="v4.2.0"
 LSHW_RELEASE="B.02.18"
 
 BIOSDEVNAME_RELEASE="0.7.2"
@@ -76,6 +76,7 @@ if $TINYIPA_REQUIRE_BIOSDEVNAME; then
 fi
 if $TINYIPA_REQUIRE_IPMITOOL; then
     wget -N -O - https://github.com/ipmitool/ipmitool/archive/IPMITOOL_${IPMITOOL_RELASE}.tar.gz | tar -xz -C "${BUILDDIR}/tmp" -f -
+    patch ${BUILDDIR}/tmp/ipmitool-IPMITOOL_${IPMITOOL_RELASE}/src/plugins/lanplus/lanplus_crypt_impl.c < patches/ipmitool-openssl.patch
 fi
 
 # Create directory for python local mirror
@@ -169,10 +170,6 @@ fi
 
 # NOTE(rpittau) change ownership of the tce info dir to prevent writing issues
 sudo chown $TC:$STAFF $BUILDDIR/usr/local/tce.installed
-
-# NOTE(rpittau) patch tce-load to adapt to changes in squashfs module in
-# latest kernel
-sudo patch ${BUILDDIR}/usr/bin/tce-load < patches/tce-load_squashfs.patch
 
 while read line; do
     sudo chroot --userspec=$TC:$STAFF $BUILDDIR /usr/bin/env -i PATH=$CHROOT_PATH http_proxy=$http_proxy https_proxy=$https_proxy no_proxy=$no_proxy tce-load -wci $line

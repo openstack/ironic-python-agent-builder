@@ -86,14 +86,20 @@ IPA_SOURCE_DIR=${IPA_SOURCE_DIR:-/opt/stack/ironic-python-agent}
 cd $IPA_SOURCE_DIR
 rm -rf *.egg-info
 pwd
-python setup.py sdist --dist-dir "$BUILDDIR/tmp/localpip" --quiet
+
+PYTHON_COMMAND="python"
+if [[ $USE_PYTHON3 == "True" ]]; then
+    PYTHON_COMMAND="python3"
+fi
+$PYTHON_COMMAND setup.py sdist --dist-dir "$BUILDDIR/tmp/localpip" --quiet
+
 ls $BUILDDIR/tmp/localpip || true
 cp requirements.txt $BUILDDIR/tmp/ipa-requirements.txt
 
 if [ -n "$IRONIC_LIB_SOURCE" ]; then
     pushd $IRONIC_LIB_SOURCE
     rm -rf *.egg-info
-    python setup.py sdist --dist-dir "$BUILDDIR/tmp/localpip" --quiet
+    $PYTHON_COMMAND setup.py sdist --dist-dir "$BUILDDIR/tmp/localpip" --quiet
     cp requirements.txt $BUILDDIR/tmp/ironic-lib-requirements.txt
     popd
 fi
@@ -101,10 +107,10 @@ fi
 if [ -n "$PYTHON_EXTRA_SOURCES_DIR_LIST" ]; then
     IFS="," read -ra PKGDIRS <<< "$PYTHON_EXTRA_SOURCES_DIR_LIST"
     for PKGDIR in "${PKGDIRS[@]}"; do
-        PKG=$(cd "$PKGDIR" ; python setup.py --name)
+        PKG=$(cd "$PKGDIR" ; $PYTHON_COMMAND setup.py --name)
         pushd "$PKGDIR"
         rm -rf *.egg-info
-        python setup.py sdist --dist-dir "$BUILDDIR/tmp/localpip" --quiet
+        $PYTHON_COMMAND setup.py sdist --dist-dir "$BUILDDIR/tmp/localpip" --quiet
         if [[ -r requirements.txt ]]; then
             cp requirements.txt $BUILDDIR/tmp/${PKG}-requirements.txt
         fi
@@ -185,7 +191,7 @@ fi
 if [ -n "$PYTHON_EXTRA_SOURCES_DIR_LIST" ]; then
     IFS="," read -ra PKGDIRS <<< "$PYTHON_EXTRA_SOURCES_DIR_LIST"
     for PKGDIR in "${PKGDIRS[@]}"; do
-        PKG=$(cd "$PKGDIR" ; python setup.py --name)
+        PKG=$(cd "$PKGDIR" ; $PYTHON_COMMAND setup.py --name)
         if [[ -r $BUILDDIR/tmp/${PKG}-requirements.txt ]]; then
             $CHROOT_CMD ${PIP_COMMAND} wheel -c /tmp/upper-constraints.txt --wheel-dir /tmp/wheels -r /tmp/${PKG}-requirements.txt
         fi

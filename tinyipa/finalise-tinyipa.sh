@@ -187,6 +187,16 @@ sudo sed -i '/# Main/a NOZSWAP=1' "$FINALDIR/etc/init.d/tc-config"
 # Place ipv6 modprobe config so the kernel support loads.
 sudo cp "$WORKDIR/build_files/modprobe.conf" "$FINALDIR/etc/modproble.conf"
 
+# NOTE(rpittau): workaorund for hwclock
+# The adjtime file used by hwclock in tinycore is /var/lib/hwclock/adjtime
+# but for some reason (bug?) the file is not created when hwclock is
+# invoked, causing hwclock to fail when using certain options, for example
+# --systohc.
+# We create the dir and the file to prevent that.
+$CHROOT_CMD mkdir -p /var/lib/hwclock
+$CHROOT_CMD touch /var/lib/hwclock/adjtime
+$CHROOT_CMD chmod 640 /var/lib/hwclock/adjtime
+
 if $PYOPTIMIZE_TINYIPA; then
     # Precompile all python
     if [[ $USE_PYTHON3 == "True" ]]; then

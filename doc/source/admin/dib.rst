@@ -74,6 +74,7 @@ To use a specific branch of ironic-python-agent, use:
 .. code-block:: bash
 
     export DIB_REPOREF_ironic_python_agent=origin/stable/queens
+    export DIB_REPOREF_requirements=origin/stable/queens
 
 To build image for architectures other than amd64, you can either set the
 ``ARCH`` environment variable or use ``-a`` to specify the target

@@ -139,6 +139,19 @@ The *devuser* element allows creating a user at build time, for example:
   export DIB_DEV_USER_AUTHORIZED_KEYS=$HOME/.ssh/id_rsa.pub
   disk-image-create debian ironic-python-agent-ramdisk devuser
 
+Consistent Network Interface Naming
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Base cloud images normally disable consistent network interface naming
+by inserting an empty udev rule. Include ``stable-interface-names`` element
+if you want to have consistent network interface naming whenever it is
+required for instance image or deploy image.
+
+.. code-block:: bash
+
+    ironic-python-agent-builder -e stable-interface-names --release 8 centos-minimal
+
+
 .. _diskimage-builder: https://docs.openstack.org/diskimage-builder
 .. _dynamic-login: https://docs.openstack.org/diskimage-builder/latest/elements/dynamic-login/README.html
 .. _devuser: https://docs.openstack.org/diskimage-builder/latest/elements/devuser/README.html

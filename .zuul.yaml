@@ -16,6 +16,7 @@
 - job:
     name: ironic-python-agent-build-image-tinyipa
     parent: ironic-python-agent-build-image-base
+    nodeset: ubuntu-focal
     vars:
       image_type: 'tinyipa'
 
@@ -64,6 +65,7 @@
 - job:
     name: ironic-python-agent-check-image-tinyipa
     parent: ironic-python-agent-check-image-base
+    nodeset: ubuntu-focal
     vars:
       image_type: 'tinyipa'
 

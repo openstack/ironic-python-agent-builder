@@ -170,6 +170,10 @@ fi
 # NOTE(rpittau) change ownership of the tce info dir to prevent writing issues
 sudo chown $TC:$STAFF $BUILDDIR/usr/local/tce.installed
 
+# NOTE(rpittau) patch tce-load to adapt to changes in squashfs module in
+# latest kernel
+sudo patch ${BUILDDIR}/usr/bin/tce-load < patches/tce-load_squashfs.patch
+
 while read line; do
     sudo chroot --userspec=$TC:$STAFF $BUILDDIR /usr/bin/env -i PATH=$CHROOT_PATH http_proxy=$http_proxy https_proxy=$https_proxy no_proxy=$no_proxy tce-load -wci $line
 done < <(paste $WORKDIR/build_files/$PY_REQS $WORKDIR/build_files/buildreqs.lst)

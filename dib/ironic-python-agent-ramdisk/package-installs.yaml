@@ -23,6 +23,11 @@ efivar:
 chrony:
 e2fsprogs:
 
+# The base minimum element uninstalls firmware, but it's needed for bare metal.
+linux-firmware:
+  phase: post-install.d
+  when: IPA_DISTRO_FAMILY = rh
+
 # Unnecessary packages to remove. We run all removals in pre-install phase, to
 # avoid breaking installs that happen in install phase.
 

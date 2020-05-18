@@ -1,0 +1,5 @@
+---
+fixes:
+  - |
+    Installs ``linux-firmware`` on the DIB images since it's now uninstalled
+    by the base elements on Red Hat operating systems.

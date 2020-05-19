@@ -19,6 +19,9 @@ sudo mount -o loop "$PARTIMG" "$DST_DIR/"
 
 setup_tce $DST_DIR
 
+# NOTE(rpittau) change ownership of the tce info dir to prevent writing issues
+sudo chown $TC:$STAFF $DST_DIR/usr/local/tce.installed
+
 $TC_CHROOT_CMD tce-load -wci grub2-multi.tcz
 
 cleanup_tce $DST_DIR

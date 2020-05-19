@@ -99,6 +99,9 @@ if [[ $USE_PYTHON3 == "True" ]]; then
     PY_REQS="finalreqs_python3.lst"
 fi
 
+# NOTE(rpittau) change ownership of the tce info dir to prevent writing issues
+sudo chown $TC:$STAFF $FINALDIR/usr/local/tce.installed
+
 while read line; do
     $TC_CHROOT_CMD tce-load -wic $line
 done < <(paste $WORKDIR/build_files/finalreqs.lst $WORKDIR/build_files/$PY_REQS)

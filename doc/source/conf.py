@@ -40,8 +40,9 @@ master_doc = 'index'
 copyright = u'2017, OpenStack Developers'
 
 # openstackdocstheme options
-repository_name = 'openstack/ironic-python-agent-builder'
-use_storyboard = True
+openstackdocs_repo_name = 'openstack/ironic-python-agent-builder'
+openstackdocs_pdf_link = True
+openstackdocs_use_storyboard = True
 
 # If true, '()' will be appended to :func: etc. cross-reference text.
 add_function_parentheses = True
@@ -51,7 +52,7 @@ add_function_parentheses = True
 add_module_names = True
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = 'sphinx'
+pygments_style = 'native'
 
 # -- Options for HTML output --------------------------------------------------
 

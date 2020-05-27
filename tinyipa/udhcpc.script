@@ -37,6 +37,7 @@ case "$1" in
             echo adding dns $i
             echo nameserver $i >> $RESOLV_CONF
         done
+        [ -n "$mtu" ] && /sbin/ifconfig $interface mtu $mtu
         ;;
 esac
 

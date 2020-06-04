@@ -30,7 +30,7 @@
       "curl": "curl",
       "ironic-python-agent": "openstack-ironic-python-agent",
       "qemu-utils": "qemu-img",
-      "python-dev": "python2-devel"
+      "python-dev": "python-devel"
     },
     "debian": {
       "tgt": "tgt",

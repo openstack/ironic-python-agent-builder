@@ -5,6 +5,7 @@
         "tgt": "target-restore",
         "curl": "curl",
         "ironic-python-agent": "openstack-ironic-python-agent",
+        "libffi-dev": "libffi-devel",
         "qemu-utils": "qemu-img",
         "python-dev": "python3-devel"
       }
@@ -14,6 +15,7 @@
         "tgt": "target-restore",
         "curl": "curl",
         "ironic-python-agent": "openstack-ironic-python-agent",
+        "libffi-dev": "libffi-devel",
         "qemu-utils": "qemu-img",
         "python-dev": "python3-devel"
       }
@@ -29,6 +31,7 @@
       "tgt": "scsi-target-utils",
       "curl": "curl",
       "ironic-python-agent": "openstack-ironic-python-agent",
+      "libffi-dev": "libffi-devel",
       "qemu-utils": "qemu-img",
       "python-dev": "python2-devel"
     },

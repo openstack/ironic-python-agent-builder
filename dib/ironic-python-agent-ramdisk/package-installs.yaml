@@ -22,6 +22,7 @@ efibootmgr:
 efivar:
 chrony:
 e2fsprogs:
+libffi-dev:
 
 # The base minimum element uninstalls firmware, but it's needed for bare metal.
 linux-firmware:

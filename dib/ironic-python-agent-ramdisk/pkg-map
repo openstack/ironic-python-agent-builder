@@ -33,7 +33,7 @@
       "ironic-python-agent": "openstack-ironic-python-agent",
       "libffi-dev": "libffi-devel",
       "qemu-utils": "qemu-img",
-      "python-dev": "python2-devel"
+      "python-dev": "python-devel"
     },
     "debian": {
       "tgt": "tgt",

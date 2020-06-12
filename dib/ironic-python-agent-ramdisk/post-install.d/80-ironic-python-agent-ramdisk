@@ -30,6 +30,18 @@ case "$DIB_INIT_SYSTEM" in
         if $DIB_IPA_ENABLE_RESCUE; then
             systemctl enable ironic-agent-create-rescue-user.path
         fi
+        # NOTE(rpittau) disable caching remote package index to prevent
+        # delays due to failures.
+        # This is a new service for dnf-based systems (e.g. Centos8) to speed
+        # up subsequent dnf commands, for example automated updates, and
+        # it's not really needed in the ipa-ramdisk as we shouldn't install
+        # anything during runtime.
+        if [[ ${IPA_DISTRO_FAMILY} == 'rh' ]]; then
+            if [[ ${YUM} == 'dnf' ]]; then
+                systemctl disable dnf-makecache.service
+                systemctl disable dnf-makecache.timer
+            fi
+        fi
         ;;
     sysv)
         update-rc.d iptables disable

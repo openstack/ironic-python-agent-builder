@@ -1,4 +1,7 @@
 - hosts: all
+  roles:
+    - ensure-pip
+
   tasks:
 
     - import_role:

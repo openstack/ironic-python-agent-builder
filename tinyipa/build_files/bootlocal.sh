@@ -38,23 +38,6 @@ sudo mkdir -p /etc/ipa-rescue-config
 
 export PYTHONOPTIMIZE=1
 
-# Run IPA
-echo "Starting Ironic Python Agent:"
-date
-ironic-python-agent 2>&1 | tee /var/log/ironic-python-agent.log
-
-
-create_rescue_user() {
-    crypted_pass=$(cat /etc/ipa-rescue-config/ipa-rescue-password)
-    sudo adduser rescue -D -G root # no useradd
-    echo "rescue:$crypted_pass" | sudo chpasswd -e
-    sudo sh -c "echo \"rescue ALL=(ALL) NOPASSWD: ALL\" >> /etc/sudoers" # no suooers.d in tiny core.
-
-    # Restart sshd with allowing password authentication
-    sudo sed -i -e 's/^PasswordAuthentication no/PasswordAuthentication yes/' /usr/local/etc/ssh/sshd_config
-    sudo /usr/local/etc/init.d/openssh restart
-}
-
 # Setup DHCP network
 configure_dhcp_network() {
     for pidfile in `ls /var/run/udhcpc*.pid`; do
@@ -74,8 +57,29 @@ configure_dhcp_network() {
     ip addr && true
 }
 
+# Configure networking, use custom udhcpc script to handle MTU option
+configure_dhcp_network
+
+# Run IPA
+echo "Starting Ironic Python Agent:"
+date
+ironic-python-agent 2>&1 | tee /var/log/ironic-python-agent.log
+
+
+create_rescue_user() {
+    crypted_pass=$(cat /etc/ipa-rescue-config/ipa-rescue-password)
+    sudo adduser rescue -D -G root # no useradd
+    echo "rescue:$crypted_pass" | sudo chpasswd -e
+    sudo sh -c "echo \"rescue ALL=(ALL) NOPASSWD: ALL\" >> /etc/sudoers" # no suooers.d in tiny core.
+
+    # Restart sshd with allowing password authentication
+    sudo sed -i -e 's/^PasswordAuthentication no/PasswordAuthentication yes/' /usr/local/etc/ssh/sshd_config
+    sudo /usr/local/etc/init.d/openssh restart
+}
+
 if [ -f /etc/ipa-rescue-config/ipa-rescue-password ]; then
     create_rescue_user || exit 0
+    # The network might change during rescue, renew addresses in this case.
     configure_dhcp_network || exit 0
 else
     echo "IPA has exited. No rescue password file was defined."

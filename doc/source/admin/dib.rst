@@ -130,6 +130,9 @@ time via the kernel command line parameters:
 
 * Restart the ironic-conductor.
 
+.. note::
+   This element is added to the published images by default.
+
 The *devuser* element allows creating a user at build time, for example:
 
 .. code-block:: bash

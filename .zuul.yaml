@@ -141,7 +141,7 @@
             voting: false
         - ipa-tempest-wholedisk-bios-ipmi-direct-dib-src:
             voting: false
-        - ipa-tempest-partition-bios-ipmi-iscsi-dib-src:
+        - ipa-tempest-bios-ipmi-iscsi-src:
             voting: false
         - ipa-tempest-ironic-inspector-src:
             voting: false

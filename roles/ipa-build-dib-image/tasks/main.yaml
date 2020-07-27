@@ -20,6 +20,9 @@
   command: |
     ironic-python-agent-builder -o {{ image_name }} -b HEAD -v
         {{ "-r {}".format(image_release) if image_release else '' }}
+        {% for element in extra_elements %}
+          --element {{ element }}
+        {% endfor %}
         {{ "--extra-args '{}'".format(dib_extra_args) if dib_extra_args else '' }}
         {{ image_distro }}
   environment:

@@ -38,6 +38,7 @@ sudo find . -xdev \
     -path './usr/lib/locale/*' -prune -o \
     -path './usr/share/doc/*' -prune -o \
     -path './usr/share/man/*' -prune -o \
+    -path './usr/share/GeoIP/*' -prune -o \
     -path './usr/share/info/*' -prune -o \
     -path './usr/share/licenses/*' -prune -o \
     -path './usr/share/locale/*' -prune -o \

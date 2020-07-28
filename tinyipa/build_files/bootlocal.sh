@@ -54,7 +54,14 @@ configure_dhcp_network() {
         /sbin/udhcpc -b -p ${pidfile} -i ${interface} -s /opt/udhcpc.script >> /var/log/udhcpc.log 2>&1
     done
     echo "Completed DHCP client restart"
-    ip addr && true
+    echo "Outputting IP and Route information"
+    ip addr || true
+    ip route || true
+    ip -6 route || true
+    echo "Logging IPv4 sysctls"
+    sysctl -a |grep ipv4 || true
+    echo "Logging IPv6 sysctls"
+    sysctl -a |grep ipv6 || true
 }
 
 # Configure networking, use custom udhcpc script to handle MTU option

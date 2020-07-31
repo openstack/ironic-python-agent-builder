@@ -1,0 +1,5 @@
+---
+features:
+  - |
+    Supports building images for Ussuri+ on CentOS 7 using Python 3. This is
+    not recommended but is necessary for some older hardware.

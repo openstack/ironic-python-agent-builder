@@ -80,6 +80,15 @@
       image_distro: 'centos7'
 
 - job:
+    name: ironic-python-agent-check-image-dib-centos7-python3
+    parent: ironic-python-agent-check-image-base
+    required-projects:
+      - openstack/diskimage-builder
+    vars:
+      image_type: 'dib'
+      image_distro: 'centos7'
+
+- job:
     name: ironic-python-agent-check-image-dib-centos8
     parent: ironic-python-agent-check-image-base
     required-projects:
@@ -133,6 +142,8 @@
         - ironic-python-agent-check-image-dib-centos8
         - ironic-python-agent-check-image-dib-centos7
         # Non-voting jobs
+        - ironic-python-agent-check-image-dib-centos7-python3:
+            voting: false
         - ironic-python-agent-check-image-dib-fedora:
             voting: false
         - ironic-python-agent-check-image-dib-debian:

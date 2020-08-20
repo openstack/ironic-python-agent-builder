@@ -57,6 +57,14 @@ fi
 
 sudo -v
 
+# Let's umount proc in case the old finalise process went sideways and
+# it's still mounted
+if grep -qs "$FINALDIR/proc" /proc/mounts; then
+    sudo umount "$FINALDIR/proc"
+fi
+
+# Remove the old final chroot dir with all its content before starting a new
+# finalise process
 if [ -d "$FINALDIR" ]; then
     sudo rm -rf "$FINALDIR"
 fi

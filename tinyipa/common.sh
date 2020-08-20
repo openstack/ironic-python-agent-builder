@@ -3,6 +3,8 @@
 WORKDIR=$(readlink -f $0 | xargs dirname)
 source ${WORKDIR}/tc-mirror.sh
 
+PIP_VERSION="20.2.2"
+
 # Allow an extension to be added to the generated files by specifying
 # $BRANCH_PATH e.g. export BRANCH_PATH=master results in tinyipa-master.gz etc
 BRANCH_EXT=''

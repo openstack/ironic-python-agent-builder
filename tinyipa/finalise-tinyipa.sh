@@ -160,7 +160,7 @@ fi
 # NOTE(rpittau): pip MUST be the same version used in the build script or
 # dragons will appear and put everything on fire
 $CHROOT_CMD ${TINYIPA_PYTHON_EXE} -m ensurepip
-$CHROOT_CMD ${PIP_COMMAND} install --upgrade pip wheel
+$CHROOT_CMD ${PIP_COMMAND} install --upgrade pip==${PIP_VERSION} wheel
 
 # If flag is set install python now
 if $BUILD_AND_INSTALL_TINYIPA ; then

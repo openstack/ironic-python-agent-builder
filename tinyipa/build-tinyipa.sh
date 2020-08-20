@@ -2,7 +2,7 @@
 
 set -ex
 WORKDIR=$(readlink -f $0 | xargs dirname)
-source ${WORKDIR}/tc-mirror.sh
+source ${WORKDIR}/common.sh
 BUILDDIR="$WORKDIR/tinyipabuild"
 TINYCORE_MIRROR_URL=${TINYCORE_MIRROR_URL:-}
 TINYIPA_REQUIRE_BIOSDEVNAME=${TINYIPA_REQUIRE_BIOSDEVNAME:-false}
@@ -187,7 +187,7 @@ fi
 
 # Build python wheels
 $CHROOT_CMD ${TINYIPA_PYTHON_EXE} -m ensurepip
-$CHROOT_CMD ${PIP_COMMAND} install --upgrade pip wheel
+$CHROOT_CMD ${PIP_COMMAND} install --upgrade pip==${PIP_VERSION} wheel
 $CHROOT_CMD ${PIP_COMMAND} install pbr
 $CHROOT_CMD ${PIP_COMMAND} wheel -c /tmp/upper-constraints.txt --wheel-dir /tmp/wheels -r /tmp/ipa-requirements.txt
 if [ -n "$IRONIC_LIB_SOURCE" ]; then

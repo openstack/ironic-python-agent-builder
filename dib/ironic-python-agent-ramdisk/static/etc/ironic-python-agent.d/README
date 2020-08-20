@@ -1,0 +1,3 @@
+Files ending in *.conf in this directory will be loading in alphabetical
+order. When a config setting is set multiple times, the last one read
+will take precedence.

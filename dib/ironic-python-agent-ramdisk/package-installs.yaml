@@ -38,9 +38,6 @@ cloud-init:
 git:
     phase: pre-install.d
     uninstall: true
-kbd:
-    phase: pre-install.d
-    uninstall: true
 man-db:
     phase: pre-install.d
     uninstall: true

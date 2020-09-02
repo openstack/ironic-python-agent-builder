@@ -33,6 +33,7 @@
 - job:
     name: ironic-python-agent-build-image-dib-centos8
     parent: ironic-python-agent-build-image-base
+    nodeset: centos-8
     required-projects:
       - openstack/diskimage-builder
     vars:
@@ -91,6 +92,7 @@
 - job:
     name: ironic-python-agent-check-image-dib-centos8
     parent: ironic-python-agent-check-image-base
+    nodeset: centos-8
     required-projects:
       - openstack/diskimage-builder
     vars:

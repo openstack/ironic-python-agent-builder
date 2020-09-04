@@ -23,6 +23,9 @@ efivar:
 chrony:
 e2fsprogs:
 libffi-dev:
+    build-only: true
+libssl-dev:
+    build-only: true
 
 # The base minimum element uninstalls firmware, but it's needed for bare metal.
 linux-firmware:

@@ -32,6 +32,7 @@
       "curl": "curl",
       "ironic-python-agent": "openstack-ironic-python-agent",
       "libffi-dev": "libffi-devel",
+      "libssl-dev": "openssl-devel",
       "qemu-utils": "qemu-img",
       "python-dev": "python-devel"
     },

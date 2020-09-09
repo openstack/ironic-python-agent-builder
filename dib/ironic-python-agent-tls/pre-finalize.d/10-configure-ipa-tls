@@ -1,19 +1,19 @@
 #!/bin/bash
 
 # /etc/ironic-python-agent.d/ is created by the ironic-python-agent-ramdisk element
-KEYDIR=$TMP_MOUNT_PATH/etc/ironic-python-agent.d
-CONFFILE=$TMP_MOUNT_PATH/etc/ironic-python-agent.d/10-configure-tls.conf
-CACONFFILE=$TMP_MOUNT_PATH/etc/ironic-python-agent.d/11-configure-client-cert-ca.conf
+KEYDIR=$TMP_BUILD_DIR/mnt/etc/ironic-python-agent.d
+CONFFILE=$KEYDIR/10-configure-tls.conf
+CACONFFILE=$KEYDIR/11-configure-client-cert-ca.conf
 
 if [[ -z $DIB_IPA_CERT_FILE ]] && [[ -z $DIB_IPA_KEY_FILE ]]; then
     echo "Both DIB_IPA_CERT_FILE and DIB_IPA_KEY_FILE are not set; generating self-signed cert"
-    openssl req -new -newkey rsa:4096 -days ${DIB_IPA_CERT_EXPIRATION:1095} -nodes -x509 -subj "/C=US/ST=NA/L=NA/O=NA/CN=${DIB_IPA_CERT_HOSTNAME:ipa-ramdisk.example.com}" -keyout $KEYDIR/agent.key -out $KEYDIR/agent.crt
+    sudo openssl req -new -nodes -newkey rsa:4096 -days ${DIB_IPA_CERT_EXPIRATION:-1095} -x509 -subj "/C=US/ST=NA/L=NA/O=NA/CN=${DIB_IPA_CERT_HOSTNAME:-ipa-ramdisk.example.com}" -keyout $KEYDIR/agent.key -out $KEYDIR/agent.crt
 else
     sudo cp $DIB_IPA_CERT_FILE $KEYDIR/agent.crt
     sudo cp $DIB_IPA_KEY_FILE $KEYDIR/agent.key
 fi
 
-sudo cat <<EOF > $CONFFILE
+cat <<EOF | sudo tee $CONFFILE
 [DEFAULT]
 listen_tls = True
 
@@ -24,8 +24,9 @@ EOF
 
 if [[ -n $DIB_IPA_CA_FILE ]]; then
     echo "DIB_IPA_CA_FILE set, configuring IPA to validate client certificates"
-    cp $DIB_IPA_CA_FILE $KEYDIR/agent.cacert.pem
-    sudo cat <<EOF >$CACONFFILE
+    sudo cp $DIB_IPA_CA_FILE $KEYDIR/agent.cacert.pem
+    cat <<EOF | sudo tee $CACONFFILE
 [ssl]
 ca_file = /etc/ironic-python-agent/agent.cacert.pem
 EOF
+fi

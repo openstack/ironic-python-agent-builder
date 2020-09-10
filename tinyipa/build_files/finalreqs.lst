@@ -22,3 +22,4 @@ smartmontools.tcz
 udev-lib.tcz
 util-linux.tcz
 ntpclient.tcz
+dosfstools.tcz

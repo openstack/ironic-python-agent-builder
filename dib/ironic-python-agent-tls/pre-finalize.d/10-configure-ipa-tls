@@ -1,7 +1,12 @@
 #!/bin/bash
 
-# /etc/ironic-python-agent.d/ is created by the ironic-python-agent-ramdisk element
-KEYDIR=$TMP_BUILD_DIR/mnt/etc/ironic-python-agent.d
+# This is the path inside the ramdisk, referenced in config files
+INSIDEDIR=/etc/ironic-python-agent.d/
+
+# but when copying files from outside the ramdisk, we have to use the mounted
+# DIB filesystems
+KEYDIR=$TMP_BUILD_DIR/mnt/$INSIDEDIR
+
 CONFFILE=$KEYDIR/10-configure-tls.conf
 CACONFFILE=$KEYDIR/11-configure-client-cert-ca.conf
 
@@ -18,8 +23,8 @@ cat <<EOF | sudo tee $CONFFILE
 listen_tls = True
 
 [ssl]
-cert_file = /etc/ironic-python-agent.d/agent.crt
-key_file = /etc/ironic-python-agent.d/agent.key
+cert_file = $INSIDEDIR/agent.crt
+key_file = $INSIDEDIR/agent.key
 EOF
 
 if [[ -n $DIB_IPA_CA_FILE ]]; then
@@ -27,6 +32,6 @@ if [[ -n $DIB_IPA_CA_FILE ]]; then
     sudo cp $DIB_IPA_CA_FILE $KEYDIR/agent.cacert.pem
     cat <<EOF | sudo tee $CACONFFILE
 [ssl]
-ca_file = /etc/ironic-python-agent/agent.cacert.pem
+ca_file = $INSIDEDIR/agent.cacert.pem
 EOF
 fi

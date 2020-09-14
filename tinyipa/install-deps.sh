@@ -2,8 +2,8 @@
 
 COMMON_PACKAGES="wget unzip sudo gawk"
 APT_PACKAGES="${COMMON_PACKAGES} python3-pip squashfs-tools"
-YUM_PACKAGES="${COMMON_PACKAGES} python-pip squashfs-tools"
-ZYPPER_PACKAGES="${COMMON_PACKAGES} python-pip squashfs"
+YUM_PACKAGES="${APT_PACKAGES}"
+ZYPPER_PACKAGES="${COMMON_PACKAGES} python3-pip squashfs"
 
 echo "Installing dependencies:"
 

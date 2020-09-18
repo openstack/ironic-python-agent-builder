@@ -21,6 +21,7 @@ fi
 cat <<EOF | sudo tee $CONFFILE
 [DEFAULT]
 listen_tls = True
+advertise_protocol = https
 
 [ssl]
 cert_file = $INSIDEDIR/agent.crt

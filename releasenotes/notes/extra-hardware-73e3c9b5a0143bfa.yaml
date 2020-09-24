@@ -1,0 +1,5 @@
+---
+features:
+  - |
+    Adds a new element ``extra-hardware`` for configuring extra hardware
+    collection in the ramdisk.

@@ -101,6 +101,12 @@
       image_release: 8
 
 - job:
+    name: ironic-python-agent-check-image-dib-centos8-extra
+    parent: ironic-python-agent-check-image-dib-centos8
+    vars:
+      extra_elements: ["extra-hardware"]
+
+- job:
     name: ironic-python-agent-check-image-dib-fedora
     parent: ironic-python-agent-check-image-base
     required-projects:

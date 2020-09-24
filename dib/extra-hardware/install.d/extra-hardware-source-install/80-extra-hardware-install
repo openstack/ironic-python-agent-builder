@@ -1,0 +1,21 @@
+#!/bin/bash
+
+if [ "${DIB_DEBUG_TRACE:-0}" -gt 0 ]; then
+    set -x
+fi
+set -eu
+set -o pipefail
+
+export LC_ALL=C.UTF-8
+
+VENVDIR=/opt/ironic-python-agent
+UPPER_CONSTRAINTS=/tmp/requirements/upper-constraints.txt
+PACKAGE=${DIB_IPA_HARDWARE_PACKAGE:-hardware${DIB_IPA_HARDWARE_VERSION:+==}${DIB_IPA_HARDWARE_VERSION:-}}
+
+$VENVDIR/bin/pip install -c "$UPPER_CONSTRAINTS" "$PACKAGE"
+
+# Because the ironic-python-agent systemd unit does not activate the virtualenv
+# before executing the ironic-python-agent script, the PATH is not updated to
+# point to the bin directory in the virtual environment. We add this symlink so
+# that ironic-python-agent sees the hardware-detect tool in its PATH.
+ln -s $VENVDIR/bin/hardware-detect /usr/local/bin/hardware-detect

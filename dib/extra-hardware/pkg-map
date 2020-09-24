@@ -1,0 +1,17 @@
+{
+  "release": {
+    "rhel": {
+      "8": {
+        "python-hardware": "python3-hardware-detect"
+      }
+    },
+    "centos": {
+      "8": {
+        "python-hardware": "python3-hardware-detect"
+      }
+    }
+  },
+  "default": {
+    "python-hardware": "python-hardware"
+  }
+}

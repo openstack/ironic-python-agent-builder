@@ -11,6 +11,7 @@
         - ipa-tempest-bios-ipmi-iscsi-tinyipa-src
         - ironic-python-agent-check-image-tinyipa
         - ironic-python-agent-check-image-dib-centos8
+        - ironic-python-agent-check-image-dib-centos8-extra
         - ironic-python-agent-check-image-dib-centos7
         # Non-voting jobs
         - ironic-python-agent-check-image-dib-centos7-python3:
@@ -37,6 +38,7 @@
         - ipa-tempest-bios-ipmi-iscsi-tinyipa-src
         - ironic-python-agent-check-image-tinyipa
         - ironic-python-agent-check-image-dib-centos8
+        - ironic-python-agent-check-image-dib-centos8-extra
         - ironic-python-agent-check-image-dib-centos7
     post:
       jobs:

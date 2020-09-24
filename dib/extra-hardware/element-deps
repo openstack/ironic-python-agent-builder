@@ -1,0 +1,5 @@
+epel
+install-types
+ironic-python-agent-ramdisk
+package-installs
+pkg-map

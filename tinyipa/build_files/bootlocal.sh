@@ -67,10 +67,12 @@ configure_dhcp_network() {
 # Configure networking, use custom udhcpc script to handle MTU option
 configure_dhcp_network
 
+mkdir -p /etc/ironic-python-agent.d/
+
 # Run IPA
 echo "Starting Ironic Python Agent:"
 date
-ironic-python-agent 2>&1 | tee /var/log/ironic-python-agent.log
+ironic-python-agent --config-dir /etc/ironic-python-agent.d/ 2>&1 | tee /var/log/ironic-python-agent.log
 
 
 create_rescue_user() {

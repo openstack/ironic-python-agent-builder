@@ -33,12 +33,12 @@
 - job:
     name: ironic-python-agent-build-image-dib-centos8
     parent: ironic-python-agent-build-image-base
-    nodeset: centos-8
+    nodeset: ubuntu-focal
     required-projects:
       - openstack/diskimage-builder
     vars:
       image_type: 'dib'
-      image_distro: 'centos-minimal'
+      image_distro: 'centos'
       image_release: 8
 
 - job:
@@ -92,12 +92,12 @@
 - job:
     name: ironic-python-agent-check-image-dib-centos8
     parent: ironic-python-agent-check-image-base
-    nodeset: centos-8
+    nodeset: ubuntu-focal
     required-projects:
       - openstack/diskimage-builder
     vars:
       image_type: 'dib'
-      image_distro: 'centos-minimal'
+      image_distro: 'centos'
       image_release: 8
 
 - job:

@@ -6,5 +6,6 @@ package-installs
 pip-and-virtualenv
 pkg-map
 runtime-ssh-host-keys
+selinux-permissive
 source-repositories
 svc-map

@@ -123,8 +123,7 @@ The *dynamic-login* element allows the operator to inject an SSH key at boot
 time via the kernel command line parameters:
 
 * Add ``sshkey="ssh-rsa <your public key here>"`` to ``pxe_append_params``
-  setting in the ``ironic.conf`` file. Disabling SELinux is required for
-  systems where it is enabled, it can be done with ``selinux=0``.
+  setting in the ``ironic.conf`` file.
 
   .. warning:: Quotation marks around the public key are important!
 

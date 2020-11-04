@@ -45,16 +45,16 @@ fail() {
     exit 1
 }
 
-upper_constraints_is_not_null() {
-    test "${UPPER_CONSTRAINTS_FILE:-""}" != ""
+tox_constraints_is_not_null() {
+    test "${TOX_CONSTRAINTS_FILE:-""}" != ""
 }
 
 copy_uc() {
-    copy "${UPPER_CONSTRAINTS_FILE:-""}" "${DESTINATION}"
+    copy "${TOX_CONSTRAINTS_FILE:-""}" "${DESTINATION}"
 }
 
 download_uc() {
-    download "${UPPER_CONSTRAINTS_FILE:-""}" "${DESTINATION}"
+    download "${TOX_CONSTRAINTS_FILE:-""}" "${DESTINATION}"
 }
 
 copy_new_requirements_uc() {
@@ -72,23 +72,23 @@ copy_new_requirements_uc() {
 download_from_tox_ini_url() {
     local url
     # NOTE(mmitchell): This extracts the URL defined as the default value for
-    #                  UPPER_CONSTRAINTS_FILE in tox.ini. This is used by image
+    #                  TOX_CONSTRAINTS_FILE in tox.ini. This is used by image
     #                  builders to avoid duplicating the default value in multiple
     #                  scripts. This is specially done to leverage the release
     #                  tools that automatically update the tox.ini when projects
     #                  are released.
-    url=$(sed -n 's/^.*{env:UPPER_CONSTRAINTS_FILE\:\([^}]*\)}.*$/\1/p' $TOX_INI | head -n1)
+    url=$(sed -n 's/^.*{env:TOX_CONSTRAINTS_FILE\:\([^}]*\)}.*$/\1/p' $TOX_INI | head -n1)
     log "tox.ini indicates '${url}' as fallback."
     download "${url}" "${DESTINATION}"
 }
 
 log "Generating local constraints file..."
 
-if upper_constraints_is_not_null; then
-    log "UPPER_CONSTRAINTS_FILE is defined as '${UPPER_CONSTRAINTS_FILE:-""}'"
-    copy_uc || download_uc || fail "Failed to copy or download file indicated in UPPER_CONSTRAINTS_FILE."
+if tox_constraints_is_not_null; then
+    log "TOX_CONSTRAINTS_FILE is defined as '${TOX_CONSTRAINTS_FILE:-""}'"
+    copy_uc || download_uc || fail "Failed to copy or download file indicated in TOX_CONSTRAINTS_FILE."
 else
-    log "UPPER_CONSTRAINTS_FILE is not defined. Using fallback strategies."
+    log "TOX_CONSTRAINTS_FILE is not defined. Using fallback strategies."
 
     copy_new_requirements_uc || \
         download_from_tox_ini_url || \

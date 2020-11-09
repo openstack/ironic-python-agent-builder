@@ -1,0 +1,6 @@
+---
+fixes:
+  - |
+    The DIB-based ramdisk is now always built with SELinux set to permissive.
+    Enabling SELinux may result in broken ramdisks and does not make much
+    sense for IPA anyway.

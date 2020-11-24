@@ -2,14 +2,14 @@
   set_fact:
     image_release: 8
   when:
-    - image_distro == "centos-minimal"
+    - image_distro in ["centos-minimal", "centos"]
     - not image_release
 
 - name: Generate a nice target name for CentOS
   set_fact:
     image_target_name: centos{{ image_release }}
   when:
-    - image_distro == "centos-minimal"
+    - image_distro in ["centos-minimal", "centos"]
     - not image_target_name
 
 - name: Generate image name

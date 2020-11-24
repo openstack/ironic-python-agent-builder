@@ -3,25 +3,20 @@
     "rhel": {
       "8": {
         "tgt": "target-restore",
-        "curl": "curl",
-        "ironic-python-agent": "openstack-ironic-python-agent",
-        "libffi-dev": "libffi-devel",
-        "qemu-utils": "qemu-img",
+        "python": "python3",
         "python-dev": "python3-devel"
       }
     },
     "centos": {
       "8": {
         "tgt": "target-restore",
-        "curl": "curl",
-        "ironic-python-agent": "openstack-ironic-python-agent",
-        "libffi-dev": "libffi-devel",
-        "qemu-utils": "qemu-img",
+        "python": "python3",
         "python-dev": "python3-devel"
       }
     },
     "ubuntu": {
       "bionic": {
+        "python": "python3",
         "python-dev": "python3-dev"
       }
     }
@@ -29,24 +24,17 @@
   "family": {
     "redhat": {
       "tgt": "scsi-target-utils",
-      "curl": "curl",
-      "ironic-python-agent": "openstack-ironic-python-agent",
       "libffi-dev": "libffi-devel",
       "libssl-dev": "openssl-devel",
       "qemu-utils": "qemu-img",
       "python-dev": "python-devel"
     },
     "debian": {
-      "tgt": "tgt",
-      "curl": "curl",
+      "python": "python3",
       "python-dev": "python3-dev"
     }
   },
   "default": {
-    "tgt": "tgt",
-    "curl": "curl",
-    "ironic-python-agent": "openstack-ironic-python-agent",
-    "qemu-utils": "qemu-utils",
-    "python-dev": "python-dev"
+    "ironic-python-agent": "openstack-ironic-python-agent"
   }
 }

@@ -16,7 +16,6 @@
 - job:
     name: ironic-python-agent-build-image-tinyipa
     parent: ironic-python-agent-build-image-base
-    nodeset: ubuntu-focal
     vars:
       image_type: 'tinyipa'
 
@@ -33,7 +32,6 @@
 - job:
     name: ironic-python-agent-build-image-dib-centos8
     parent: ironic-python-agent-build-image-base
-    nodeset: ubuntu-focal
     required-projects:
       - openstack/diskimage-builder
     vars:

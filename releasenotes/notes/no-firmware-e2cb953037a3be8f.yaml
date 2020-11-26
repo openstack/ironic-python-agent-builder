@@ -1,0 +1,5 @@
+---
+features:
+  - |
+    Firmware for netronome and amdgpu is now removed by default. Set
+    ``IPA_REMOVE_FIRMWARE`` to override.

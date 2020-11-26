@@ -53,6 +53,8 @@ def main():
                         "ironic-python-agent and requirements")
     parser.add_argument("-v", "--verbose", action='store_true',
                         help="Enable verbose logging in diskimage-builder")
+    parser.add_argument("--lzma", action='store_true',
+                        help="Use lzma compression for smaller images")
     parser.add_argument("--extra-args",
                         help="Extra arguments to pass to diskimage-builder")
     # TODO(dtantsur): handle distribution == tinyipa
@@ -68,6 +70,9 @@ def main():
     if args.branch:
         os.environ['DIB_REPOREF_ironic_python_agent'] = args.branch
         os.environ['DIB_REPOREF_requirements'] = args.branch
+    if args.lzma:
+        os.environ['DIB_IPA_COMPRESS_CMD'] = \
+            'xz --format=lzma --compress --stdout'
     extra_args = shlex.split(args.extra_args) if args.extra_args else []
     if args.verbose:
         extra_args.append("-x")

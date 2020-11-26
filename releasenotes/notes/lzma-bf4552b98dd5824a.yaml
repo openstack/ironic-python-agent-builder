@@ -1,0 +1,5 @@
+---
+features:
+  - |
+    The ``ironic-python-agent-builder`` CLI now supports ``--lzma`` flag to
+    compress images with the LZMA algorithm.

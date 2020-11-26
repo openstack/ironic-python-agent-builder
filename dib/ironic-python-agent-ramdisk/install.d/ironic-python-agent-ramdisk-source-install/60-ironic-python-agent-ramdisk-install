@@ -42,7 +42,10 @@ fi
 $VENVDIR/bin/pip install 'pip>=7.1'
 
 # install IPA inside the virtual environment
-$VENVDIR/bin/pip install -c $UPPER_CONSTRAINTS $IPADIR --install-option="--install-scripts=/usr/local/bin/"
+$VENVDIR/bin/pip install -c $UPPER_CONSTRAINTS $IPADIR
+ln -s $VENVDIR/bin/ironic-python-agent /usr/local/bin/
+ln -s $VENVDIR/bin/ironic-collect-introspection-data /usr/local/bin/
+
 
 case "$DIB_INIT_SYSTEM" in
     upstart)

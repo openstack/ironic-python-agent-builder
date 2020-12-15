@@ -1,5 +1,6 @@
 ---
 features:
   - |
-    Firmware for netronome and amdgpu is now removed by default. Set
-    ``IPA_REMOVE_FIRMWARE`` to override.
+    Firmware for netronome, amdgpu, qcom, ti-communication, ti-keystone,
+    ueagle-atm, rsi, mrvl, brcm, mediatek, ath10k, rtlwifi are now removed
+    by default. Set ``IPA_REMOVE_FIRMWARE`` to override.

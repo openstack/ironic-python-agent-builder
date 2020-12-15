@@ -162,10 +162,27 @@ Firmware Removal
 ~~~~~~~~~~~~~~~~
 
 By default the element removes some firmware blobs to reduce the image size.
-Specifically, firmware from ``netronome`` and ``amdgpu`` is removed. If you
-want to override this, change the ``IPA_REMOVE_FIRMWARE`` environment variable
-to a comma-separated list of directories or files under ``/usr/lib/firmware``.
+The list can be found below this paragraph. The majority of these firmware
+images are used by SoCs, WI-FI chips, some GPUs and Smartnics which are
+unlikely to be encountered. If you want to override this, change the
+``IPA_REMOVE_FIRMWARE`` environment variable to a comma-separated list
+of directories or files under ``/usr/lib/firmware``.
 Set it to an empty string to disable firmware removal.
+
+Fimrware removed:
+
+* ``amdgpu``
+* ``netronome``
+* ``qcom``
+* ``ti-communication``
+* ``ti-keystone``
+* ``ueagle-atm``
+* ``rsi``
+* ``mrvl``
+* ``brcm``
+* ``mediatek``
+* ``ath10k``
+* ``rtlwifi``
 
 Available Elements
 ------------------

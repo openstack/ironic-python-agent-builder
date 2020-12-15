@@ -9,7 +9,9 @@ set -o pipefail
 rm -rf /tmp/ironic-python-agent
 
 for item in ${IPA_REMOVE_FIRMWARE//,/ }; do
-    rm -rf /usr/lib/firmware/$item
+    # Attempt removal of item, but don't error
+    # if it is not present already.
+    rm -rf /usr/lib/firmware/$item || true
 done
 
 # TODO(dtantsur): implement the same for debian-based systems

@@ -1,4 +1,0 @@
----
-upgrade:
-  - |
-    Pre-built images are now built with CentOS Stream 8 instead of just CentOS.

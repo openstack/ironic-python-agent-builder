@@ -7,11 +7,16 @@ set -eu
 set -o pipefail
 
 rm -rf /tmp/ironic-python-agent
-
-for item in ${IPA_REMOVE_FIRMWARE//,/ }; do
-    # Attempt removal of item, but don't error
-    # if it is not present already.
-    rm -rf /usr/lib/firmware/$item || true
+# In Centos Stream, /lib is linked to /lib/firmware, so the first
+# loop will likely go ahead and remove everything, but the || true
+# below will keep it from erroring.
+KNOWN_FIRMWARE_PATH="/lib/firmware/ /usr/lib/firmware/"
+for folder in $KNOWN_FIRMWARE_PATH; do
+    for item in ${IPA_REMOVE_FIRMWARE//,/ }; do
+        # Attempt removal of item, but don't error
+        # if it is not present already.
+        rm -rf $folder$item || true
+    done
 done
 
 # TODO(dtantsur): implement the same for debian-based systems

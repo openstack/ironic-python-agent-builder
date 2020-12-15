@@ -37,7 +37,7 @@
     vars:
       image_type: 'dib'
       image_distro: 'centos'
-      image_release: 8-stream
+      image_release: 8
 
 - job:
     name: ironic-python-agent-check-image-base
@@ -95,7 +95,7 @@
     vars:
       image_type: 'dib'
       image_distro: 'centos'
-      image_release: 8-stream
+      image_release: 8
 
 - job:
     name: ironic-python-agent-check-image-dib-centos8-extra

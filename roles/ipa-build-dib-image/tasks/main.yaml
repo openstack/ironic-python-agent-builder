@@ -1,13 +1,13 @@
-- name: Default to CentOS Stream 8
+- name: Default to CentOS 8
   set_fact:
-    image_release: 8-stream
+    image_release: 8
   when:
     - image_distro in ["centos-minimal", "centos"]
     - not image_release
 
 - name: Generate a nice target name for CentOS
   set_fact:
-    image_target_name: centos{{ image_release | replace('-stream', '') }}
+    image_target_name: centos{{ image_release }}
   when:
     - image_distro in ["centos-minimal", "centos"]
     - not image_target_name

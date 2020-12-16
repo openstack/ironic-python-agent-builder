@@ -1,11 +1,9 @@
+ironic-ramdisk-base
 dhcp-all-interfaces
 ibft-interfaces
 install-static
-no-final-image
 package-installs
 pip-and-virtualenv
 pkg-map
-runtime-ssh-host-keys
-selinux-permissive
 source-repositories
 svc-map

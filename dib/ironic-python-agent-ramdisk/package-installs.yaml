@@ -7,8 +7,9 @@ iptables:
 lshw:
 ipmitool:
 qemu-utils:
+# NOTE(dtantsur): gcc is not build-only because dkms requires it
 gcc:
-python-dev:
+python:
 parted:
 hdparm:
 util-linux:
@@ -22,9 +23,12 @@ efibootmgr:
 efivar:
 chrony:
 e2fsprogs:
+
 libffi-dev:
     build-only: true
 libssl-dev:
+    build-only: true
+python-dev:
     build-only: true
 
 # The base minimum element uninstalls firmware, but it's needed for bare metal.
@@ -32,12 +36,21 @@ linux-firmware:
   phase: post-install.d
   when: IPA_DISTRO_FAMILY = rh
 
+# Packages that should not normally be present on IPA images
+cloud-init:
+    phase: post-install.d
+    uninstall: true
+teamd:
+    phase: post-install.d
+    uninstall: true
+    when: IPA_DISTRO_FAMILY = rh
+tuned:
+    phase: post-install.d
+    uninstall: true
+    when: IPA_DISTRO_FAMILY = rh
+
 # Unnecessary packages to remove. We run all removals in pre-install phase, to
 # avoid breaking installs that happen in install phase.
-
-cloud-init:
-    phase: pre-install.d
-    uninstall: true
 git:
     phase: pre-install.d
     uninstall: true
@@ -49,11 +62,11 @@ rsync:
     uninstall: true
 
 # Distro-specific uninstalls
-cronie:
+kernel-debug-devel:
     phase: pre-install.d
     uninstall: true
     when: IPA_DISTRO_FAMILY = rh
-kernel-debug-devel:
+mozjs60:
     phase: pre-install.d
     uninstall: true
     when: IPA_DISTRO_FAMILY = rh
@@ -61,7 +74,11 @@ plymouth:
     phase: pre-install.d
     uninstall: true
     when: IPA_DISTRO_FAMILY = rh
-teamd:
+python3-cairo:
+    phase: pre-install.d
+    uninstall: true
+    when: IPA_DISTRO_FAMILY = rh
+python3-gobject-base:
     phase: pre-install.d
     uninstall: true
     when: IPA_DISTRO_FAMILY = rh

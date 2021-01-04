@@ -50,21 +50,29 @@ def main():
                         help="Additional DIB element to use")
     parser.add_argument("-b", "--branch",
                         help="If set, override the branch that is used for "
-                        "ironic-python-agent and requirements")
+                             "ironic-python-agent and requirements")
     parser.add_argument("-v", "--verbose", action='store_true',
                         help="Enable verbose logging in diskimage-builder")
     parser.add_argument("--lzma", action='store_true',
                         help="Use lzma compression for smaller images")
     parser.add_argument("--extra-args",
                         help="Extra arguments to pass to diskimage-builder")
+    parser.add_argument("--elements-path",
+                        help="Path(s) to custom DIB elements separated by "
+                             "a colon")
     # TODO(dtantsur): handle distribution == tinyipa
-    os.environ['ELEMENTS_PATH'] = find_elements_path()
+    args = parser.parse_args()
+    if args.elements_path:
+        os.environ['ELEMENTS_PATH'] = args.elements_path
+    if 'ELEMENTS_PATH' in os.environ:
+        os.environ['ELEMENTS_PATH'] += ":" + find_elements_path()
+    else:
+        os.environ['ELEMENTS_PATH'] = find_elements_path()
     if not os.environ.get('DIB_INSTALLTYPE_pip_and_virtualenv'):
         # DIB updates these to latest versions from source. However, we do the
         # same in our virtualenv, so it's not needed and just increases the
         # size of the image.
         os.environ['DIB_INSTALLTYPE_pip_and_virtualenv'] = 'package'
-    args = parser.parse_args()
     if args.release:
         os.environ['DIB_RELEASE'] = args.release
     if args.branch:

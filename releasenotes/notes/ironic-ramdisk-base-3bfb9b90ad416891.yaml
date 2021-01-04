@@ -1,0 +1,5 @@
+---
+features:
+  - |
+    The new element ``ironic-ramdisk-base`` can be used to build ramdisks
+    without IPA itself or any of its dependencies.

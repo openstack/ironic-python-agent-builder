@@ -40,6 +40,15 @@
       image_release: 8
 
 - job:
+    name: ironic-python-agent-build-image-dib-debian
+    parent: ironic-python-agent-build-image-base
+    required-projects:
+      - openstack/diskimage-builder
+    vars:
+      image_type: 'dib'
+      image_distro: 'debian-minimal'
+
+- job:
     name: ironic-python-agent-check-image-base
     parent: base
     nodeset: ubuntu-focal
@@ -119,7 +128,13 @@
       - openstack/diskimage-builder
     vars:
       image_type: 'dib'
-      image_distro: 'debian'
+      image_distro: 'debian-minimal'
+
+- job:
+    name: ironic-python-agent-check-image-dib-debian-extra
+    parent: ironic-python-agent-check-image-dib-debian
+    vars:
+      extra_elements: ["extra-hardware"]
 
 - job:
     name: ironic-python-agent-check-image-dib-ubuntu

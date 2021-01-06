@@ -1,0 +1,13 @@
+---
+fixes:
+  - |
+    Free firmware is now installed by default on Debian DIB builds.
+  - |
+    No longer tries to install ``biosdevname`` on non Red Hat systems
+    (dropped from Ubuntu after Bionic, never present in Debian).
+upgrade:
+  - |
+    Non-free firmware is now installed by default on Debian DIB builds.
+    Change the available repositories to disable:
+
+      export DIB_DEBIAN_COMPONENTS=main

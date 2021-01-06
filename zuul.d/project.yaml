@@ -13,12 +13,12 @@
         - ironic-python-agent-check-image-dib-centos8
         - ironic-python-agent-check-image-dib-centos8-extra
         - ironic-python-agent-check-image-dib-centos7
+        - ironic-python-agent-check-image-dib-debian
+        - ironic-python-agent-check-image-dib-debian-extra
         # Non-voting jobs
         - ironic-python-agent-check-image-dib-centos7-python3:
             voting: false
         - ironic-python-agent-check-image-dib-fedora:
-            voting: false
-        - ironic-python-agent-check-image-dib-debian:
             voting: false
         - ironic-python-agent-check-image-dib-ubuntu:
             voting: false
@@ -40,8 +40,11 @@
         - ironic-python-agent-check-image-dib-centos8
         - ironic-python-agent-check-image-dib-centos8-extra
         - ironic-python-agent-check-image-dib-centos7
+        - ironic-python-agent-check-image-dib-debian
+        - ironic-python-agent-check-image-dib-debian-extra
     post:
       jobs:
         - publish-openstack-python-branch-tarball
         - ironic-python-agent-build-image-tinyipa
         - ironic-python-agent-build-image-dib-centos8
+        - ironic-python-agent-build-image-dib-debian

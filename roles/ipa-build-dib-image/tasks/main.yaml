@@ -12,6 +12,13 @@
     - image_distro in ["centos-minimal", "centos"]
     - not image_target_name
 
+- name: Generate a nice target name for Debian
+  set_fact:
+    image_target_name: debian
+  when:
+    - image_distro in ["debian-minimal", "debian"]
+    - not image_target_name
+
 - name: Generate image name
   set_fact:
     image_name: ipa-{{ image_target_name | default(image_distro, true) }}-{{ ipa_branch_path }}

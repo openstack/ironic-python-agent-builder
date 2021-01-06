@@ -36,6 +36,23 @@ linux-firmware:
   phase: post-install.d
   when: IPA_DISTRO_FAMILY = rh
 
+firmware-linux-free:
+  when: DISTRO_NAME = debian
+firmware-misc-nonfree:
+  when:
+    - DISTRO_NAME = debian
+    - IPA_DEBIAN_NONFREE = true
+intel-microcode:
+  arch: x86_64
+  when:
+    - DISTRO_NAME = debian
+    - IPA_DEBIAN_NONFREE = true
+amd64-microcode:
+  arch: x86_64
+  when:
+    - DISTRO_NAME = debian
+    - IPA_DEBIAN_NONFREE = true
+
 # Packages that should not normally be present on IPA images
 cloud-init:
     phase: post-install.d

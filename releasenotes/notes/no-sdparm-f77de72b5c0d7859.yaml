@@ -1,0 +1,5 @@
+---
+fixes:
+  - |
+    Removes unnecessary requirement on ``sdparm`` (removed in python-hardware
+    0.20.0).

@@ -64,7 +64,6 @@
       - ^doc/.*$
       - ^releasenotes/.*$
       - ^setup.cfg$
-      - ^test-requirements.txt$
       - ^tools/.*$
       - ^tox.ini$
     vars:

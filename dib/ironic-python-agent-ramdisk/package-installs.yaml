@@ -23,6 +23,7 @@ efibootmgr:
 efivar:
 chrony:
 e2fsprogs:
+nvme-cli:
 
 libffi-dev:
     build-only: true

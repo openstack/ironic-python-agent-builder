@@ -1,0 +1,6 @@
+---
+features:
+  - |
+    Adds nvme-cli package required for ``ironic-python-agent`` to
+    be able to fetch information from NVMe controllers and perform NVMe-native
+    cleaning operations.

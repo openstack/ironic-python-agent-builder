@@ -12,6 +12,9 @@ SCRIPTDIR=$(dirname $0)
 IPADIR=/tmp/ironic-python-agent
 UPPER_CONSTRAINTS=/tmp/requirements/upper-constraints.txt
 VENVDIR=/opt/ironic-python-agent
+# 19.1.1 is required for cryptography.
+REQUIRED_PIP_STR="19.1.1"
+REQUIRED_PIP_TUPLE="(19, 1, 1)"
 
 IPA_PYTHON_VERSION=$DIB_PYTHON_VERSION
 IPA_PYTHON="$DIB_PYTHON"
@@ -37,9 +40,12 @@ else
   $IPA_PYTHON -m virtualenv $VENVDIR
 fi
 
-# pip might be an older version which does not support the -c option, therefore
-# upgrade it first. This is no-op when a new enough version is available.
-$VENVDIR/bin/pip install 'pip>=7.1'
+HAS_PIP=$($VENVDIR/bin/python -c \
+    "import pip; print(tuple(map(int, pip.__version__.split('.'))) >= $REQUIRED_PIP_TUPLE)")
+if [ $HAS_PIP == "False" ]; then
+    # NOTE(dtantsur): use a fixed version to avoid breakages
+    $VENVDIR/bin/pip install "pip==$REQUIRED_PIP_STR"
+fi
 
 # install IPA inside the virtual environment
 $VENVDIR/bin/pip install -c $UPPER_CONSTRAINTS $IPADIR

@@ -1,0 +1,9 @@
+---
+features:
+  - |
+    Supports installing ironic-lib from source in the DIB build. Set
+    ::
+
+      export IRONIC_LIB_FROM_SOURCE=true
+
+    to use.

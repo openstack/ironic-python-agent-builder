@@ -104,15 +104,6 @@ function install_ssh {
     $TC_CHROOT_CMD chmod 600 /home/tc/.ssh/authorized_keys
 }
 
-function fix_python_optimize {
-    if grep -q "PYTHONOPTIMIZE=1" "$REBUILDDIR/opt/bootlocal.sh"; then
-        # tinyipa was built with optimized Python environment, apply fixes
-        echo "PYTHONOPTIMIZE=1" | $TC_CHROOT_CMD tee -a /home/tc/.ssh/environment
-        echo "PermitUserEnvironment yes" | $CHROOT_CMD tee -a $SSHD_CONFIG_PATH
-        echo 'Defaults env_keep += "PYTHONOPTIMIZE"' | $CHROOT_CMD tee -a /etc/sudoers
-    fi
-}
-
 
 function rebuild_ramdisk {
     # Rebuild build directory into gz file
@@ -134,11 +125,6 @@ setup_tce "$DST_DIR"
 
 # NOTE (pas-ha) default tinyipa is built without SSH access, enable it here
 install_ssh
-# NOTE(pas-ha) default tinyipa is built with PYOPTIMIZE_TINYIPA=true and
-# for Ansible+python to work we need to ensure that PYTHONOPTIMIZE=1 is
-# set for all sessions from 'tc' user including those that are escalated
-# with 'sudo' afterwards
-fix_python_optimize
 
 cleanup_tce "$DST_DIR"
 rebuild_ramdisk

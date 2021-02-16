@@ -36,8 +36,6 @@ fi
 # Create ipa-rescue-config directory for rescue password
 sudo mkdir -p /etc/ipa-rescue-config
 
-export PYTHONOPTIMIZE=1
-
 # Setup DHCP network
 configure_dhcp_network() {
     for pidfile in `ls /var/run/udhcpc*.pid`; do

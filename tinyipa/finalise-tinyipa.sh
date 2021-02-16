@@ -13,7 +13,7 @@ INSTALL_SSH=${INSTALL_SSH:-true}
 AUTHORIZE_SSH=${AUTHORIZE_SSH:-false}
 
 SSH_PUBLIC_KEY=${SSH_PUBLIC_KEY:-}
-PYOPTIMIZE_TINYIPA=${PYOPTIMIZE_TINYIPA:-true}
+PYOPTIMIZE_TINYIPA=${PYOPTIMIZE_TINYIPA:-false}
 TINYIPA_REQUIRE_BIOSDEVNAME=${TINYIPA_REQUIRE_BIOSDEVNAME:-false}
 TINYIPA_REQUIRE_IPMITOOL=${TINYIPA_REQUIRE_IPMITOOL:-true}
 TINYIPA_UDEV_SETTLE_TIMEOUT=${TINYIPA_UDEV_SETTLE_TIMEOUT:-60}
@@ -27,10 +27,6 @@ if [ -n "$PYTHON_EXTRA_SOURCES_DIR_LIST" ]; then
     IFS="," read -ra PKGDIRS <<< "$PYTHON_EXTRA_SOURCES_DIR_LIST"
     for PKGDIR in "${PKGDIRS[@]}"; do
         PKG=$(cd "$PKGDIR" ; python setup.py --name)
-        if [[ "$PKG" == "hardware" ]]; then
-            # hardware depends upon numpy which can't be optimised
-            PYOPTIMIZE_TINYIPA=false
-        fi
     done
 fi
 
@@ -212,31 +208,7 @@ $CHROOT_CMD touch /var/lib/hwclock/adjtime
 $CHROOT_CMD chmod 640 /var/lib/hwclock/adjtime
 
 if $PYOPTIMIZE_TINYIPA; then
-    # Precompile all python
-    if [[ $USE_PYTHON3 == "True" ]]; then
-        set +e
-        $CHROOT_CMD /bin/bash -c "python3 -OO -m compileall /usr/local/lib/python3.6"
-        set -e
-        find $FINALDIR/usr/local/lib/python3.6 -name "*.py" -not -path "*ironic_python_agent/api/config.py" | sudo xargs --no-run-if-empty rm
-        find $FINALDIR/usr/local/lib/python3.6 -name "*.pyc" ! -name "*opt-2*" | sudo xargs --no-run-if-empty rm
-        sudo find $FINALDIR/usr/local/lib/python3.6 -type d -name __pycache__ -exec sh -c 'cd "$1"; for f in *; do mv -i "$f" .. ; done' find-sh {} \;
-        find $FINALDIR/usr/local/lib/python3.6 -name "*.cpython-36.opt-2*" | sed 'p;s/\.cpython-36\.opt-2//' | sudo xargs -n2 --no-run-if-empty mv
-    fi
-    set +e
-    $CHROOT_CMD /bin/bash -c "python -OO -m compileall /usr/local/lib/python2.7"
-    set -e
-    find $FINALDIR/usr/local/lib/python2.7 -name "*.py" -not -path "*ironic_python_agent/api/config.py" | sudo xargs --no-run-if-empty rm
-    find $FINALDIR/usr/local/lib/python2.7 -name "*.pyc" | sudo xargs --no-run-if-empty rm
-    if $INSTALL_SSH && $AUTHORIZE_SSH ; then
-        # NOTE(pas-ha) for Ansible+Python to work we need to ensure that
-        # PYTHONOPTIMIZE=1 is set for all sessions from 'tc' user including
-        # those that are elevated with 'sudo' afterwards
-        echo "PYTHONOPTIMIZE=1" | $TC_CHROOT_CMD tee -a /home/tc/.ssh/environment
-        echo "PermitUserEnvironment yes" | $CHROOT_CMD tee -a /usr/local/etc/ssh/sshd_config
-        echo 'Defaults env_keep += "PYTHONOPTIMIZE"' | $CHROOT_CMD tee -a /etc/sudoers
-    fi
-else
-    sudo sed -i "s/PYTHONOPTIMIZE=1/PYTHONOPTIMIZE=0/" "$FINALDIR/opt/bootlocal.sh"
+    echo "WARNING: Precompilation is not compatible with oslo.privsep and is being ignored."
 fi
 
 # Delete unnecessary Babel .dat files

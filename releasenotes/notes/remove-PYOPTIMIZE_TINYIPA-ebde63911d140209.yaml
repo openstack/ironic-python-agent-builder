@@ -1,0 +1,8 @@
+---
+fixes:
+  - |
+    Removes support for ``PYOPTIMIZE_TINYIPA``, which now casues the TinyIPA
+    image to be approximately 5 MB larger. This was due to an incompatability
+    with the ``oslo.privsep`` library dependency on ``pycparser`` which cannot
+    load into precompiled python programs where the original source embedded
+    documentation is not present.

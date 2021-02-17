@@ -1,7 +1,7 @@
 .PHONY: default all dependencies build finalise addssh iso clean clean_build clean_iso
 default: dependencies build finalise instance-images
 
-all: build finalise iso instance-images
+all: dependencies build finalise iso instance-images
 
 dependencies:
 	./install-deps.sh

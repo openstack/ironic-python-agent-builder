@@ -15,6 +15,7 @@ ipv6-netfilter-5.15.10-tinycore64.tcz
 libpci-dev.tcz
 libtool-dev.tcz
 libtool.tcz
+ninja.tcz
 parted.tcz
 pciutils.tcz
 pixman-dev.tcz

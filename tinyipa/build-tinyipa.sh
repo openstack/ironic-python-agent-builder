@@ -9,7 +9,7 @@ TINYIPA_REQUIRE_BIOSDEVNAME=${TINYIPA_REQUIRE_BIOSDEVNAME:-false}
 TINYIPA_REQUIRE_IPMITOOL=${TINYIPA_REQUIRE_IPMITOOL:-true}
 IRONIC_LIB_SOURCE=${IRONIC_LIB_SOURCE:-}
 USE_PYTHON3=${USE_PYTHON3:-True}
-TC_RELEASE="11.x"
+TC_RELEASE="12.x"
 
 TGT_RELEASE="v1.0.80"
 QEMU_RELEASE="v4.2.0"
@@ -77,6 +77,8 @@ fi
 if $TINYIPA_REQUIRE_IPMITOOL; then
     wget -N -O - https://github.com/ipmitool/ipmitool/archive/IPMITOOL_${IPMITOOL_RELASE}.tar.gz | tar -xz -C "${BUILDDIR}/tmp" -f -
     patch ${BUILDDIR}/tmp/ipmitool-IPMITOOL_${IPMITOOL_RELASE}/src/plugins/lanplus/lanplus_crypt_impl.c < patches/ipmitool-openssl.patch
+    patch ${BUILDDIR}/tmp/ipmitool-IPMITOOL_${IPMITOOL_RELASE}/include/ipmitool/ipmi_hpmfwupg.h < patches/ipmitool-hpmfwupg_h.patch
+    patch ${BUILDDIR}/tmp/ipmitool-IPMITOOL_${IPMITOOL_RELASE}/lib/ipmi_hpmfwupg.c < patches/ipmitool-hpmfwupg_c.patch
 fi
 
 # Create directory for python local mirror

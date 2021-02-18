@@ -20,7 +20,9 @@ psmisc:
 dosfstools:
 mdadm:
 efibootmgr:
+    not-arch: ppc64,ppc64el,ppc64le
 efivar:
+    not-arch: ppc64,ppc64el,ppc64le
 chrony:
 e2fsprogs:
 nvme-cli:

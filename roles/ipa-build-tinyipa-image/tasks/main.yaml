@@ -1,5 +1,5 @@
 - name: Build a TinyIPA image
-  command: make
+  command: make all
   args:
     chdir: '{{ tinyipa_dir }}'
   environment:

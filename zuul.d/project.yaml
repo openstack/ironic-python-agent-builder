@@ -22,6 +22,8 @@
             voting: false
         - ironic-python-agent-check-image-dib-ubuntu:
             voting: false
+        - ironic-python-agent-check-image-dib-opensuse:
+            voting: false
         - ipa-tempest-wholedisk-bios-ipmi-direct-dib-src:
             voting: false
         - ipa-tempest-bios-ipmi-iscsi-src:

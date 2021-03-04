@@ -32,6 +32,17 @@
     "debian": {
       "python": "python3",
       "python-dev": "python3-dev"
+    },
+    "suse": {
+      "qemu-utils": "qemu",
+      "python": "python3",
+      "genisoimage": "mkisofs",
+      "gdisk": "gptfdisk",
+      "libffi-dev": "libffi-devel",
+      "libssl-dev": "libopenssl-devel",
+      "python-dev": "python3-devel",
+      "git": "",
+      "man-db": ""
     }
   },
   "default": {

@@ -3,29 +3,17 @@
 set -ex
 WORKDIR=$(readlink -f $0 | xargs dirname)
 source ${WORKDIR}/common.sh
-BUILDDIR="$WORKDIR/tinyipabuild"
-TINYCORE_MIRROR_URL=${TINYCORE_MIRROR_URL:-}
-TINYIPA_REQUIRE_BIOSDEVNAME=${TINYIPA_REQUIRE_BIOSDEVNAME:-false}
-TINYIPA_REQUIRE_IPMITOOL=${TINYIPA_REQUIRE_IPMITOOL:-true}
-IRONIC_LIB_SOURCE=${IRONIC_LIB_SOURCE:-}
-USE_PYTHON3=${USE_PYTHON3:-True}
-TC_RELEASE="12.x"
 
+IRONIC_LIB_SOURCE=${IRONIC_LIB_SOURCE:-}
+
+TC_RELEASE="12.x"
 TGT_RELEASE="v1.0.80"
 QEMU_RELEASE="v4.2.0"
 LSHW_RELEASE="B.02.18"
-
 BIOSDEVNAME_RELEASE="0.7.2"
 IPMITOOL_RELASE="1_8_18"
 
-# PYTHON_EXTRA_SOURCES_DIR_LIST is a csv list of python package dirs to include
-PYTHON_EXTRA_SOURCES_DIR_LIST=${PYTHON_EXTRA_SOURCES_DIR_LIST:-}
-
-CHROOT_PATH="/tmp/overides:/usr/local/sbin:/usr/local/bin:/apps/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 CHROOT_CMD="sudo chroot $BUILDDIR /usr/bin/env -i PATH=$CHROOT_PATH http_proxy=$http_proxy https_proxy=$https_proxy no_proxy=$no_proxy"
-
-TC=1001
-STAFF=50
 
 function clone_single_branch {
     git clone --branch $3 --depth=1 $1 $2

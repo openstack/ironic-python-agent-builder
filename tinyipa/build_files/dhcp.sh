@@ -6,7 +6,7 @@
 # This waits until all devices have registered
 /sbin/udevadm settle --timeout=%UDEV_SETTLE_TIMEOUT%
 
-NETDEVICES="$(awk -F: '/eth.:|tr.:/{print $1}' /proc/net/dev 2>/dev/null)"
+NETDEVICES="$(awk -F: '/^ *e.*:|^ *p.*:/{print $1}' /proc/net/dev 2>/dev/null)"
 echo "$0: Discovered network devices: $NETDEVICES"
 for DEVICE in $NETDEVICES; do
   ifconfig $DEVICE | grep -q "inet addr"

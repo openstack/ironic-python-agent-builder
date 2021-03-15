@@ -1,9 +1,0 @@
-@@ -800,8 +800,6 @@
- 	char descString[HPMFWUPG_DESC_STRING_LENGTH + 1];
- }VERSIONINFO, *PVERSIONINFO;
- 
--VERSIONINFO gVersionInfo[HPMFWUPG_COMPONENT_ID_MAX];
--
- #define TARGET_VER (0x01)
- #define ROLLBACK_VER (0x02)
- #define IMAGE_VER (0x04)

@@ -16,7 +16,7 @@ QEMU_RELEASE="v4.2.0"
 LSHW_RELEASE="B.02.18"
 
 BIOSDEVNAME_RELEASE="0.7.2"
-IPMITOOL_RELASE="1_8_18"
+IPMITOOL_GIT_HASH="710888479332a46bad78f3d736eff0cbdefd2d1b"
 
 # PYTHON_EXTRA_SOURCES_DIR_LIST is a csv list of python package dirs to include
 PYTHON_EXTRA_SOURCES_DIR_LIST=${PYTHON_EXTRA_SOURCES_DIR_LIST:-}
@@ -75,10 +75,10 @@ if $TINYIPA_REQUIRE_BIOSDEVNAME; then
     wget -N -O - https://linux.dell.com/biosdevname/biosdevname-${BIOSDEVNAME_RELEASE}/biosdevname-${BIOSDEVNAME_RELEASE}.tar.gz | tar -xz -C "${BUILDDIR}/tmp" -f -
 fi
 if $TINYIPA_REQUIRE_IPMITOOL; then
-    wget -N -O - https://github.com/ipmitool/ipmitool/archive/IPMITOOL_${IPMITOOL_RELASE}.tar.gz | tar -xz -C "${BUILDDIR}/tmp" -f -
-    patch ${BUILDDIR}/tmp/ipmitool-IPMITOOL_${IPMITOOL_RELASE}/src/plugins/lanplus/lanplus_crypt_impl.c < patches/ipmitool-openssl.patch
-    patch ${BUILDDIR}/tmp/ipmitool-IPMITOOL_${IPMITOOL_RELASE}/include/ipmitool/ipmi_hpmfwupg.h < patches/ipmitool-hpmfwupg_h.patch
-    patch ${BUILDDIR}/tmp/ipmitool-IPMITOOL_${IPMITOOL_RELASE}/lib/ipmi_hpmfwupg.c < patches/ipmitool-hpmfwupg_c.patch
+    git clone https://github.com/ipmitool/ipmitool.git "${BUILDDIR}/tmp/ipmitool-src"
+    cd "${BUILDDIR}/tmp/ipmitool-src"
+    git reset $IPMITOOL_GIT_HASH --hard
+    cd -
 fi
 
 # Create directory for python local mirror
@@ -241,7 +241,7 @@ fi
 if $TINYIPA_REQUIRE_IPMITOOL; then
     rm -rf $WORKDIR/build_files/ipmitool.tcz
     # NOTE(TheJulia): Explicitly add the libtool path since /usr/local/ is not in path from the chroot.
-    $CHROOT_CMD /bin/sh -c "cd /tmp/ipmitool-* && env LIBTOOL='/usr/local/bin/libtool' ./bootstrap && ./configure && make && make install DESTDIR=/tmp/ipmitool"
+    $CHROOT_CMD /bin/sh -c "cd /tmp/ipmitool-src && env LIBTOOL='/usr/local/bin/libtool' ./bootstrap && ./configure && make && make install DESTDIR=/tmp/ipmitool"
     find $BUILDDIR/tmp/ipmitool/ -type f -executable | xargs file | awk -F ':' '/ELF/ {print $1}' | sudo xargs strip
     cd $WORKDIR/build_files && mksquashfs $BUILDDIR/tmp/ipmitool ipmitool.tcz && md5sum ipmitool.tcz > ipmitool.tcz.md5.txt
 fi

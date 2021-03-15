@@ -143,3 +143,18 @@
     vars:
       image_type: 'dib'
       image_distro: 'ubuntu'
+
+- job:
+    name: ironic-python-agent-build-image-tinyipa-ussuri
+    parent: ironic-python-agent-build-image-tinyipa
+    nodeset: ubuntu-bionic
+    required-projects:
+      - name: openstack/ironic-python-agent-builder
+        override-checkout: 2.2.0
+- job:
+    name: ironic-python-agent-check-image-tinyipa-ussuri
+    parent: ironic-python-agent-check-image-tinyipa
+    nodeset: ubuntu-bionic
+    required-projects:
+        - name: openstack/ironic-python-agent-builder
+          override-checkout: 2.2.0

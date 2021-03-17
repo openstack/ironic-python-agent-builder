@@ -155,7 +155,17 @@
     name: ironic-python-agent-check-image-tinyipa-ussuri
     parent: ironic-python-agent-check-image-tinyipa
     nodeset: ubuntu-bionic
-    override-checkout: stable/ussuri
     required-projects:
         - name: openstack/ironic-python-agent-builder
           override-checkout: 2.2.0
+
+- job:
+    name: ironic-python-agent-test-image-tinyipa-ussuri
+    parent: ironic-python-agent-check-image-tinyipa-ussuri
+    required-projects:
+      - name: openstack/ironic-python-agent
+        override-checkout: stable/ussuri
+      - name: openstack/requirements
+        override-checkout: stable/ussuri
+    vars:
+      ipa_branch_path: "stable-ussuri"

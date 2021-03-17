@@ -16,6 +16,8 @@ http://ftp.vim.org/os/Linux/distr/tinycorelinux
 http://mirrors.163.com/tinycorelinux
 "
 
+TINYCORE_MIRROR_URL=${TINYCORE_MIRROR_URL:-}
+
 # NOTE(TheJulia): Removed mirrors because they are out
 # of date
 # http://distro.ibiblio.org/tinycorelinux ~1.5 months out of sync.

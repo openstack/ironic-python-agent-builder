@@ -3,7 +3,16 @@
 WORKDIR=$(readlink -f $0 | xargs dirname)
 source ${WORKDIR}/tc-mirror.sh
 
+BUILDDIR="$WORKDIR/tinyipabuild"
+
 PIP_VERSION="20.2.2"
+
+TINYIPA_REQUIRE_BIOSDEVNAME=${TINYIPA_REQUIRE_BIOSDEVNAME:-false}
+TINYIPA_REQUIRE_IPMITOOL=${TINYIPA_REQUIRE_IPMITOOL:-true}
+USE_PYTHON3=${USE_PYTHON3:-True}
+
+# PYTHON_EXTRA_SOURCES_DIR_LIST is a csv list of python package dirs to include
+PYTHON_EXTRA_SOURCES_DIR_LIST=${PYTHON_EXTRA_SOURCES_DIR_LIST:-}
 
 # Allow an extension to be added to the generated files by specifying
 # $BRANCH_PATH e.g. export BRANCH_PATH=master results in tinyipa-master.gz etc

@@ -30,7 +30,7 @@
             voting: false
         - tripleo-buildimage-ironic-python-agent-centos-8:
             voting: false
-        - ironic-python-agent-check-image-tinyipa-ussuri:
+        - ironic-python-agent-test-image-tinyipa-ussuri:
             voting: false
     gate:
       jobs:

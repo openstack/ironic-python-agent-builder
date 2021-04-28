@@ -56,6 +56,13 @@ if [ "$DISTRO_NAME" == "opensuse" ] || [ $IPA_PYTHON_VERSION == 2 ]; then
     $VENVDIR/bin/pip install -U setuptools
 fi
 
+# For aarch64 platform, it seems it always tries to build wheels first for
+# python packages which have no wheels in PyPi. Although it will install the
+# source packages successfully at last.
+if [[ "$ARCH" =~ (arm64|aarch64) ]]; then
+    $VENVDIR/bin/pip install wheel
+fi
+
 # install IPA inside the virtual environment
 $VENVDIR/bin/pip install -c $UPPER_CONSTRAINTS $IPADIR
 ln -s $VENVDIR/bin/ironic-python-agent /usr/local/bin/

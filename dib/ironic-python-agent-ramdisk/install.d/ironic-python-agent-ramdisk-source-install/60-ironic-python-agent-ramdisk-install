@@ -48,8 +48,11 @@ if [ $HAS_PIP == "False" ]; then
     $VENVDIR/bin/pip install "pip==$REQUIRED_PIP_STR"
 fi
 
-# Upgrade setuptools package for openSuse
-if [ "$DISTRO_NAME" == "opensuse" ]; then
+# Upgrade setuptools package for openSuse and in virtualenvs using Python 2.x
+# NOTE(rpittau): if we want to keep compatibility with Python 2.x, we need to
+# upgrade setuptools in the virtualenv as the default installed has issues
+# when parsing requirements.
+if [ "$DISTRO_NAME" == "opensuse" ] || [ $IPA_PYTHON_VERSION == 2 ]; then
     $VENVDIR/bin/pip install -U setuptools
 fi
 

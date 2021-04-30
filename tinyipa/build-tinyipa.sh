@@ -143,8 +143,7 @@ if [ -n "$CI_DIR" ]; then
     done
 fi
 
-$CHROOT_CMD mkdir /etc/sysconfig/tcedir
-$CHROOT_CMD chmod a+rwx /etc/sysconfig/tcedir
+$CHROOT_CMD mkdir -m777 /etc/sysconfig/tcedir
 $CHROOT_CMD touch /etc/sysconfig/tcuser
 $CHROOT_CMD chmod a+rwx /etc/sysconfig/tcuser
 

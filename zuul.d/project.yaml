@@ -8,7 +8,6 @@
         - openstack-tox-pep8
         - ironic-standalone-ipa-src
         - ipa-tempest-bios-ipmi-direct-tinyipa-src
-        - ipa-tempest-bios-ipmi-iscsi-tinyipa-src
         - ironic-python-agent-check-image-tinyipa
         - ironic-python-agent-check-image-dib-centos8
         - ironic-python-agent-check-image-dib-centos8-extra
@@ -24,9 +23,7 @@
             voting: false
         - ironic-python-agent-check-image-dib-opensuse:
             voting: false
-        - ipa-tempest-wholedisk-bios-ipmi-direct-dib-src:
-            voting: false
-        - ipa-tempest-bios-ipmi-iscsi-src:
+        - ipa-tempest-bios-ipmi-direct-src:
             voting: false
         - ipa-tempest-ironic-inspector-src:
             voting: false
@@ -39,7 +36,6 @@
         - openstack-tox-pep8
         - ironic-standalone-ipa-src
         - ipa-tempest-bios-ipmi-direct-tinyipa-src
-        - ipa-tempest-bios-ipmi-iscsi-tinyipa-src
         - ironic-python-agent-check-image-tinyipa
         - ironic-python-agent-check-image-dib-centos8
         - ironic-python-agent-check-image-dib-centos8-extra

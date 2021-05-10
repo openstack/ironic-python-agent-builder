@@ -2,4 +2,8 @@
 Ironic Python Agent Builder Release Notes
 =========================================
 
-.. release-notes::
+.. toctree::
+   :maxdepth: 1
+
+   unreleased
+   wallaby

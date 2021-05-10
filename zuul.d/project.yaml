@@ -49,6 +49,9 @@
     post:
       jobs:
         - publish-openstack-python-branch-tarball
-        - ironic-python-agent-build-image-tinyipa
-        - ironic-python-agent-build-image-dib-centos8
-        - ironic-python-agent-build-image-dib-debian
+        - ironic-python-agent-build-image-tinyipa:
+            branches: master
+        - ironic-python-agent-build-image-dib-centos8:
+            branches: master
+        - ironic-python-agent-build-image-dib-debian:
+            branches: master

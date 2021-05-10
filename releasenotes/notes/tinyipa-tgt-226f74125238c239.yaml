@@ -1,0 +1,5 @@
+---
+upgrade:
+  - |
+    The tinyIPA build no longer supports the ``iscsi`` deploy interface. Please
+    use version 2.6.0 or older for this.

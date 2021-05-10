@@ -7,7 +7,6 @@ source ${WORKDIR}/common.sh
 IRONIC_LIB_SOURCE=${IRONIC_LIB_SOURCE:-}
 
 TC_RELEASE="12.x"
-TGT_RELEASE="v1.0.80"
 QEMU_RELEASE="v4.2.0"
 LSHW_RELEASE="B.02.18"
 BIOSDEVNAME_RELEASE="0.7.2"
@@ -55,8 +54,7 @@ mkdir "$BUILDDIR"
 # Configure mirror
 sudo sh -c "echo $TINYCORE_MIRROR_URL > $BUILDDIR/opt/tcemirror"
 
-# Download TGT, Qemu-utils, Biosdevname and IPMItool source
-clone_single_branch "https://github.com/fujita/tgt.git" "${BUILDDIR}/tmp/tgt" "$TGT_RELEASE"
+# Download Qemu-utils, Biosdevname and IPMItool source
 clone_single_branch "https://github.com/qemu/qemu.git" "${BUILDDIR}/tmp/qemu" "$QEMU_RELEASE"
 clone_single_branch "https://github.com/lyonel/lshw.git" "${BUILDDIR}/tmp/lshw" "$LSHW_RELEASE"
 if $TINYIPA_REQUIRE_BIOSDEVNAME; then
@@ -195,12 +193,6 @@ fi
 $CHROOT_CMD ${PIP_COMMAND} wheel -c /tmp/upper-constraints.txt --no-index --pre --wheel-dir /tmp/wheels --find-links=/tmp/localpip --find-links=/tmp/wheels ironic-python-agent
 echo Resulting wheels:
 ls -1 $BUILDDIR/tmp/wheels
-
-# Build tgt
-rm -rf $WORKDIR/build_files/tgt.tcz
-$CHROOT_CMD /bin/sh -c "cd /tmp/tgt && make && make install-programs install-conf install-scripts DESTDIR=/tmp/tgt-installed"
-find $BUILDDIR/tmp/tgt-installed/ -type f -executable | xargs file | awk -F ':' '/ELF/ {print $1}' | sudo xargs strip
-cd $WORKDIR/build_files && mksquashfs $BUILDDIR/tmp/tgt-installed tgt.tcz && md5sum tgt.tcz > tgt.tcz.md5.txt
 
 # Build qemu-utils
 rm -rf $WORKDIR/build_files/qemu-utils.tcz

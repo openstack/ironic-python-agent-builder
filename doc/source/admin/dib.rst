@@ -244,7 +244,7 @@ Beyond installing the ironic-python-agent, this element does the following:
   can be with arguments.
 * Configures rescue mode if ``DIB_IPA_ENABLE_RESCUE`` is not set to ``false``.
 
-This element outputs three files:
+This element outputs two files:
 
 * ``$IMAGE-NAME.initramfs``: The deploy ramdisk file containing the
   ironic-python-agent (IPA) service.

@@ -24,31 +24,50 @@ echo "#disabled" > ./tmp/fstab.new
 sudo mv ./tmp/fstab.new ./etc/fstab
 sudo ln -s ./sbin/init ./
 
-# Note: The pci.ids, which is used by lshw, locate on Ubuntu
-# in /usr/share/misc. Therefore we are removing only the
-# ./usr/share/misc/m* (will remove the magic and magic.mgc files).
-# on RHEL pci.ids is locate on /usr/share/hwdata/pci.ids.
-sudo find . -xdev \
-    -path './sys/*' -prune -o \
-    -path './tmp/*' -prune -o \
-    -path './boot/*' -prune -o \
-    -path './root/.cache' -prune -o \
-    -path "*site-packages/babel/locale-data/*" -prune -o \
-    -path './usr/include/*' -prune -o \
-    -path './usr/lib/locale/*' -prune -o \
-    -path './usr/share/doc/*' -prune -o \
-    -path './usr/share/man/*' -prune -o \
-    -path './usr/share/GeoIP/*' -prune -o \
-    -path './usr/share/info/*' -prune -o \
-    -path './usr/share/licenses/*' -prune -o \
-    -path './usr/share/locale/*' -prune -o \
-    -path './usr/share/misc/m*' -prune -o \
-    -path './usr/src/kernels/*' -prune -o \
-    -path './var/cache/*' -prune -o \
-    -path './var/log/*' -prune -o \
-    -name '*.pyc' -prune -o \
-    -name '*.pyo' -prune -o \
-    -print | sudo cpio -o -H newc | ${DIB_IPA_COMPRESS_CMD} > ${IMAGE_PATH}.initramfs
+# Note(JayF): to anyone trying to make this more configurable in the future,
+# there are significant hurdles around shell quoting if you try to put these
+# find commands into variables for making them more configurable.
+if [ "${DIB_IPA_MINIMAL_PRUNE:-0}" -gt 0 ]; then
+    # Operator opted out of full ramdisk pruning; do not proactively remove
+    # directories that may be in use by other elements/packages
+    sudo find . -xdev \
+        -path './sys/*' -prune -o \
+        -path './tmp/*' -prune -o \
+        -path './boot/*' -prune -o \
+        -path './root/.cache' -prune -o \
+        -name '*.pyc' -prune -o \
+        -name '*.pyo' -prune -o \
+        -print | sudo cpio -o -H newc | ${DIB_IPA_COMPRESS_CMD} > ${IMAGE_PATH}.initramfs
+else
+    # This performs a full prune, leading to the smallest possible ramdisk
+    # size. This may break operator-configured packages or elements that
+    # depend on pruned paths.
+    # Note: The pci.ids, which is used by lshw, are located on Ubuntu
+    # in /usr/share/misc. Therefore we are removing only the
+    # ./usr/share/misc/m* (will remove the magic and magic.mgc files).
+    # on RHEL pci.ids is locate on /usr/share/hwdata/pci.ids.
+    sudo find . -xdev \
+        -path './sys/*' -prune -o \
+        -path './tmp/*' -prune -o \
+        -path './boot/*' -prune -o \
+        -path './root/.cache' -prune -o \
+        -path "*site-packages/babel/locale-data/*" -prune -o \
+        -path './usr/include/*' -prune -o \
+        -path './usr/lib/locale/*' -prune -o \
+        -path './usr/share/doc/*' -prune -o \
+        -path './usr/share/man/*' -prune -o \
+        -path './usr/share/GeoIP/*' -prune -o \
+        -path './usr/share/info/*' -prune -o \
+        -path './usr/share/licenses/*' -prune -o \
+        -path './usr/share/locale/*' -prune -o \
+        -path './usr/share/misc/m*' -prune -o \
+        -path './usr/src/kernels/*' -prune -o \
+        -path './var/cache/*' -prune -o \
+        -path './var/log/*' -prune -o \
+        -name '*.pyc' -prune -o \
+        -name '*.pyo' -prune -o \
+        -print | sudo cpio -o -H newc | ${DIB_IPA_COMPRESS_CMD} > ${IMAGE_PATH}.initramfs
+fi
 
 select_boot_kernel_initrd $TARGET_ROOT
 sudo cp $BOOTDIR/$KERNEL ${IMAGE_PATH}.kernel

@@ -1,0 +1,4 @@
+---
+other:
+  - |
+    The pre-built images now use CentOS Stream 8 instead of CentOS 8.

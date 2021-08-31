@@ -55,3 +55,9 @@
             branches: master
         - ironic-python-agent-build-image-dib-debian:
             branches: master
+    experimental:
+      jobs:
+        - ironic-python-agent-check-image-dib-centos9:
+            voting: false
+        - ironic-python-agent-check-image-dib-centos9-extra:
+            voting: false

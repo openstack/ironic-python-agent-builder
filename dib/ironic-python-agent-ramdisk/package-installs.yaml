@@ -1,4 +1,3 @@
-tgt:
 curl:
 # dmidecode does not exist for ppc* arches so we use lshw
 dmidecode:
@@ -26,6 +25,8 @@ efivar:
 chrony:
 e2fsprogs:
 nvme-cli:
+# This provides iscsistart which is required for iBFT support
+open-iscsi:
 
 libffi-dev:
     build-only: true

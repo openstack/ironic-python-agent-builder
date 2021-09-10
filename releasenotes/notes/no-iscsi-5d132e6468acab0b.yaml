@@ -1,0 +1,5 @@
+---
+upgrade:
+  - |
+    The ``iscsi`` deploy interface is no longer supported by the DIB builder,
+    use ironic-python-agent-builder 2.7.0 or older for it.

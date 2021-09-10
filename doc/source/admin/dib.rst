@@ -11,7 +11,7 @@ The following should work but receive only limited testing and support:
 
 * CentOS 7 (using Python 3.6)
 * openSUSE Leap 15.1
-* Ubuntu Bionic
+* Ubuntu 20.04 Focal
 
 Building
 --------

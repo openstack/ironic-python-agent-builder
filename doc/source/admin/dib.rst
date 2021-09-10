@@ -2,7 +2,16 @@ diskimage-builder images
 ========================
 
 Images built using diskimage-builder_ are recommended for production use on
-real hardware.
+real hardware. The recommended distributions are:
+
+* CentOS 8 (regular and stream)
+* Debian Buster (``debian-minimal`` element)
+
+The following should work but receive only limited testing and support:
+
+* CentOS 7 (using Python 3.6)
+* openSUSE Leap 15.1
+* Ubuntu Bionic
 
 Building
 --------
@@ -34,7 +43,7 @@ variable (default is amd64):
 .. code-block:: shell
 
     export ARCH=aarch64
-    ironic-python-agent-builder -o my-ipa fedora
+    ironic-python-agent-builder -o my-ipa --release 8-stream centos
 
 ... with diskimage-builder
 ~~~~~~~~~~~~~~~~~~~~~~~~~~

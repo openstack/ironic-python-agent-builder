@@ -17,8 +17,6 @@
         # Non-voting jobs
         - ironic-python-agent-check-image-dib-centos7-python3:
             voting: false
-        - ironic-python-agent-check-image-dib-fedora:
-            voting: false
         - ironic-python-agent-check-image-dib-ubuntu:
             voting: false
         - ironic-python-agent-check-image-dib-opensuse:

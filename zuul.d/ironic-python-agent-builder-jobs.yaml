@@ -115,6 +115,23 @@
       extra_elements: ["extra-hardware"]
 
 - job:
+    name: ironic-python-agent-check-image-dib-centos9
+    parent: ironic-python-agent-check-image-base
+    required-projects:
+      - openstack/diskimage-builder
+    vars:
+      image_type: 'dib'
+      image_distro: 'centos'
+      image_release: '9-stream'
+      image_target_name: centos9
+
+- job:
+    name: ironic-python-agent-check-image-dib-centos9-extra
+    parent: ironic-python-agent-check-image-dib-centos9
+    vars:
+      extra_elements: ["extra-hardware"]
+
+- job:
     name: ironic-python-agent-check-image-dib-opensuse
     parent: ironic-python-agent-check-image-base
     required-projects:

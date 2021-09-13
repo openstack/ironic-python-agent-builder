@@ -1,17 +1,22 @@
 {
   "release": {
     "rhel": {
-      "8": {
-        "python-hardware": "python3-hardware-detect"
+      "7": {
+        "python-hardware": "python-hardware"
       }
     },
     "centos": {
-      "8": {
-        "python-hardware": "python3-hardware-detect"
+      "7": {
+        "python-hardware": "python-hardware"
       }
     }
   },
+  "family": {
+    "redhat": {
+      "python-hardware": "python3-hardware-detect"
+    }
+  },
   "default": {
-    "python-hardware": "python-hardware"
+    "python-hardware": "python3-hardware"
   }
 }

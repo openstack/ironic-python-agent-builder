@@ -1,41 +1,30 @@
 {
   "release": {
     "rhel": {
-      "8": {
-        "tgt": "target-restore",
-        "python": "python3",
-        "python-dev": "python3-devel"
+      "7": {
+        "python": "python",
+        "python-dev": "python-devel",
+        "tgt": "scsi-target-utils"
       }
     },
     "centos": {
-      "8": {
-        "tgt": "target-restore",
-        "python": "python3",
-        "python-dev": "python3-devel"
-      }
-    },
-    "ubuntu": {
-      "bionic": {
-        "python": "python3",
-        "python-dev": "python3-dev"
+      "7": {
+        "python": "python",
+        "python-dev": "python-devel",
+        "tgt": "scsi-target-utils"
       }
     }
   },
   "family": {
     "redhat": {
-      "tgt": "scsi-target-utils",
       "libffi-dev": "libffi-devel",
       "libssl-dev": "openssl-devel",
+      "python-dev": "python3-devel",
       "qemu-utils": "qemu-img",
-      "python-dev": "python-devel"
-    },
-    "debian": {
-      "python": "python3",
-      "python-dev": "python3-dev"
+      "tgt": "target-restore"
     },
     "suse": {
       "qemu-utils": "qemu",
-      "python": "python3",
       "genisoimage": "mkisofs",
       "gdisk": "gptfdisk",
       "libffi-dev": "libffi-devel",
@@ -46,6 +35,8 @@
     }
   },
   "default": {
-    "ironic-python-agent": "openstack-ironic-python-agent"
+    "ironic-python-agent": "openstack-ironic-python-agent",
+    "python": "python3",
+    "python-dev": "python3-dev"
   }
 }

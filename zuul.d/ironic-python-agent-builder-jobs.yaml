@@ -164,6 +164,7 @@
     vars:
       image_type: 'dib'
       image_distro: 'ubuntu'
+      image_release: 'focal'
 
 - job:
     name: ironic-python-agent-build-image-tinyipa-ussuri

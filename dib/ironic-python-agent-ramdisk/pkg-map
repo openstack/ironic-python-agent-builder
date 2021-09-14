@@ -3,15 +3,13 @@
     "rhel": {
       "7": {
         "python": "python",
-        "python-dev": "python-devel",
-        "tgt": "scsi-target-utils"
+        "python-dev": "python-devel"
       }
     },
     "centos": {
       "7": {
         "python": "python",
-        "python-dev": "python-devel",
-        "tgt": "scsi-target-utils"
+        "python-dev": "python-devel"
       }
     }
   },
@@ -19,9 +17,9 @@
     "redhat": {
       "libffi-dev": "libffi-devel",
       "libssl-dev": "openssl-devel",
+      "open-iscsi": "iscsi-initiator-utils",
       "python-dev": "python3-devel",
-      "qemu-utils": "qemu-img",
-      "tgt": "target-restore"
+      "qemu-utils": "qemu-img"
     },
     "suse": {
       "qemu-utils": "qemu",

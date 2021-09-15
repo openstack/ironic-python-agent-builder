@@ -27,7 +27,7 @@ Then you need to install some utilities. For the main build script:
 
 For building an ISO you'll also need:
 
-* genisoimage
+* mkisofs, genisoimage, or xorrisofs
 
 Building
 --------

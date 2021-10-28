@@ -1,0 +1,4 @@
+---
+other:
+  - |
+    We now build and publish diskimage-builder debian based image on arm64.

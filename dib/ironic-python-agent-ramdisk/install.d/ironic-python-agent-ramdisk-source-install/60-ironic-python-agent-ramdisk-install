@@ -13,9 +13,6 @@ IPADIR=/tmp/ironic-python-agent
 IRLIBDIR=/tmp/ironic-lib
 UPPER_CONSTRAINTS=/tmp/requirements/upper-constraints.txt
 VENVDIR=/opt/ironic-python-agent
-# 19.1.1 is required for cryptography.
-REQUIRED_PIP_STR="19.1.1"
-REQUIRED_PIP_TUPLE="(19, 1, 1)"
 
 IPA_PYTHON_VERSION=$DIB_PYTHON_VERSION
 IPA_PYTHON="$DIB_PYTHON"
@@ -37,8 +34,13 @@ esac
 # create the virtual environment using the default python
 if [ $IPA_PYTHON_VERSION == 3 ]; then
   $IPA_PYTHON -m venv $VENVDIR
+  REQUIRED_PIP_STR="21.3.1"
+  REQUIRED_PIP_TUPLE="(21, 3, 1)"
 else
   $IPA_PYTHON -m virtualenv $VENVDIR
+  # NOTE(rpittau) pip 20.3.4 is the last version to support Python 2.x
+  REQUIRED_PIP_STR="20.3.4"
+  REQUIRED_PIP_TUPLE="(20, 3, 4)"
 fi
 
 HAS_PIP=$($VENVDIR/bin/python -c \

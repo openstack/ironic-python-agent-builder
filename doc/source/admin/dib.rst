@@ -106,8 +106,9 @@ ISO Images
 ~~~~~~~~~~
 
 Additionally, the IPA ramdisk can be packaged inside of an ISO for use with
-some virtual media drivers. Use the ``iso-image-create`` utility, passing it
-the initrd and the kernel, for example:
+some virtual media drivers. Use the ``iso-image-create`` script in
+``ironic-python-agent-builder`` repository, passing it the initrd and the
+kernel, for example:
 
 .. code-block:: console
 

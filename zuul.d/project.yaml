@@ -13,6 +13,7 @@
         - ironic-python-agent-check-image-dib-centos8-extra
         - ironic-python-agent-check-image-dib-centos7
         - ironic-python-agent-check-image-dib-debian
+        - ironic-python-agent-check-image-dib-debian-arm64
         - ironic-python-agent-check-image-dib-debian-extra
         # Non-voting jobs
         - ironic-python-agent-check-image-dib-centos7-python3:
@@ -39,6 +40,7 @@
         - ironic-python-agent-check-image-dib-centos8-extra
         - ironic-python-agent-check-image-dib-centos7
         - ironic-python-agent-check-image-dib-debian
+        - ironic-python-agent-check-image-dib-debian-arm64
         - ironic-python-agent-check-image-dib-debian-extra
     post:
       jobs:
@@ -48,6 +50,8 @@
         - ironic-python-agent-build-image-dib-centos8:
             branches: master
         - ironic-python-agent-build-image-dib-debian:
+            branches: master
+        - ironic-python-agent-build-image-dib-debian-arm64:
             branches: master
     experimental:
       jobs:

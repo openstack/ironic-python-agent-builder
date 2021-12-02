@@ -24,6 +24,7 @@
   "family": {
     "redhat": {
       "tgt": "scsi-target-utils",
+      "genisoimage": "xorriso",
       "libffi-dev": "libffi-devel",
       "libssl-dev": "openssl-devel",
       "qemu-utils": "qemu-img",

@@ -15,6 +15,7 @@
   },
   "family": {
     "redhat": {
+      "genisoimage": "xorriso",
       "libffi-dev": "libffi-devel",
       "libssl-dev": "openssl-devel",
       "open-iscsi": "iscsi-initiator-utils",

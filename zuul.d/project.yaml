@@ -15,6 +15,10 @@
         - ironic-python-agent-check-image-dib-debian
         - ironic-python-agent-check-image-dib-debian-extra
         # Non-voting jobs
+        - ironic-python-agent-check-image-dib-centos9:
+            voting: false
+        - ironic-python-agent-check-image-dib-centos9-extra:
+            voting: false
         - ironic-python-agent-check-image-dib-ubuntu:
             voting: false
         - ironic-python-agent-check-image-dib-opensuse:
@@ -47,9 +51,3 @@
             branches: master
         - ironic-python-agent-build-image-dib-debian:
             branches: master
-    experimental:
-      jobs:
-        - ironic-python-agent-check-image-dib-centos9:
-            voting: false
-        - ironic-python-agent-check-image-dib-centos9-extra:
-            voting: false

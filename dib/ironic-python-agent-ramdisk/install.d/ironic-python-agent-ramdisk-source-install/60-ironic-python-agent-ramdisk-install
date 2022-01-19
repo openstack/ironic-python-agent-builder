@@ -13,33 +13,11 @@ IPADIR=/tmp/ironic-python-agent
 IRLIBDIR=/tmp/ironic-lib
 UPPER_CONSTRAINTS=/tmp/requirements/upper-constraints.txt
 VENVDIR=/opt/ironic-python-agent
-# 19.1.1 is required for cryptography.
-REQUIRED_PIP_STR="19.1.1"
-REQUIRED_PIP_TUPLE="(19, 1, 1)"
-
-IPA_PYTHON_VERSION=$DIB_PYTHON_VERSION
-IPA_PYTHON="$DIB_PYTHON"
-
-case "$DISTRO_NAME" in
-    centos7|rhel7)
-        # NOTE(dtantsur): C.UTF-8 doesn't seem to exist in CentOS 7
-        export LC_ALL=en_US.UTF-8
-
-        if grep -q 'Python :: 3 :: Only' $IPADIR/setup.cfg; then
-            echo "WARNING: using Python 3 on CentOS 7, this is not recommended"
-            ${YUM:-yum} install -y python3 python3-devel
-            IPA_PYTHON=python3
-            IPA_PYTHON_VERSION=3
-        fi
-        ;;
-esac
 
 # create the virtual environment using the default python
-if [ $IPA_PYTHON_VERSION == 3 ]; then
-  $IPA_PYTHON -m venv $VENVDIR
-else
-  $IPA_PYTHON -m virtualenv $VENVDIR
-fi
+python3 -m venv $VENVDIR
+REQUIRED_PIP_STR="21.3.1"
+REQUIRED_PIP_TUPLE="(21, 3, 1)"
 
 HAS_PIP=$($VENVDIR/bin/python -c \
     "import pip; print(tuple(map(int, pip.__version__.split('.'))) >= $REQUIRED_PIP_TUPLE)")
@@ -52,7 +30,7 @@ fi
 # NOTE(rpittau): if we want to keep compatibility with Python 2.x, we need to
 # upgrade setuptools in the virtualenv as the default installed has issues
 # when parsing requirements.
-if [ "$DISTRO_NAME" == "opensuse" ] || [ $IPA_PYTHON_VERSION == 2 ]; then
+if [ "$DISTRO_NAME" == "opensuse" ]; then
     $VENVDIR/bin/pip install -U setuptools
 fi
 

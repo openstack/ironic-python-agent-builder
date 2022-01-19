@@ -3,7 +3,7 @@ dhcp-all-interfaces
 ibft-interfaces
 install-static
 package-installs
-pip-and-virtualenv
+ensure-venv
 pkg-map
 source-repositories
 svc-map

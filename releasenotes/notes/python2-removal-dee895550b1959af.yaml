@@ -1,0 +1,10 @@
+---
+upgrade:
+  - |
+    Support for python2 in ironic-python-agent was dropped in the Ussuri release
+    however it was still possible to build (non-functional) python2 images for
+    CentOS 7. This python2 support is now dropped from the image build also. As
+    part of this change, the `pip-and-virtualenv` element is not longer a
+    dependency, so any custom elements which depend on this element will need to
+    either include it explicitly or migrate to the recommended `ensure-venv`
+    element.

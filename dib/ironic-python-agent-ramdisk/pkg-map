@@ -2,15 +2,11 @@
   "release": {
     "rhel": {
       "7": {
-        "python": "python",
-        "python-dev": "python-devel",
         "tgt": "scsi-target-utils"
       }
     },
     "centos": {
       "7": {
-        "python": "python",
-        "python-dev": "python-devel",
         "tgt": "scsi-target-utils"
       }
     }

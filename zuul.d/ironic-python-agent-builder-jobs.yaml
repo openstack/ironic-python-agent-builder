@@ -20,16 +20,6 @@
       image_type: 'tinyipa'
 
 - job:
-    name: ironic-python-agent-build-image-dib-centos7
-    parent: ironic-python-agent-build-image-base
-    override-branch: stable/train
-    required-projects:
-      - openstack/diskimage-builder
-    vars:
-      image_type: 'dib'
-      image_distro: 'centos7'
-
-- job:
     name: ironic-python-agent-build-image-dib-centos8
     parent: ironic-python-agent-build-image-base
     required-projects:
@@ -75,16 +65,6 @@
     parent: ironic-python-agent-check-image-base
     vars:
       image_type: 'tinyipa'
-
-- job:
-    name: ironic-python-agent-check-image-dib-centos7
-    parent: ironic-python-agent-check-image-base
-    override-branch: stable/train
-    required-projects:
-      - openstack/diskimage-builder
-    vars:
-      image_type: 'dib'
-      image_distro: 'centos7'
 
 - job:
     name: ironic-python-agent-check-image-dib-centos7-python3

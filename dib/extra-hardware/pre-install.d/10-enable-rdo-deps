@@ -1,0 +1,6 @@
+#!/bin/bash
+# It enables RDO deps repo for CentOS Stream 9
+
+if [[ "${DISTRO_NAME}${DIB_RELEASE}" =~ "centos9" ]]; then
+    curl -o /etc/yum.repos.d/dlrn-deps.repo https://trunk.rdoproject.org/centos9-master/dlrn-deps.repo
+fi

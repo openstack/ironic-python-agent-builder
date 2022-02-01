@@ -5,7 +5,7 @@ Images built using diskimage-builder_ are recommended for production use on
 real hardware. The recommended distributions are:
 
 * CentOS 8 (regular and stream)
-* Debian Buster (``debian-minimal`` element)
+* Debian Bullseye (``debian-minimal`` element)
 
 The following should work but receive only limited testing and support:
 

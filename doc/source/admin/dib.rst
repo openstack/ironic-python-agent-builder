@@ -4,7 +4,7 @@ diskimage-builder images
 Images built using diskimage-builder_ are recommended for production use on
 real hardware. The recommended distributions are:
 
-* CentOS 8 (regular and stream)
+* CentOS Stream 8
 * Debian Bullseye (``debian-minimal`` element)
 
 The following should work but receive only limited testing and support:
@@ -29,13 +29,13 @@ You can add other diskimage-builder_ elements via the ``-e`` flag:
 
 .. code-block:: shell
 
-    ironic-python-agent-builder -e <extra-element> --release 8 centos-minimal
+    ironic-python-agent-builder -e <extra-element> --release 8-stream centos
 
 You can specify the base name of the target images:
 
 .. code-block:: shell
 
-    ironic-python-agent-builder -o my-ipa --release 8 centos-minimal
+    ironic-python-agent-builder -o my-ipa --release 8-stream centos
 
 You can specify the arch of the target image by setting ``ARCH`` environment
 variable (default is amd64):
@@ -74,9 +74,9 @@ for example:
 
 .. code-block:: shell
 
-    export DIB_RELEASE=8
+    export DIB_RELEASE=8-stream
     disk-image-create -o ironic-python-agent \
-        ironic-python-agent-ramdisk centos-minimal
+        ironic-python-agent-ramdisk centos
 
 To use a specific branch of ironic-python-agent, use:
 
@@ -169,7 +169,7 @@ required for instance image or deploy image.
 
 .. code-block:: bash
 
-    ironic-python-agent-builder -e stable-interface-names --release 8 centos-minimal
+    ironic-python-agent-builder -e stable-interface-names --release 8-stream centos
 
 
 .. _diskimage-builder: https://docs.openstack.org/diskimage-builder

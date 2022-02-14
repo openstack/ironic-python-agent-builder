@@ -6,7 +6,7 @@ source ${WORKDIR}/common.sh
 
 IRONIC_LIB_SOURCE=${IRONIC_LIB_SOURCE:-}
 
-TC_RELEASE="12.x"
+TC_RELEASE="13.x"
 QEMU_RELEASE="v4.2.0"
 LSHW_RELEASE="B.02.18"
 BIOSDEVNAME_RELEASE="0.7.2"
@@ -196,7 +196,7 @@ ls -1 $BUILDDIR/tmp/wheels
 
 # Build qemu-utils
 rm -rf $WORKDIR/build_files/qemu-utils.tcz
-$CHROOT_CMD /bin/sh -c "cd /tmp/qemu && ./configure --disable-system --disable-user --disable-linux-user --disable-bsd-user --disable-guest-agent --disable-blobs --python=/usr/local/bin/$TINYIPA_PYTHON_EXE && make && make install DESTDIR=/tmp/qemu-utils"
+$CHROOT_CMD /bin/sh -c "cd /tmp/qemu && CFLAGS=-Wno-error ./configure --disable-system --disable-user --disable-linux-user --disable-bsd-user --disable-guest-agent --disable-blobs --python=/usr/local/bin/$TINYIPA_PYTHON_EXE && make && make install DESTDIR=/tmp/qemu-utils"
 find $BUILDDIR/tmp/qemu-utils/ -type f -executable | xargs file | awk -F ':' '/ELF/ {print $1}' | sudo xargs strip
 cd $WORKDIR/build_files && mksquashfs $BUILDDIR/tmp/qemu-utils qemu-utils.tcz && md5sum qemu-utils.tcz > qemu-utils.tcz.md5.txt
 # Create qemu-utils.tcz.dep

@@ -1,0 +1,9 @@
+---
+fixes:
+  - |
+    Fixes issues with ramdisks potentially crashing when starting due to
+    systemd attempting to access a random number generator before udevd has
+    been launched. Depending on the mode of operation and underlying
+    and configuration, i.e. in FIPS mode, the system could have crashed as
+    a result. We will now always create the character devices devices, which
+    can be used early in the boot sequence.

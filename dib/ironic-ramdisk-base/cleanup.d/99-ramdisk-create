@@ -24,6 +24,20 @@ echo "#disabled" > ./tmp/fstab.new
 sudo mv ./tmp/fstab.new ./etc/fstab
 sudo ln -s ./sbin/init ./
 
+# NOTE(TheJulia): Make a random and urandom entry to handle
+# long standing systemd bug cases where it may, depending on
+# underlying OS config/version, try to open the random number
+# generator before initializing.
+# This class of issue has appeared frquently with systemd,
+# https://github.com/systemd/systemd/issues/4167 is a commonly
+# referenced example of this behavior.
+if ! [ -a ./dev/random ]; then
+    sudo mknod ./dev/random c 1 8
+fi
+if ! [ -a ./dev/urandom ]; then
+    sudo mknod ./dev/urandom c 1 9
+fi
+
 # Note: The pci.ids, which is used by lshw, locate on Ubuntu
 # in /usr/share/misc. Therefore we are removing only the
 # ./usr/share/misc/m* (will remove the magic and magic.mgc files).

@@ -9,6 +9,8 @@
         - ironic-standalone-ipa-src
         - ipa-tempest-bios-ipmi-direct-tinyipa-src
         - ironic-python-agent-check-image-tinyipa
+        - ironic-python-agent-check-image-dib-centos9
+        - ironic-python-agent-check-image-dib-centos9-extra
         - ironic-python-agent-check-image-dib-centos8
         - ironic-python-agent-check-image-dib-centos8-extra
         - ironic-python-agent-check-image-dib-centos7-python3
@@ -16,10 +18,6 @@
         - ironic-python-agent-check-image-dib-debian-arm64
         - ironic-python-agent-check-image-dib-debian-extra
         # Non-voting jobs
-        - ironic-python-agent-check-image-dib-centos9:
-            voting: false
-        - ironic-python-agent-check-image-dib-centos9-extra:
-            voting: false
         - ironic-python-agent-check-image-dib-ubuntu:
             voting: false
         - ironic-python-agent-check-image-dib-opensuse:
@@ -36,6 +34,8 @@
         - ironic-standalone-ipa-src
         - ipa-tempest-bios-ipmi-direct-tinyipa-src
         - ironic-python-agent-check-image-tinyipa
+        - ironic-python-agent-check-image-dib-centos9
+        - ironic-python-agent-check-image-dib-centos9-extra
         - ironic-python-agent-check-image-dib-centos8
         - ironic-python-agent-check-image-dib-centos8-extra
         - ironic-python-agent-check-image-dib-centos7-python3

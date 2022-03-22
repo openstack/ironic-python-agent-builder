@@ -6,5 +6,6 @@ Ironic Python Agent Builder Release Notes
    :maxdepth: 1
 
    unreleased
+   yoga
    xena
    wallaby

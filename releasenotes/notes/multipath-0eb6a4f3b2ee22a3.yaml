@@ -1,0 +1,6 @@
+---
+features:
+  - |
+    Adds a new element ``multipath-io`` for configuring setups
+    using multipath.
+

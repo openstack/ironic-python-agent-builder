@@ -19,6 +19,7 @@
     vars:
       image_type: 'tinyipa'
 
+# TODO(dtantsur): remove when no other projects use it
 - job:
     name: ironic-python-agent-build-image-dib-centos8
     parent: ironic-python-agent-build-image-base
@@ -29,6 +30,17 @@
       image_distro: 'centos'
       image_release: '8-stream'
       image_target_name: 'centos8'
+
+- job:
+    name: ironic-python-agent-build-image-dib-centos9
+    parent: ironic-python-agent-build-image-base
+    required-projects:
+      - openstack/diskimage-builder
+    vars:
+      image_type: 'dib'
+      image_distro: 'centos'
+      image_release: '9-stream'
+      image_target_name: 'centos9'
 
 - job:
     name: ironic-python-agent-build-image-dib-debian
@@ -68,15 +80,7 @@
     vars:
       image_type: 'tinyipa'
 
-- job:
-    name: ironic-python-agent-check-image-dib-centos7-python3
-    parent: ironic-python-agent-check-image-base
-    required-projects:
-      - openstack/diskimage-builder
-    vars:
-      image_type: 'dib'
-      image_distro: 'centos7'
-
+# TODO(dtantsur): remove when no other projects use it
 - job:
     name: ironic-python-agent-check-image-dib-centos8
     parent: ironic-python-agent-check-image-base
@@ -87,12 +91,6 @@
       image_distro: 'centos'
       image_release: '8-stream'
       image_target_name: 'centos8'
-
-- job:
-    name: ironic-python-agent-check-image-dib-centos8-extra
-    parent: ironic-python-agent-check-image-dib-centos8
-    vars:
-      extra_elements: ["extra-hardware"]
 
 - job:
     name: ironic-python-agent-check-image-dib-centos9

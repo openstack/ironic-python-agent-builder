@@ -4,12 +4,11 @@ diskimage-builder images
 Images built using diskimage-builder_ are recommended for production use on
 real hardware. The recommended distributions are:
 
-* CentOS Stream 8
+* CentOS Stream 9
 * Debian Bullseye (``debian-minimal`` element)
 
 The following should work but receive only limited testing and support:
 
-* CentOS 7 (using Python 3.6)
 * openSUSE Leap 15.1
 * Ubuntu 20.04 Focal
 
@@ -29,13 +28,13 @@ You can add other diskimage-builder_ elements via the ``-e`` flag:
 
 .. code-block:: shell
 
-    ironic-python-agent-builder -e <extra-element> --release 8-stream centos
+    ironic-python-agent-builder -e <extra-element> --release 9-stream centos
 
 You can specify the base name of the target images:
 
 .. code-block:: shell
 
-    ironic-python-agent-builder -o my-ipa --release 8-stream centos
+    ironic-python-agent-builder -o my-ipa --release 9-stream centos
 
 You can specify the arch of the target image by setting ``ARCH`` environment
 variable (default is amd64):
@@ -43,7 +42,7 @@ variable (default is amd64):
 .. code-block:: shell
 
     export ARCH=aarch64
-    ironic-python-agent-builder -o my-ipa --release 8-stream centos
+    ironic-python-agent-builder -o my-ipa --release 9-stream centos
 
 ... with diskimage-builder
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -74,7 +73,7 @@ for example:
 
 .. code-block:: shell
 
-    export DIB_RELEASE=8-stream
+    export DIB_RELEASE=9-stream
     disk-image-create -o ironic-python-agent \
         ironic-python-agent-ramdisk centos
 
@@ -169,7 +168,7 @@ required for instance image or deploy image.
 
 .. code-block:: bash
 
-    ironic-python-agent-builder -e stable-interface-names --release 8-stream centos
+    ironic-python-agent-builder -e stable-interface-names --release 9-stream centos
 
 
 .. _diskimage-builder: https://docs.openstack.org/diskimage-builder

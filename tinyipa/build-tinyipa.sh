@@ -162,12 +162,12 @@ while read line; do
     sudo chroot --userspec=$TC:$STAFF $BUILDDIR /usr/bin/env -i PATH=$CHROOT_PATH http_proxy=$http_proxy https_proxy=$https_proxy no_proxy=$no_proxy tce-load -wci $line
 done < <(paste $WORKDIR/build_files/$PY_REQS $WORKDIR/build_files/buildreqs.lst)
 
-PIP_COMMAND="pip"
 TINYIPA_PYTHON_EXE="python"
 if [[ $USE_PYTHON3 == "True" ]]; then
-    PIP_COMMAND="pip3"
-    TINYIPA_PYTHON_EXE="python3"
+    TINYIPA_PYTHON_EXE="python3.9"
 fi
+
+PIP_COMMAND="$TINYIPA_PYTHON_EXE -m pip"
 
 # Build python wheels
 $CHROOT_CMD ${TINYIPA_PYTHON_EXE} -m ensurepip

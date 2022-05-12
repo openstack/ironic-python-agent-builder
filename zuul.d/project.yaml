@@ -11,9 +11,6 @@
         - ironic-python-agent-check-image-tinyipa
         - ironic-python-agent-check-image-dib-centos9
         - ironic-python-agent-check-image-dib-centos9-extra
-        - ironic-python-agent-check-image-dib-centos8
-        - ironic-python-agent-check-image-dib-centos8-extra
-        - ironic-python-agent-check-image-dib-centos7-python3
         - ironic-python-agent-check-image-dib-debian
         - ironic-python-agent-check-image-dib-debian-arm64
         - ironic-python-agent-check-image-dib-debian-extra
@@ -36,9 +33,6 @@
         - ironic-python-agent-check-image-tinyipa
         - ironic-python-agent-check-image-dib-centos9
         - ironic-python-agent-check-image-dib-centos9-extra
-        - ironic-python-agent-check-image-dib-centos8
-        - ironic-python-agent-check-image-dib-centos8-extra
-        - ironic-python-agent-check-image-dib-centos7-python3
         - ironic-python-agent-check-image-dib-debian
         - ironic-python-agent-check-image-dib-debian-arm64
         - ironic-python-agent-check-image-dib-debian-extra
@@ -47,7 +41,7 @@
         - publish-openstack-python-branch-tarball
         - ironic-python-agent-build-image-tinyipa:
             branches: master
-        - ironic-python-agent-build-image-dib-centos8:
+        - ironic-python-agent-build-image-dib-centos9:
             branches: master
         - ironic-python-agent-build-image-dib-debian:
             branches: master

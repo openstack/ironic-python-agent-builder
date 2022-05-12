@@ -1,0 +1,5 @@
+---
+upgrade:
+  - |
+    CentOS 7 and 8 are no longer supported since OpenStack dropped support
+    for Python 3.6. Please use CentOS 9 (Stream) instead.

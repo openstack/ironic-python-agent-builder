@@ -23,6 +23,11 @@ done
 case "$DISTRO_NAME" in
     fedora|centos|rhel)
         ${YUM:-yum} remove -y postfix gcc make
+        # Remove webkit... Save ~26MB. This is a ramdisk, not a web brower.
+        ${YUM:-yum} remove -y webkit2gtk3-jsc libproxy-webkitgtk4 || true
+        # Remove polkit... Save ~23 MB. This is a ramdisk, not a desktop.
+        ${YUM:-yum} remove -y polkit polkit-libs PackageKit polkit-pkla-compat || true
+
         ${YUM:-yum} clean all
         # Rebuilding the rpm database after removing packages will reduce
         # its size

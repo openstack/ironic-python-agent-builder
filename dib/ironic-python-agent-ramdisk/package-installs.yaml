@@ -26,6 +26,8 @@ efivar:
 chrony:
 e2fsprogs:
 nvme-cli:
+# smartctl is required for ATA secure erase.
+smartmontools:
 
 libffi-dev:
     build-only: true

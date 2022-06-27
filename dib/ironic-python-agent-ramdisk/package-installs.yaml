@@ -27,6 +27,8 @@ e2fsprogs:
 nvme-cli:
 # This provides iscsistart which is required for iBFT support
 open-iscsi:
+# smartctl is required for ATA secure erase.
+smartmontools:
 
 libffi-dev:
     build-only: true

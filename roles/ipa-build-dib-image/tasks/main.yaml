@@ -1,6 +1,6 @@
-- name: Default to CentOS 8
+- name: Default to CentOS Stream 9
   set_fact:
-    image_release: 8
+    image_release: 9-stream
   when:
     - image_distro in ["centos-minimal", "centos"]
     - not image_release

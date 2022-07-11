@@ -1,0 +1,4 @@
+---
+upgrade:
+  - |
+    Support for openSUSE Leap 15.* has been removed.

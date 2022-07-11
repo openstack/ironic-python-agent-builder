@@ -9,7 +9,6 @@ real hardware. The recommended distributions are:
 
 The following should work but receive only limited testing and support:
 
-* openSUSE Leap 15.1
 * Ubuntu 20.04 Focal
 
 Building

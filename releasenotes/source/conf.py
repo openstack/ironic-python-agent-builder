@@ -52,8 +52,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Ironic Python Agent Builder Release Notes'
-copyright = u'2017, OpenStack Developers'
+project = 'Ironic Python Agent Builder Release Notes'
+copyright = '2017, OpenStack Developers'
 
 # openstackdocstheme options
 openstackdocs_repo_name = 'openstack/ironic-python-agent-builder'
@@ -212,8 +212,8 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     ('index', 'ironic_python_agent_builderReleaseNotes.tex',
-     u'Ironic Python Agent Builder Release Notes Documentation',
-     u'OpenStack Foundation', 'manual'),
+     'Ironic Python Agent Builder Release Notes Documentation',
+     'OpenStack Foundation', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -243,8 +243,8 @@ latex_documents = [
 # (source start file, name, description, authors, manual section).
 man_pages = [
     ('index', 'ironic_python_agent_builderrereleasenotes',
-     u'Ironic Python Agent Builder Release Notes Documentation',
-     [u'OpenStack Foundation'], 1)
+     'Ironic Python Agent Builder Release Notes Documentation',
+     ['OpenStack Foundation'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -258,8 +258,8 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     ('index', 'ironic_python_agent_builder ReleaseNotes',
-     u'Ironic Python Agent Builder Release Notes Documentation',
-     u'OpenStack Foundation', 'ironic_python_agent_builderReleaseNotes',
+     'Ironic Python Agent Builder Release Notes Documentation',
+     'OpenStack Foundation', 'ironic_python_agent_builderReleaseNotes',
      'Release notes for Ironic Python Agent Builder.',
      'Miscellaneous'),
 ]

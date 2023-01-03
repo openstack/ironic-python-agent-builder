@@ -1,0 +1,7 @@
+---
+fixes:
+  - |
+    Fixes excess files being housed in /var/tmp inside of a ramdisk image
+    which may, in some cases, result in a much larger ramdisk than expected.
+    Files and folders in /var/tmp within a ramdisk are now removed prior to
+    the ramdisk being packaged as part of a DIB based image build.

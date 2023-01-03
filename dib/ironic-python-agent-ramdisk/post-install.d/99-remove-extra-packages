@@ -29,3 +29,7 @@ case "$DISTRO_NAME" in
         rpm --rebuilddb
         ;;
 esac
+
+# NOTE(TheJulia): remove any excess temporary files from /var/tmp
+# In particular, dracut may leave some items we don't need/want.
+rm -r -f /var/tmp/*

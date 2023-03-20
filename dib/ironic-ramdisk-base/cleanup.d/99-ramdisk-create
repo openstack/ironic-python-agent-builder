@@ -86,5 +86,11 @@ fi
 select_boot_kernel_initrd $TARGET_ROOT
 sudo cp $BOOTDIR/$KERNEL ${IMAGE_PATH}.kernel
 sudo chown $USER: ${IMAGE_PATH}.kernel
+if [ "$DIB_CHECKSUM" == "1" ]; then
+    pushd $(dirname ${IMAGE_PATH})
+    md5sum ${IMAGE_NAME}.initramfs ${IMAGE_NAME}.kernel > ${IMAGE_NAME}.md5
+    sha256sum ${IMAGE_NAME}.initramfs ${IMAGE_NAME}.kernel > ${IMAGE_NAME}.sha256
+    popd
+fi
 # Output image sizes for debugging
 sudo ls -lh ${IMAGE_PATH}.*

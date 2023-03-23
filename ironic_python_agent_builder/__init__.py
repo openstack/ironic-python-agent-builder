@@ -81,6 +81,10 @@ def main():
     if args.lzma:
         os.environ['DIB_IPA_COMPRESS_CMD'] = \
             'xz --format=lzma --compress --stdout'
+    # Enable checksum generation by default
+    if 'DIB_CHECKSUM' not in os.environ:
+        os.environ['DIB_CHECKSUM'] = 'sha256'
+
     extra_args = shlex.split(args.extra_args) if args.extra_args else []
     if args.verbose:
         extra_args.append("-x")

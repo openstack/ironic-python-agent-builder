@@ -13,7 +13,6 @@
   environment:
     BRANCH_PATH: '{{ ipa_branch_path }}'
     IPA_SOURCE_DIR: '{{ ansible_user_dir }}/src/opendev.org/openstack/ironic-python-agent'
-  when: "'ussuri' not in ipa_branch_path"
 
 - name: Move resulting files
   shell: |

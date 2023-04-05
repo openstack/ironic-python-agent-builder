@@ -45,7 +45,7 @@
 - job:
     name: ironic-python-agent-check-image-base
     parent: base
-    nodeset: ubuntu-focal
+    nodeset: ubuntu-jammy
     pre-run: playbooks/ironic-python-agent-build-image/pre.yaml
     run: playbooks/ironic-python-agent-build-image/run.yaml
     post-run: playbooks/ironic-python-agent-build-image/extra-logs.yaml
@@ -126,4 +126,5 @@
     vars:
       image_type: 'dib'
       image_distro: 'ubuntu'
-      image_release: 'focal'
+      image_release: 'jammy'
+      dib_no_tmpfs: '1'

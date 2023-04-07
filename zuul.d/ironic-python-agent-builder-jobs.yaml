@@ -3,7 +3,9 @@
     parent: publish-openstack-artifacts
     pre-run: playbooks/ironic-python-agent-build-image/pre.yaml
     run: playbooks/ironic-python-agent-build-image/run.yaml
-    post-run: playbooks/ironic-python-agent-build-image/post.yaml
+    post-run:
+      - playbooks/ironic-python-agent-build-image/post.yaml
+      - playbooks/ironic-python-agent-build-image/extra-logs.yaml
     timeout: 1800
     required-projects:
       - openstack/requirements
@@ -46,6 +48,7 @@
     nodeset: ubuntu-focal
     pre-run: playbooks/ironic-python-agent-build-image/pre.yaml
     run: playbooks/ironic-python-agent-build-image/run.yaml
+    post-run: playbooks/ironic-python-agent-build-image/extra-logs.yaml
     timeout: 1800
     required-projects:
       - openstack/requirements

@@ -1,0 +1,7 @@
+- hosts: all
+
+  tasks:
+
+    - name: Collect disk usage info
+      shell: "df > {{ zuul_output_dir }}/logs/df.txt"
+      become: yes

@@ -35,6 +35,11 @@
   environment:
     # Increase from the default value of 30
     DIB_DHCP_TIMEOUT: 60
+    # Use or not tmpfs to build the image, default to use it.
+    # As images become bigger and bigger, in the future we may
+    # decide to switch to not use it by default since we have
+    # enough disk space.
+    DIB_NO_TMPFS: '{{ dib_no_tmpfs }}'
     # Use repositories checked out by Zuul (combined with -b HEAD above)
     DIB_REPOLOCATION_ironic_python_agent: '{{ ipa_source_path }}'
     DIB_REPOLOCATION_requirements: '{{ requirements_path }}'

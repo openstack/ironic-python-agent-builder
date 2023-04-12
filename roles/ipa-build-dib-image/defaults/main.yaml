@@ -8,4 +8,5 @@ ipa_raw_dir: '{{ ansible_user_dir }}/src/opendev.org/openstack/ironic-python-age
 ipa_tar_dir: '{{ ansible_user_dir }}/src/opendev.org/openstack/ironic-python-agent/UPLOAD_TAR'
 dib_extra_args:
 dib_from_source: true
+dib_no_tmpfs: 0
 extra_elements: ["dynamic-login"]

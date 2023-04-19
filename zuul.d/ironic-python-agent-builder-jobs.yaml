@@ -128,3 +128,10 @@
       image_distro: 'ubuntu'
       image_release: 'jammy'
       dib_no_tmpfs: '1'
+
+- job:
+    name: ironic-python-agent-check-image-dib-ubuntu-arm64
+    parent: ironic-python-agent-check-image-dib-ubuntu
+    nodeset: ubuntu-jammy-arm64
+    vars:
+      image_target_name: ubuntu-arm64

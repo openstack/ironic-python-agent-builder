@@ -1,5 +1,10 @@
 ethtool:
 fio:
+fio-engine-libaio:
+  when:
+   - IPA_DISTRO_FAMILY = rh
+   - DIB_RELEASE != 7
+   - DIB_RELEASE != 8
 hdparm:
 infiniband-diags:
 lldpad:

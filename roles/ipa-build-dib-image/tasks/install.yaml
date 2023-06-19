@@ -26,13 +26,3 @@
   become: true
   when: dib_from_source
 
-# NOTE(dtantsur): work around the issue in older DIB versions when some
-# elements try to use the default Python instead of the one DIB is using,
-# failing with "No module named yaml"
-- name: Install PyYAML in Python 2
-  pip:
-    name: PyYAML
-    extra_args: -c "{{ ansible_user_dir }}/{{ zuul.projects['opendev.org/openstack/requirements'].src_dir }}/upper-constraints.txt"
-    executable: pip2
-  become: true
-  ignore_errors: true

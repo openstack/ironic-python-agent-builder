@@ -228,6 +228,10 @@ for target in *; do
     fi
 done
 popd
+# symlink bash to sh if /bin/sh is not there
+if [ ! -f "$FINALDIR/bin/sh" ]; then
+    $CHROOT_CMD ln -sf "/bin/bash" "/bin/sh"
+fi
 set -x
 
 # Rebuild build directory into gz file

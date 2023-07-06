@@ -2,7 +2,7 @@
 # put other system startup commands here
 
 #exec > /tmp/installlogs 2>&1
-set -x
+set -ux
 
 echo "Starting bootlocal script:"
 date
@@ -66,6 +66,11 @@ configure_dhcp_network() {
 configure_dhcp_network
 
 mkdir -p /etc/ironic-python-agent.d/
+
+if [ -d /sys/firmware/efi ] ; then
+    echo "Make efivars available"
+    mount -t efivarfs efivarfs /sys/firmware/efi/efivars
+fi
 
 # Run IPA
 echo "Starting Ironic Python Agent:"

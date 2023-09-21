@@ -1,6 +1,7 @@
 - job:
     name: ironic-python-agent-build-image-base
     parent: publish-openstack-artifacts
+    nodeset: ubuntu-jammy
     pre-run: playbooks/ironic-python-agent-build-image/pre.yaml
     run: playbooks/ironic-python-agent-build-image/run.yaml
     post-run:

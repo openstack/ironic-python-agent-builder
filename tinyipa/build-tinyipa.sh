@@ -76,10 +76,7 @@ cd $IPA_SOURCE_DIR
 rm -rf *.egg-info
 pwd
 
-PYTHON_COMMAND="python"
-if [[ $USE_PYTHON3 == "True" ]]; then
-    PYTHON_COMMAND="python3"
-fi
+PYTHON_COMMAND="python3"
 $PYTHON_COMMAND setup.py sdist --dist-dir "$BUILDDIR/tmp/localpip" --quiet
 
 ls $BUILDDIR/tmp/localpip || true
@@ -150,10 +147,7 @@ cp $WORKDIR/build_files/fakeuname $BUILDDIR/tmp/overides/uname
 
 sudo cp $WORKDIR/build_files/ntpdate $BUILDDIR/bin/ntpdate
 
-PY_REQS="buildreqs_python2.lst"
-if [[ $USE_PYTHON3 == "True" ]]; then
-    PY_REQS="buildreqs_python3.lst"
-fi
+PY_REQS="buildreqs_python3.lst"
 
 # NOTE(rpittau) change ownership of the tce info dir to prevent writing issues
 sudo chown $TC:$STAFF $BUILDDIR/usr/local/tce.installed
@@ -162,10 +156,7 @@ while read line; do
     sudo chroot --userspec=$TC:$STAFF $BUILDDIR /usr/bin/env -i PATH=$CHROOT_PATH http_proxy=$http_proxy https_proxy=$https_proxy no_proxy=$no_proxy tce-load -wci $line
 done < <(paste $WORKDIR/build_files/$PY_REQS $WORKDIR/build_files/buildreqs.lst)
 
-TINYIPA_PYTHON_EXE="python"
-if [[ $USE_PYTHON3 == "True" ]]; then
-    TINYIPA_PYTHON_EXE="python3.9"
-fi
+TINYIPA_PYTHON_EXE="python3.9"
 
 PIP_COMMAND="$TINYIPA_PYTHON_EXE -m pip"
 

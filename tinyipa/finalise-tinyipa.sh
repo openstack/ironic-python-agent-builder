@@ -90,10 +90,7 @@ cp $WORKDIR/build_files/fakeuname $FINALDIR/tmp/overides/uname
 
 sudo cp $WORKDIR/build_files/ntpdate $FINALDIR/bin/ntpdate
 sudo chmod 755 $FINALDIR/bin/ntpdate
-PY_REQS="finalreqs_python2.lst"
-if [[ $USE_PYTHON3 == "True" ]]; then
-    PY_REQS="finalreqs_python3.lst"
-fi
+PY_REQS="finalreqs_python3.lst"
 
 # NOTE(rpittau) change ownership of the tce info dir to prevent writing issues
 sudo chown $TC:$STAFF $FINALDIR/usr/local/tce.installed
@@ -140,12 +137,8 @@ fi
 # Ensure tinyipa picks up installed kernel modules
 $CHROOT_CMD depmod -a `$WORKDIR/build_files/fakeuname -r`
 
-PIP_COMMAND="pip"
-TINYIPA_PYTHON_EXE="python"
-if [[ $USE_PYTHON3 == "True" ]]; then
-    PIP_COMMAND="pip3"
-    TINYIPA_PYTHON_EXE="python3"
-fi
+PIP_COMMAND="pip3"
+TINYIPA_PYTHON_EXE="python3"
 
 # Install pip
 # NOTE(rpittau): pip MUST be the same version used in the build script or

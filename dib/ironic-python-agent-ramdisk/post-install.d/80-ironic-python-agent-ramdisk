@@ -7,6 +7,7 @@ set -eu
 set -o pipefail
 
 DIB_IPA_ENABLE_RESCUE=${DIB_IPA_ENABLE_RESCUE:-true}
+DIB_IPA_ENABLE_SYSTEMD_NETWORKD=${DIB_IPA_ENABLE_SYSTEMD_NETWORKD:-true}
 
 if $DIB_IPA_ENABLE_RESCUE; then
     # Make sure rescue works
@@ -40,6 +41,24 @@ case "$DIB_INIT_SYSTEM" in
             if [[ ${YUM} == 'dnf' ]]; then
                 systemctl disable dnf-makecache.service
                 systemctl disable dnf-makecache.timer
+            fi
+        fi
+
+        # NOTE(drannou) debian by default is using networking instead of
+        # systemd-networkd. In some usecase like rescue, we need IPA to
+        # re-launch dhclient when modifications are made on the interface.
+        # The easiest way to manage that is to activate systemd-networkd.
+        if $DIB_IPA_ENABLE_SYSTEMD_NETWORKD; then
+            if [[ $DISTRO_NAME =~ debian ]] ; then
+                rm /etc/network/interfaces
+                rm -rf /etc/network/interfaces.d
+                echo "[Match]
+Name=en*
+
+[Network]
+DHCP=yes" > /etc/systemd/network/99-dhcp.network
+
+                systemctl enable systemd-networkd
             fi
         fi
         ;;

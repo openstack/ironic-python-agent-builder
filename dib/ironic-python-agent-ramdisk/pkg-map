@@ -11,6 +11,11 @@
         "python": "python",
         "python-dev": "python-devel"
       }
+    },
+    "debian": {
+      "bullseye": {
+          "lshw": "lshw/bullseye-backports"
+      }
     }
   },
   "family": {

@@ -1,0 +1,4 @@
+---
+fixes:
+  - |
+    Fixes building images for Debian Bullseye and Bookworm.

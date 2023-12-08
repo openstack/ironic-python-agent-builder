@@ -15,6 +15,8 @@
         - ironic-python-agent-check-image-dib-debian-arm64
         - ironic-python-agent-check-image-dib-debian-extra
         # Non-voting jobs
+        - ironic-python-agent-check-image-dib-debian-bullseye:
+            voting: false
         - ironic-python-agent-check-image-dib-ubuntu:
             voting: false
         - ironic-python-agent-check-image-dib-ubuntu-arm64:

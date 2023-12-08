@@ -41,7 +41,7 @@
     vars:
       image_type: 'dib'
       image_distro: 'debian-minimal'
-      image_release: 'bullseye'
+      image_release: 'bookworm'
 
 - job:
     name: ironic-python-agent-check-image-base
@@ -97,6 +97,12 @@
     vars:
       image_type: 'dib'
       image_distro: 'debian-minimal'
+      image_release: 'bookworm'
+
+- job:
+    name: ironic-python-agent-check-image-dib-debian-bullseye
+    parent: ironic-python-agent-check-image-dib-debian
+    vars:
       image_release: 'bullseye'
 
 - job:

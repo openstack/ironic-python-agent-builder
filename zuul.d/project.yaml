@@ -26,8 +26,6 @@
             voting: false
         - ipa-tempest-ironic-inspector-src:
             voting: false
-        - tripleo-buildimage-ironic-python-agent-centos-8:
-            voting: false
     gate:
       jobs:
         - openstack-tox-pep8

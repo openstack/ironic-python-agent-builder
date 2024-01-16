@@ -1,0 +1,4 @@
+---
+other:
+  - |
+    Debian images are now published using Bookworm instead of Bullseye.

@@ -7,7 +7,7 @@ If enabled without any environment variables set to modify configuration,
 this element will enable TLS API support in IPA with a self-signed certificate
 and key created at build time.
 
-Optionally, you can provide your own SSL certifiate and key, and optionally
+Optionally, you can provide your own SSL certificate and key, and optionally
 ca, via the following environment variables. They should be set to an
 accessible path on the build systems filesystem. If set, they will be copied
 into the built ramdisk, and IPA will be configured to use them.

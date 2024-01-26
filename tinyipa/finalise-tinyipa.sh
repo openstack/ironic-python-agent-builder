@@ -85,8 +85,8 @@ if $TINYIPA_REQUIRE_IPMITOOL; then
     cp $WORKDIR/build_files/ipmitool.* $FINALDIR/tmp/builtin/optional
 fi
 
-mkdir $FINALDIR/tmp/overides
-cp $WORKDIR/build_files/fakeuname $FINALDIR/tmp/overides/uname
+mkdir $FINALDIR/tmp/overrides
+cp $WORKDIR/build_files/fakeuname $FINALDIR/tmp/overrides/uname
 
 sudo cp $WORKDIR/build_files/ntpdate $FINALDIR/bin/ntpdate
 sudo chmod 755 $FINALDIR/bin/ntpdate
@@ -181,7 +181,7 @@ sudo sed -i '/# Main/a NOZSWAP=1' "$FINALDIR/etc/init.d/tc-config"
 # Place ipv6 modprobe config so the kernel support loads.
 sudo cp "$WORKDIR/build_files/modprobe.conf" "$FINALDIR/etc/modproble.conf"
 
-# NOTE(rpittau): workaorund for hwclock
+# NOTE(rpittau): workaround for hwclock
 # The adjtime file used by hwclock in tinycore is /var/lib/hwclock/adjtime
 # but for some reason (bug?) the file is not created when hwclock is
 # invoked, causing hwclock to fail when using certain options, for example

@@ -42,7 +42,7 @@ wget -N $TINYCORE_MIRROR_URL/$TC_RELEASE/x86_64/release/distribution_files/vmlin
 cd $WORKDIR
 
 ########################################################
-# Build Required Python Dependecies in a Build Directory
+# Build Required Python Dependencies in a Build Directory
 ########################################################
 
 # Make directory for building in
@@ -142,8 +142,8 @@ $CHROOT_CMD mkdir -m777 /etc/sysconfig/tcedir
 $CHROOT_CMD touch /etc/sysconfig/tcuser
 $CHROOT_CMD chmod a+rwx /etc/sysconfig/tcuser
 
-mkdir $BUILDDIR/tmp/overides
-cp $WORKDIR/build_files/fakeuname $BUILDDIR/tmp/overides/uname
+mkdir $BUILDDIR/tmp/overrides
+cp $WORKDIR/build_files/fakeuname $BUILDDIR/tmp/overrides/uname
 
 sudo cp $WORKDIR/build_files/ntpdate $BUILDDIR/bin/ntpdate
 

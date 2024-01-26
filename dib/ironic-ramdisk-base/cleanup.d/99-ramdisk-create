@@ -28,7 +28,7 @@ sudo ln -s ./sbin/init ./
 # long standing systemd bug cases where it may, depending on
 # underlying OS config/version, try to open the random number
 # generator before initializing.
-# This class of issue has appeared frquently with systemd,
+# This class of issue has appeared frequently with systemd,
 # https://github.com/systemd/systemd/issues/4167 is a commonly
 # referenced example of this behavior.
 if ! [ -a ./dev/random ]; then

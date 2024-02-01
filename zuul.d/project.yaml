@@ -25,6 +25,8 @@
             voting: false
         - ipa-tempest-ironic-inspector-src:
             voting: false
+        - ironic-python-agent-builder-tox-codespell:
+            voting: false
     gate:
       jobs:
         - openstack-tox-pep8

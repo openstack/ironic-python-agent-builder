@@ -142,3 +142,11 @@
     nodeset: ubuntu-jammy-arm64
     vars:
       image_target_name: ubuntu-arm64
+
+
+- job:
+    name: ironic-python-agent-builder-tox-codespell
+    parent: openstack-tox
+    timeout: 7200
+    vars:
+      tox_envlist: codespell

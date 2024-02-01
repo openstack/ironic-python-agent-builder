@@ -11,7 +11,7 @@
 #
 # By default, id_rsa or id_dsa keys  of the user performing the build
 # are baked into the image as authorized_keys for 'tc' user.
-# To supply different public ssh key, befor running this script set
+# To supply different public ssh key, before running this script set
 # SSH_PUBLIC_KEY environment variable to point to absolute path to the key.
 #
 # This script produces "ansible-<tinyipa-ramdisk-name>" ramdisk that can serve

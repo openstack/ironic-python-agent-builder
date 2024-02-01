@@ -1,6 +1,6 @@
 ---
 fixes:
   - |
-    Add support for TinyIPA predictible device names in dhcp.sh script by changing
+    Add support for TinyIPA predictable device names in dhcp.sh script by changing
     of NETDEVICES variable. It will support any device from /proc/net/dev starting
     with e or p letter.

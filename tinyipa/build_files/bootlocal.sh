@@ -24,7 +24,7 @@ fi
 # Maybe save some RAM?
 #rm -rf /tmp/builtin
 
-# Install IPA and dependecies
+# Install IPA and dependencies
 if ! type "ironic-python-agent" > /dev/null ; then
     PIP_COMMAND="pip"
     if hash pip3 2>/dev/null; then

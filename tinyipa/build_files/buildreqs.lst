@@ -11,7 +11,7 @@ gdisk.tcz
 git.tcz
 glib2-dev.tcz
 hdparm.tcz
-ipv6-netfilter-6.1.2-tinycore64.tcz
+ipv6-netfilter-6.6.8-tinycore64.tcz
 libpci-dev.tcz
 libtool-dev.tcz
 libtool.tcz
@@ -19,8 +19,8 @@ ninja.tcz
 parted.tcz
 pciutils.tcz
 pixman-dev.tcz
-raid-dm-6.1.2-tinycore64.tcz
-scsi-6.1.2-tinycore64.tcz
+raid-dm-6.6.8-tinycore64.tcz
+scsi-6.6.8-tinycore64.tcz
 udev-lib.tcz
 util-linux.tcz
 zlib_base-dev.tcz

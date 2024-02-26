@@ -61,7 +61,7 @@ if $TINYIPA_REQUIRE_BIOSDEVNAME; then
     wget -N -O - https://linux.dell.com/biosdevname/biosdevname-${BIOSDEVNAME_RELEASE}/biosdevname-${BIOSDEVNAME_RELEASE}.tar.gz | tar -xz -C "${BUILDDIR}/tmp" -f -
 fi
 if $TINYIPA_REQUIRE_IPMITOOL; then
-    git clone https://github.com/ipmitool/ipmitool.git "${BUILDDIR}/tmp/ipmitool-src"
+    git clone https://codeberg.org/IPMITool/ipmitool.git "${BUILDDIR}/tmp/ipmitool-src"
     cd "${BUILDDIR}/tmp/ipmitool-src"
     git reset $IPMITOOL_GIT_HASH --hard
     cd -

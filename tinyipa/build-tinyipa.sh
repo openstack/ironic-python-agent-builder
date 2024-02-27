@@ -10,7 +10,7 @@ TC_RELEASE="15.x"
 QEMU_RELEASE="v5.2.0"
 LSHW_RELEASE="B.02.18"
 BIOSDEVNAME_RELEASE="0.7.2"
-IPMITOOL_GIT_HASH="710888479332a46bad78f3d736eff0cbdefd2d1b"
+IPMITOOL_GIT_HASH="19d78782d795d0cf4ceefe655f616210c9143e62"
 
 CHROOT_CMD="sudo chroot $BUILDDIR /usr/bin/env -i PATH=$CHROOT_PATH http_proxy=$http_proxy https_proxy=$https_proxy no_proxy=$no_proxy"
 

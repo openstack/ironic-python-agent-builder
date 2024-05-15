@@ -31,6 +31,7 @@ case "$DIB_INIT_SYSTEM" in
         if $DIB_IPA_ENABLE_RESCUE; then
             systemctl enable ironic-agent-create-rescue-user.path
         fi
+        systemctl enable ironic-agent-resolve-config-drive.service
         # NOTE(rpittau) disable caching remote package index to prevent
         # delays due to failures.
         # This is a new service for dnf-based systems (e.g. Centos8) to speed

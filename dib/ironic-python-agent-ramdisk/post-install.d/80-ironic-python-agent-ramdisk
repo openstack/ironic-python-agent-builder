@@ -71,3 +71,10 @@ DHCP=yes" > /etc/systemd/network/99-dhcp.network
         exit 1
         ;;
 esac
+
+# Blocks out userdata from being acted upon by cloud-init if present.
+if [[ -x /etc/cloud/cloud.cfg.d ]]; then
+    cat > /etc/cloud/cloud.cfg.d/94-ironic-python-agent-disable-userdata.cfg <<EOF
+allow_userdata: false
+EOF
+fi

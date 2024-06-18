@@ -4,7 +4,7 @@ else
     export IPA_DISTRO_FAMILY=other
 fi
 
-if [[ ${DISTRO_NAME} =~ (centos|rhel) && ${DIB_RELEASE%-stream} > 7 ]]; then
+if [[ ${DISTRO_NAME} =~ (centos|rhel) ]]; then
     export DIB_DHCP_NETWORK_MANAGER_AUTO=${DIB_DHCP_NETWORK_MANAGER_AUTO:-true}
 fi
 

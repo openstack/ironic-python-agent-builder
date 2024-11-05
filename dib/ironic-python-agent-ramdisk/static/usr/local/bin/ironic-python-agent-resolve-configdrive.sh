@@ -33,7 +33,7 @@ else
         # We need to enumerate through the devices, and obtain the
         for device in $(lsblk -o PATH,LABEL|grep config-2|cut -f1 -d" "); do
             device_id=$(udevadm info --query=property --property=ID_FS_PUBLISHER_ID $device | sed s/ID_FS_PUBLISHER_ID=//)
-            if [[ "${publisher_id}" == "${device_id}" ]]; then
+            if [[ "${publisher_id,,}" == "${device_id,,}" ]]; then
                 # SUCCESS! Valid device! Do it!
                 echo "Device ${device} matches the ${publisher_id}. Mounting..."
                 mount -t iso9660 -o ro,mode=0700 "${device}" /mnt/config || true

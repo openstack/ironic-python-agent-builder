@@ -1,7 +1,7 @@
 - job:
     name: ironic-python-agent-build-image-base
     parent: publish-openstack-artifacts
-    nodeset: ubuntu-jammy
+    nodeset: ubuntu-noble
     pre-run: playbooks/ironic-python-agent-build-image/pre.yaml
     run: playbooks/ironic-python-agent-build-image/run.yaml
     post-run:
@@ -46,7 +46,7 @@
 - job:
     name: ironic-python-agent-check-image-base
     parent: base
-    nodeset: ubuntu-jammy
+    nodeset: ubuntu-noble
     pre-run: playbooks/ironic-python-agent-build-image/pre.yaml
     run: playbooks/ironic-python-agent-build-image/run.yaml
     post-run: playbooks/ironic-python-agent-build-image/extra-logs.yaml
@@ -133,13 +133,13 @@
     vars:
       image_type: 'dib'
       image_distro: 'ubuntu'
-      image_release: 'jammy'
+      image_release: 'noble'
       dib_no_tmpfs: '1'
 
 - job:
     name: ironic-python-agent-check-image-dib-ubuntu-arm64
     parent: ironic-python-agent-check-image-dib-ubuntu
-    nodeset: ubuntu-jammy-arm64
+    nodeset: ubuntu-noble-arm64
     vars:
       image_target_name: ubuntu-arm64
 

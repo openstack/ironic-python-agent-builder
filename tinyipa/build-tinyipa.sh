@@ -82,14 +82,6 @@ $PYTHON_COMMAND setup.py sdist --dist-dir "$BUILDDIR/tmp/localpip" --quiet
 ls $BUILDDIR/tmp/localpip || true
 cp requirements.txt $BUILDDIR/tmp/ipa-requirements.txt
 
-if [ -n "$IRONIC_LIB_SOURCE" ]; then
-    pushd $IRONIC_LIB_SOURCE
-    rm -rf *.egg-info
-    $PYTHON_COMMAND setup.py sdist --dist-dir "$BUILDDIR/tmp/localpip" --quiet
-    cp requirements.txt $BUILDDIR/tmp/ironic-lib-requirements.txt
-    popd
-fi
-
 if [ -n "$PYTHON_EXTRA_SOURCES_DIR_LIST" ]; then
     IFS="," read -ra PKGDIRS <<< "$PYTHON_EXTRA_SOURCES_DIR_LIST"
     for PKGDIR in "${PKGDIRS[@]}"; do
@@ -105,9 +97,6 @@ if [ -n "$PYTHON_EXTRA_SOURCES_DIR_LIST" ]; then
 fi
 
 $WORKDIR/generate_tox_constraints.sh upper-constraints.txt
-if [ -n "$IRONIC_LIB_SOURCE" ]; then
-    sed -i '/ironic-lib/d' upper-constraints.txt $BUILDDIR/tmp/ipa-requirements.txt
-fi
 cp upper-constraints.txt $BUILDDIR/tmp/upper-constraints.txt
 echo Using upper-constraints:
 cat upper-constraints.txt
@@ -165,10 +154,6 @@ $CHROOT_CMD ${TINYIPA_PYTHON_EXE} -m ensurepip
 $CHROOT_CMD ${PIP_COMMAND} install --upgrade pip==${PIP_VERSION} wheel
 $CHROOT_CMD ${PIP_COMMAND} install pbr
 $CHROOT_CMD ${PIP_COMMAND} wheel -c /tmp/upper-constraints.txt --wheel-dir /tmp/wheels -r /tmp/ipa-requirements.txt
-if [ -n "$IRONIC_LIB_SOURCE" ]; then
-    $CHROOT_CMD ${PIP_COMMAND} wheel -c /tmp/upper-constraints.txt --wheel-dir /tmp/wheels -r /tmp/ironic-lib-requirements.txt
-    $CHROOT_CMD ${PIP_COMMAND} wheel -c /tmp/upper-constraints.txt --no-index --pre --wheel-dir /tmp/wheels --find-links=/tmp/localpip --find-links=/tmp/wheels ironic-lib
-fi
 
 if [ -n "$PYTHON_EXTRA_SOURCES_DIR_LIST" ]; then
     IFS="," read -ra PKGDIRS <<< "$PYTHON_EXTRA_SOURCES_DIR_LIST"

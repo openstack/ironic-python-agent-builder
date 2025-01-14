@@ -22,12 +22,3 @@ rebuilding an image with the following procedure.
         DIB_REPOREF_ironic_python_agent=my-test-branch \
         ironic-python-agent-builder -o my-ipa --release 9-stream centos
 
-#. A similar process (with one additional variable) can be used for ironic-lib
-   changes:
-
-   .. code-block:: bash
-
-    DIB_REPOLOCATION_ironic_lib=/home/user/path/to/repo \
-        DIB_REPOREF_ironic_lib=my-test-branch \
-        IRONIC_LIB_FROM_SOURCE=true \
-        ironic-python-agent-builder -o my-ipa --release 9-stream centos

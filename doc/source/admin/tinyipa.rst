@@ -154,18 +154,6 @@ If you want to collect BIOS given names of NICs in the inventory, set
 
     export TINYIPA_REQUIRE_BIOSDEVNAME=true
 
-Using ironic-lib from source
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-ironic-lib_ contains important parts of the provisioning logic. If you would
-like to build an IPA image with your local checkout of ironic-lib_, export
-the following variable:
-
-.. code-block:: bash
-
-    export IRONIC_LIB_SOURCE=/absolute/path/to/ironic-lib/checkout
-
 
 .. _Ironic Python Agent: https://docs.openstack.org/ironic-python-agent
 .. _TinyCoreLinux: http://tinycorelinux.net
-.. _ironic-lib: https://opendev.org/openstack/ironic-lib

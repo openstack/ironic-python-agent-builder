@@ -10,7 +10,6 @@ export LC_ALL=C.UTF-8
 
 SCRIPTDIR=$(dirname $0)
 IPADIR=/tmp/ironic-python-agent
-IRLIBDIR=/tmp/ironic-lib
 UPPER_CONSTRAINTS=/tmp/requirements/upper-constraints.txt
 VENVDIR=/opt/ironic-python-agent
 
@@ -45,12 +44,6 @@ fi
 $VENVDIR/bin/pip install -c $UPPER_CONSTRAINTS $IPADIR
 ln -s $VENVDIR/bin/ironic-python-agent /usr/local/bin/
 ln -s $VENVDIR/bin/ironic-collect-introspection-data /usr/local/bin/
-
-# install ironic-lib from source if requested
-if [ ${IRONIC_LIB_FROM_SOURCE:-false} == "true" ]; then
-    $VENVDIR/bin/pip install -c $UPPER_CONSTRAINTS -r $IRLIBDIR/requirements.txt
-    $VENVDIR/bin/pip install $IRLIBDIR
-fi
 
 case "$DIB_INIT_SYSTEM" in
     upstart)

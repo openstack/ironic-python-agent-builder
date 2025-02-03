@@ -1,0 +1,4 @@
+---
+features:
+  - |
+    Changes lzma compression level to 9 for smaller images.

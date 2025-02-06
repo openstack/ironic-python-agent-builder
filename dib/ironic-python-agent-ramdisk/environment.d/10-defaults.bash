@@ -1,4 +1,4 @@
-export IPA_REMOVE_FIRMWARE=${IPA_REMOVE_FIRMWARE:-amdgpu,netronome,qcom,ti-communication,ti-keystone,ueagle-atm,rsi,mrvl,brcm,mediatek,ath10k,rtlwifi}
+export IPA_REMOVE_FIRMWARE=${IPA_REMOVE_FIRMWARE:-amdgpu,netronome,qcom,ti-communication,ti-keystone,ueagle-atm,rsi,mrvl,brcm,mediatek,ath10k,rtlwifi,rtw88,rtw89,libertas,ath11k}
 
 # NOTE(TheJulia): List of what each item represents for future context
 # amdgpu == AMD/ATI Radeon/Vega/Raven firmware for drivers
@@ -13,3 +13,7 @@ export IPA_REMOVE_FIRMWARE=${IPA_REMOVE_FIRMWARE:-amdgpu,netronome,qcom,ti-commu
 # mediatek == Mediatek wifi and SoC (think chromebook) firmware
 # ath10k == Qualcom Atheros 10k firmware
 # rtlwifi == Realtek Wifi firmware
+# rtw88 == Realtek wireless
+# rtw89 == Realtek wireless
+# libertas == Marvell libertas wifi
+# auth11k == Qualcomm atheros WLAN

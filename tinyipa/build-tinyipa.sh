@@ -7,15 +7,77 @@ source ${WORKDIR}/common.sh
 IRONIC_LIB_SOURCE=${IRONIC_LIB_SOURCE:-}
 
 TC_RELEASE="15.x"
-QEMU_RELEASE="v5.2.0"
+QEMU_RELEASE="5.2.0"
 LSHW_RELEASE="B.02.18"
 BIOSDEVNAME_RELEASE="0.7.2"
 IPMITOOL_GIT_HASH="19d78782d795d0cf4ceefe655f616210c9143e62"
 
 CHROOT_CMD="sudo chroot $BUILDDIR /usr/bin/env -i PATH=$CHROOT_PATH http_proxy=$http_proxy https_proxy=$https_proxy no_proxy=$no_proxy"
 
-function clone_single_branch {
-    git clone --branch $3 --depth=1 $1 $2
+DOWNLOAD_RETRY_MAX=${DOWNLOAD_RETRY_MAX:-5}
+DOWNLOAD_RETRY_DELAY=${DOWNLOAD_RETRY_DELAY:-10}
+
+function download_with_retry() {
+    local source_url=$1
+    local destination_path=$2
+    local attempts=1
+
+    declare -A tar_flags=(
+        ["tar.gz"]="z"
+        ["tgz"]="z"
+        ["tar.bz2"]="j"
+        ["tbz2"]="j"
+        ["tar.xz"]="J"
+        ["txz"]="J"
+    )
+
+    echo "Downloading $source_url to $destination_path"
+    while [ $attempts -le $DOWNLOAD_RETRY_MAX ]; do
+        for ext in "${!tar_flags[@]}"; do
+            if [[ "$source_url" =~ \.${ext}$ ]]; then
+                mkdir -p "$destination_path"
+                if wget --timeout=30 --tries=3 -O - "$source_url" | tar -x${tar_flags[$ext]} -C "$destination_path" --strip-components=1 -f -; then
+                    echo "Successfully downloaded $source_url on attempt $attempts"
+                    return 0
+                fi
+                break
+            fi
+        done
+
+        if [[ ! "$source_url" =~ \.tar\.[a-z]+$ ]]; then
+            if wget --timeout=30 --tries=3 "$source_url" -O "${destination_path}"; then
+                echo "Successfully downloaded $source_url on attempt $attempts"
+                return 0
+            fi
+        fi
+
+        echo "Download attempt $attempts failed for $source_url, retrying in $DOWNLOAD_RETRY_DELAY seconds..."
+        sleep $DOWNLOAD_RETRY_DELAY
+        attempts=$((attempts + 1))
+    done
+
+    echo "Failed to download $source_url after $DOWNLOAD_RETRY_MAX attempts"
+    return 1
+}
+
+function tce_load_with_retry() {
+    local package=$1
+    local attempts=1
+
+    echo "Loading package $package with tce-load"
+    while [ $attempts -le $DOWNLOAD_RETRY_MAX ]; do
+        if sudo chroot --userspec=$TC:$STAFF $BUILDDIR /usr/bin/env -i PATH=$CHROOT_PATH http_proxy=$http_proxy https_proxy=$https_proxy no_proxy=$no_proxy tce-load -wci $package; then
+            echo "Successfully loaded $package on attempt $attempts"
+            return 0
+        fi
+
+        echo "tce-load attempt $attempts failed for $package, retrying in $DOWNLOAD_RETRY_DELAY seconds..."
+        sleep $DOWNLOAD_RETRY_DELAY
+        attempts=$((attempts + 1))
+    done
+
+    echo "Failed to load $package with tce-load after $DOWNLOAD_RETRY_MAX attempts"
+    return 1
 }
 
 echo "Building tinyipa:"
@@ -37,8 +99,8 @@ fi
 choose_tc_mirror
 
 cd $WORKDIR/build_files
-wget -N $TINYCORE_MIRROR_URL/$TC_RELEASE/x86_64/release/distribution_files/corepure64.gz
-wget -N $TINYCORE_MIRROR_URL/$TC_RELEASE/x86_64/release/distribution_files/vmlinuz64
+download_with_retry "$TINYCORE_MIRROR_URL/$TC_RELEASE/x86_64/release/distribution_files/corepure64.gz" "corepure64.gz"
+download_with_retry "$TINYCORE_MIRROR_URL/$TC_RELEASE/x86_64/release/distribution_files/vmlinuz64" "vmlinuz64"
 cd $WORKDIR
 
 ########################################################
@@ -55,10 +117,10 @@ mkdir "$BUILDDIR"
 sudo sh -c "echo $TINYCORE_MIRROR_URL > $BUILDDIR/opt/tcemirror"
 
 # Download Qemu-utils, Biosdevname and IPMItool source
-clone_single_branch "https://github.com/qemu/qemu.git" "${BUILDDIR}/tmp/qemu" "$QEMU_RELEASE"
-clone_single_branch "https://github.com/lyonel/lshw.git" "${BUILDDIR}/tmp/lshw" "$LSHW_RELEASE"
+download_with_retry "https://download.qemu.org/qemu-${QEMU_RELEASE}.tar.xz" "${BUILDDIR}/tmp/qemu"
+download_with_retry "https://github.com/lyonel/lshw/archive/refs/tags/${LSHW_RELEASE}.tar.gz" "${BUILDDIR}/tmp/lshw"
 if $TINYIPA_REQUIRE_BIOSDEVNAME; then
-    wget -N -O - https://linux.dell.com/biosdevname/biosdevname-${BIOSDEVNAME_RELEASE}/biosdevname-${BIOSDEVNAME_RELEASE}.tar.gz | tar -xz -C "${BUILDDIR}/tmp" -f -
+    download_with_retry "https://linux.dell.com/biosdevname/biosdevname-${BIOSDEVNAME_RELEASE}/biosdevname-${BIOSDEVNAME_RELEASE}.tar.gz" "${BUILDDIR}/tmp/biosdevname"
 fi
 if $TINYIPA_REQUIRE_IPMITOOL; then
     git clone https://codeberg.org/IPMITool/ipmitool.git "${BUILDDIR}/tmp/ipmitool-src"
@@ -153,7 +215,7 @@ PY_REQS="buildreqs_python3.lst"
 sudo chown $TC:$STAFF $BUILDDIR/usr/local/tce.installed
 
 while read line; do
-    sudo chroot --userspec=$TC:$STAFF $BUILDDIR /usr/bin/env -i PATH=$CHROOT_PATH http_proxy=$http_proxy https_proxy=$https_proxy no_proxy=$no_proxy tce-load -wci $line
+    tce_load_with_retry "$line"
 done < <(paste $WORKDIR/build_files/$PY_REQS $WORKDIR/build_files/buildreqs.lst)
 
 TINYIPA_PYTHON_EXE="python3.9"

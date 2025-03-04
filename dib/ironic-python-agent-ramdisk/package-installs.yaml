@@ -59,6 +59,11 @@ amd64-microcode:
     - DISTRO_NAME = debian
     - IPA_DEBIAN_NONFREE = true
 
+# Packages needed by Debian
+# bsdextrautils provides the 'hexdump' command used by IPA.
+bsdextrautils:
+  when: DISTRO_NAME = debian
+
 # Packages that should not normally be present on IPA images
 cloud-init:
     phase: post-install.d

@@ -64,7 +64,7 @@ DHCP=yes" > /etc/systemd/network/99-dhcp.network
         fi
         if [ -e /usr/lib/systemd/system/glean-early.service ]; then
             # Disable Glean-early start
-            # Under normal cirumstances, glean-early attempts to mount a config
+            # Under normal circumstances, glean-early attempts to mount a config
             # drive, configure ssh and a hostname. We only need the mount, and we
             # trigger that in ironic-agent-resolve-config-drive.service.
             # This is largely because glean uses /mnt/config by default,

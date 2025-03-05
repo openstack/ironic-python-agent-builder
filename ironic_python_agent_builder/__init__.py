@@ -80,7 +80,7 @@ def main():
         os.environ['DIB_REPOREF_requirements'] = args.branch
     if args.lzma:
         os.environ['DIB_IPA_COMPRESS_CMD'] = \
-            'xz --format=lzma --compress --stdout'
+            'xz --format=lzma --compress --stdout -9'
     # Enable checksum generation by default
     if 'DIB_CHECKSUM' not in os.environ:
         os.environ['DIB_CHECKSUM'] = 'sha256'

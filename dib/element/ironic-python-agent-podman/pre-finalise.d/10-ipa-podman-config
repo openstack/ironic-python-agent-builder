@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Ensure the directory exists
+sudo mkdir -p $(dirname $PODMAN_CONF_FILE)
+
+# Create Podman configuration file inside the ramdisk with sudo tee
+echo "[engine]
+no_pivot_root = true" | sudo tee $PODMAN_CONF_FILE > /dev/null
+
+echo "Podman configuration written to $PODMAN_CONF_FILE"

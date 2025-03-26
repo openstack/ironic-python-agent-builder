@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Ensure the directory exists
+sudo mkdir -p $(dirname $IPA_CONFFILE)
+
+# Write the configuration inside the ramdisk
+cat <<EOF | sudo tee $IPA_CONFFILE
+[container]
+allow_arbitrary_containers="$ALLOW_ARBITRARY_CONTAINERS"
+allowed_containers="$ALLOWED_CONTAINERS"
+container_steps_file="$CONTAINER_STEPS_FILE"
+runner="$RUNNER"
+pull_options="$PULL_OPTIONS"
+run_options="$RUN_OPTIONS"
+EOF
+
+echo "Ironic Python Agent config written to $IPA_CONFFILE"

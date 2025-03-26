@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Copy the YAML file to the ramdisk location
+if [[ -f $STEPS_FILE_PATH ]]; then
+    sudo cp $STEPS_FILE_PATH $STEPS_FILE
+    echo "Local mysteps.yaml copied to ramdisk: $STEPS_FILE"
+else
+    echo "No valid mysteps.yaml file found at $STEPS_FILE_PATH. Please provide a valid file or check the default path."
+    exit 1
+fi

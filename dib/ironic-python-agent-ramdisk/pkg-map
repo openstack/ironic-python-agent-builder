@@ -1,15 +1,15 @@
 {
   "release": {
     "rhel": {
-      "7": {
-        "python": "python",
-        "python-dev": "python-devel"
+      "9": {
+        "python": "python3.12",
+        "python-dev": "python3.12-devel"
       }
     },
     "centos": {
-      "7": {
-        "python": "python",
-        "python-dev": "python-devel"
+      "9-stream": {
+        "python": "python3.12",
+        "python-dev": "python3.12-devel"
       }
     },
     "debian": {

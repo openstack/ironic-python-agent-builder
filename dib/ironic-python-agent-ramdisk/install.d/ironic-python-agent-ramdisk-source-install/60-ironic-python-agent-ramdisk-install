@@ -13,8 +13,15 @@ IPADIR=/tmp/ironic-python-agent
 UPPER_CONSTRAINTS=/tmp/requirements/upper-constraints.txt
 VENVDIR=/opt/ironic-python-agent
 
+# define default python
+PYTHON_BIN="python3"
+if [[ "${DISTRO_NAME}${DIB_RELEASE}" =~ "centos9" ]]; then
+  PYTHON_BIN="python3.12"
+fi
+
 # create the virtual environment using the default python
-python3 -m venv $VENVDIR
+$PYTHON_BIN -m venv $VENVDIR
+
 REQUIRED_PIP_STR="25.1.1"
 REQUIRED_PIP_TUPLE="(25, 1, 1)"
 

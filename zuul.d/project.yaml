@@ -7,8 +7,6 @@
       jobs:
         - openstack-tox-pep8
         - ironic-standalone-ipa-src
-        - ipa-tempest-bios-ipmi-direct-tinyipa-src
-        - ironic-python-agent-check-image-tinyipa
         - ironic-python-agent-check-image-dib-centos9
         - ironic-python-agent-check-image-dib-centos9-extra
         - ironic-python-agent-check-image-dib-debian
@@ -31,8 +29,6 @@
       jobs:
         - openstack-tox-pep8
         - ironic-standalone-ipa-src
-        - ipa-tempest-bios-ipmi-direct-tinyipa-src
-        - ironic-python-agent-check-image-tinyipa
         - ironic-python-agent-check-image-dib-centos9
         - ironic-python-agent-check-image-dib-centos9-extra
         - ironic-python-agent-check-image-dib-debian
@@ -41,8 +37,6 @@
     post:
       jobs:
         - publish-openstack-python-branch-tarball
-        - ironic-python-agent-build-image-tinyipa:
-            branches: master
         - ironic-python-agent-build-image-dib-centos9:
             branches: master
         - ironic-python-agent-build-image-dib-debian:

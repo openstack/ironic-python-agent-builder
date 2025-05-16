@@ -1,0 +1,7 @@
+---
+other:
+  - |
+    Due to the deprecation of Python 3.9 support in OpenStack and the
+    evolution of python dependencies, CI test jobs for TinyIPA have
+    been removed. Overall code to build the test images should expect
+    to be removed from Ironic projects and tools as time progresses.

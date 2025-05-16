@@ -17,12 +17,6 @@
       ipa_tar_dir: '{{ ansible_user_dir }}/src/opendev.org/openstack/ironic-python-agent/UPLOAD_TAR'
 
 - job:
-    name: ironic-python-agent-build-image-tinyipa
-    parent: ironic-python-agent-build-image-base
-    vars:
-      image_type: 'tinyipa'
-
-- job:
     name: ironic-python-agent-build-image-dib-centos9
     parent: ironic-python-agent-build-image-base
     required-projects:
@@ -65,12 +59,6 @@
     vars:
       ipa_raw_dir: '{{ ansible_user_dir }}/src/opendev.org/openstack/ironic-python-agent/UPLOAD_RAW'
       ipa_tar_dir: '{{ ansible_user_dir }}/src/opendev.org/openstack/ironic-python-agent/UPLOAD_TAR'
-
-- job:
-    name: ironic-python-agent-check-image-tinyipa
-    parent: ironic-python-agent-check-image-base
-    vars:
-      image_type: 'tinyipa'
 
 - job:
     name: ironic-python-agent-check-image-dib-centos9

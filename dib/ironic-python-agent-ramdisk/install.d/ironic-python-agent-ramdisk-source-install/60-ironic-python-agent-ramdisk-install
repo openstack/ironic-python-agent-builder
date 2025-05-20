@@ -15,8 +15,8 @@ VENVDIR=/opt/ironic-python-agent
 
 # create the virtual environment using the default python
 python3 -m venv $VENVDIR
-REQUIRED_PIP_STR="21.3.1"
-REQUIRED_PIP_TUPLE="(21, 3, 1)"
+REQUIRED_PIP_STR="25.1.1"
+REQUIRED_PIP_TUPLE="(25, 1, 1)"
 
 HAS_PIP=$($VENVDIR/bin/python -c \
     "import pip; print(tuple(map(int, pip.__version__.split('.'))) >= $REQUIRED_PIP_TUPLE)")

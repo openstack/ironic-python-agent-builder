@@ -20,4 +20,4 @@ doing a source-based installation:
   install when ``DIB_IPA_HARDWARE_PACKAGE`` is unset. If unset, the latest
   version will be installed.
 * ``DIB_IPA_HARDWARE_RDO`` set to ``0`` to prevent the latest RDO package repositories
-  being installed on CentOS-9-Stream (ignored when ``DIB_YUM_REPO_CONF`` is set).
+  being installed on CentOS Stream (ignored when ``DIB_YUM_REPO_CONF`` is set).

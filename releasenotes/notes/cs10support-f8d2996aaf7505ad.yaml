@@ -1,0 +1,5 @@
+---
+features:
+  - |
+    Ironic python agent builder now supports building ironic-python
+    agent ramdisk using CentOS Stream 10

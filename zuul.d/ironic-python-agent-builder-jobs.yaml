@@ -27,6 +27,22 @@
       image_release: '9-stream'
       image_target_name: 'centos9'
 
+# NOTE(rpittau): using nested virt nodes to ensure EL10 hw support
+- job:
+    name: ironic-python-agent-build-image-dib-centos10
+    nodeset:
+      nodes:
+        - name: nested-virt-ubuntu-noble
+          label: nested-virt-ubuntu-noble
+    parent: ironic-python-agent-build-image-base
+    required-projects:
+      - openstack/diskimage-builder
+    vars:
+      image_type: 'dib'
+      image_distro: 'centos'
+      image_release: '10-stream'
+      image_target_name: 'centos10'
+
 - job:
     name: ironic-python-agent-build-image-dib-debian
     parent: ironic-python-agent-build-image-base
@@ -71,9 +87,31 @@
       image_release: '9-stream'
       image_target_name: centos9
 
+# NOTE(rpittau): using nested virt nodes to ensure EL10 hw support
+- job:
+    name: ironic-python-agent-check-image-dib-centos10
+    nodeset:
+      nodes:
+        - name: nested-virt-ubuntu-noble
+          label: nested-virt-ubuntu-noble
+    parent: ironic-python-agent-check-image-base
+    required-projects:
+      - openstack/diskimage-builder
+    vars:
+      image_type: 'dib'
+      image_distro: 'centos'
+      image_release: '10-stream'
+      image_target_name: centos10
+
 - job:
     name: ironic-python-agent-check-image-dib-centos9-extra
     parent: ironic-python-agent-check-image-dib-centos9
+    vars:
+      extra_elements: ["extra-hardware"]
+
+- job:
+    name: ironic-python-agent-check-image-dib-centos10-extra
+    parent: ironic-python-agent-check-image-dib-centos10
     vars:
       extra_elements: ["extra-hardware"]
 

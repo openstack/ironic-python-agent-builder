@@ -9,6 +9,8 @@
         - ironic-standalone-ipa-src
         - ironic-python-agent-check-image-dib-centos9
         - ironic-python-agent-check-image-dib-centos9-extra
+        - ironic-python-agent-check-image-dib-centos10
+        - ironic-python-agent-check-image-dib-centos10-extra
         - ironic-python-agent-check-image-dib-debian
         - ironic-python-agent-check-image-dib-debian-arm64
         - ironic-python-agent-check-image-dib-debian-extra
@@ -31,6 +33,8 @@
         - ironic-standalone-ipa-src
         - ironic-python-agent-check-image-dib-centos9
         - ironic-python-agent-check-image-dib-centos9-extra
+        - ironic-python-agent-check-image-dib-centos10
+        - ironic-python-agent-check-image-dib-centos10-extra
         - ironic-python-agent-check-image-dib-debian
         - ironic-python-agent-check-image-dib-debian-arm64
         - ironic-python-agent-check-image-dib-debian-extra

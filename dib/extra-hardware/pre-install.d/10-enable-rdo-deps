@@ -5,5 +5,6 @@ set -eux
 set -o pipefail
 
 if [ ${DIB_IPA_HARDWARE_RDO:-0} -ne 0 ]; then
-    curl -o /etc/yum.repos.d/dlrn-deps.repo https://trunk.rdoproject.org/centos9-master/dlrn-deps.repo
+    curl -o /etc/yum.repos.d/dlrn-deps.repo https://trunk.rdoproject.org/${DISTRO_NAME}${DIB_RELEASE}-master/dlrn-deps.repo
 fi
+

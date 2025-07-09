@@ -25,6 +25,9 @@ Beyond installing the ironic-python-agent, this element does the following:
   listen for raw data from stdin and write compressed data to stdout. Command
   can be with arguments.
 * Configures rescue mode if ``DIB_IPA_ENABLE_RESCUE`` is not set to ``false``.
+* By default, sets a maximum size for the ramdisk systemd journal to 15M. This
+  can be disabled by setting ``DIB_IPA_DISABLE_JOURNAL_MAX_LOG_SIZE`` to any
+  value which is not ``False``.
 
 This element outputs three files:
 

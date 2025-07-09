@@ -15,7 +15,15 @@ for folder in $KNOWN_FIRMWARE_PATH; do
     for item in ${IPA_REMOVE_FIRMWARE//,/ }; do
         # Attempt removal of item, but don't error
         # if it is not present already.
-        rm -rf $folder$item || true
+        if [[ "$item" != "" ]] && [[ "$item" =~ "/" ]]; then
+            # We're deleting targetted contents in a folder,
+            # and not an entire folder. Since we're checking for an
+            # an empty string, we should be fine letting it do the
+            # expansion.
+            rm -r -f $folder$item*
+        else
+            rm -rf $folder$item || true
+        fi
     done
 done
 

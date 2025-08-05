@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [ "${DIB_DEBUG_TRACE:-0}" -gt 0 ]; then
+    set -x
+fi
+set -eu
+set -o pipefail
+
+DIB_IPA_DISABLE_JOURNAL_MAX_LOG_SIZE=${DIB_IPA_DISABLE_JOURNAL_MAX_LOG_SIZE:-False}
+
+if [[ "$DIB_IPA_DISABLE_JOURNAL_MAX_LOG_SIZE" == "False" ]]; then
+    # Default templates have a journal section already defined, and we don't use
+    # iniset by convention, so unless we really need to, we'll just append here.
+    echo "SystemMaxUse=15M" >> /etc/systemd/journald.conf
+fi

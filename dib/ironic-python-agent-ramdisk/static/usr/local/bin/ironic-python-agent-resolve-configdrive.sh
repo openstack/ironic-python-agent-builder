@@ -15,7 +15,7 @@ PATH=/bin:/usr/bin:/sbin:/usr/sbin
 CONFIG_DRIVE_LABEL="config-2"
 
 # Identify the number of devices
-device_count=$(lsblk -o PATH,LABEL | grep $CONFIG_DRIVE_LABEL | wc -l)
+device_count=$(lsblk -o PATH,LABEL | grep -c $CONFIG_DRIVE_LABEL || true)
 
 # Identify if we have an a publisher id set
 publisher_id=""

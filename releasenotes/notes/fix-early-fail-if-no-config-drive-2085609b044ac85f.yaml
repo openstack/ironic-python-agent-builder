@@ -1,0 +1,5 @@
+---
+fixes:
+  - |
+    Fixes a minor issue where the resolve config drive script fails early if
+    no config drive is found.

@@ -12,6 +12,6 @@ submitted for review via the Gerrit tool:
 
 Pull requests submitted through GitHub will be ignored.
 
-Bugs should be filed on Storyboard, not GitHub:
+Bugs should be filed on Launchpad, not GitHub:
 
-   https://storyboard.openstack.org/#!/project/948
+   https://bugs.launchpad.net/ironic-python-agent-builder

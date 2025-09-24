@@ -16,12 +16,12 @@ export IPA_REMOVE_FIRMWARE=${IPA_REMOVE_FIRMWARE:-amdgpu,netronome,qcom,ti-commu
 # rtw88 == Realtek wireless
 # rtw89 == Realtek wireless
 # libertas == Marvell libertas wifi
-# auth11k == Qualcomm atheros WLAN
+# ath11k == Qualcomm atheros WLAN
 # mellanox/mlxsw_spectrum = Mellanox Spectrum Switch ASIC
 # s5p-mfc = Samsung MFC SoC video codecs
-# ti/tas2781 = Texas Insturments TAS2781 Notebook audio DSPs.
-# ti-connectivity = Texas Insturments Wi-Fi/BT/FM/GPS
-# TAS = Texas Insturments TAS2781 Notebook audio DSPs.
+# ti/tas2781 = Texas Instruments TAS2781 Notebook audio DSPs.
+# ti-connectivity = Texas Instruments Wi-Fi/BT/FM/GPS
+# TAS = Texas Instruments TAS2781 Notebook audio DSPs.
 # ath3k = Qualcomm 802.11
 # ath6k = Qualcomm 802.11
 # ath9k = Qualcomm 802.11 PCI/PCI-E

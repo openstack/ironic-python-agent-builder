@@ -3,6 +3,8 @@ Description=Ironic agent config drive setup
 Wants=network-pre.target
 Before=network-pre.target
 After=local-fs.target
+Before=glean.service
+Before=system-glean.slice
 
 [Service]
 ExecStart=/bin/bash /usr/local/bin/ironic-python-agent-resolve-configdrive.sh

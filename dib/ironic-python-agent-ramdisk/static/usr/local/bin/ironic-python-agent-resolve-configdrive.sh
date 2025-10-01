@@ -10,18 +10,26 @@ PATH=/bin:/usr/bin:/sbin:/usr/sbin
 # Inspired by/based on glean-early.sh
 # https://opendev.org/opendev/glean/src/branch/master/glean/init/glean-early.sh
 
-# NOTE(TheJulia): We care about iso images, and would expect lower case as a
-# result. In the case of VFAT partitions, they would be upper case.
-CONFIG_DRIVE_LABEL="config-2"
-
-# Identify the number of devices
-device_count=$(lsblk -o PATH,LABEL | grep -c $CONFIG_DRIVE_LABEL || true)
-
 # Identify if we have an a publisher id set
 publisher_id=""
 if grep -q "ir_pub_id" /proc/cmdline; then
     publisher_id=$(cat /proc/cmdline | sed -e 's/^.*ir_pub_id=//' -e 's/ .*$//')
 fi
+
+# NOTE(TheJulia): We care about iso images, and would expect lower case as a
+# result. In the case of VFAT partitions, they would be upper case.
+CONFIG_DRIVE_LABEL="config-2"
+
+i=0
+while [ $i -lt 30 ] ; do
+    i=$((i + 1))
+
+    # Identify the number of devices
+    device_count=$(lsblk -o PATH,LABEL | grep -c $CONFIG_DRIVE_LABEL || true)
+
+    [ $device_count -lt 1 ] || break
+    sleep 1
+done
 
 if [ $device_count -lt 1 ]; then
     # Nothing to do here, exit!

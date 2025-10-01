@@ -1,0 +1,4 @@
+---
+fixes:
+  - |
+    Wait config drive up to 30 seconds. This ensure that network data is available to Glean.

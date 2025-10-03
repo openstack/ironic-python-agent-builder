@@ -23,8 +23,6 @@
             voting: false
         - ipa-tempest-bios-ipmi-direct-src:
             voting: false
-        - ipa-tempest-ironic-inspector-src:
-            voting: false
         - ironic-python-agent-builder-tox-codespell:
             voting: false
     gate:

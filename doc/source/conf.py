@@ -42,7 +42,7 @@ copyright = '2017, OpenStack Developers'
 # openstackdocstheme options
 openstackdocs_repo_name = 'openstack/ironic-python-agent-builder'
 openstackdocs_pdf_link = True
-openstackdocs_use_storyboard = True
+openstackdocs_use_storyboard = False
 
 # If true, '()' will be appended to :func: etc. cross-reference text.
 add_function_parentheses = True

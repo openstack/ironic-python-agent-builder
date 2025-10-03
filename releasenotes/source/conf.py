@@ -58,7 +58,7 @@ copyright = '2017, OpenStack Developers'
 # openstackdocstheme options
 openstackdocs_repo_name = 'openstack/ironic-python-agent-builder'
 openstackdocs_auto_name = False
-openstackdocs_use_storyboard = True
+openstackdocs_use_storyboard = False
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

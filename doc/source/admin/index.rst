@@ -9,6 +9,5 @@ using the builders provided in the **ironic-python-agent-builder** project.
    :maxdepth: 2
 
    dib
-   tinyipa
 
 .. _Ironic Python Agent: https://docs.openstack.org/ironic-python-agent

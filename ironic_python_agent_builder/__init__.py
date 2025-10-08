@@ -60,7 +60,6 @@ def main():
     parser.add_argument("--elements-path",
                         help="Path(s) to custom DIB elements separated by "
                              "a colon")
-    # TODO(dtantsur): handle distribution == tinyipa
     args = parser.parse_args()
     if args.elements_path:
         os.environ['ELEMENTS_PATH'] = args.elements_path

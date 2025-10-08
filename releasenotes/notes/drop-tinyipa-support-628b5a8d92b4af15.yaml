@@ -1,0 +1,5 @@
+---
+upgrade:
+  - |
+    TinyIPA CI, builder, related documentation and configuration have been
+    removed. Any remaining downstream TinyIPA references are legacy.

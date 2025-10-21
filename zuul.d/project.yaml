@@ -41,6 +41,8 @@
         - publish-openstack-python-branch-tarball
         - ironic-python-agent-build-image-dib-centos9:
             branches: master
+        - ironic-python-agent-build-image-dib-centos10:
+            branches: master
         - ironic-python-agent-build-image-dib-debian:
             branches: master
         - ironic-python-agent-build-image-dib-debian-arm64:

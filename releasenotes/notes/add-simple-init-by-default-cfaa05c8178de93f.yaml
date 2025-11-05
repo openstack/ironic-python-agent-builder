@@ -1,0 +1,8 @@
+---
+features:
+  - |
+    The default ``ironic-python-agent-builder`` elements for
+    ``diskimage-builder`` now includes the ``simple-init``
+    element by default. This enables resulting IPA images,
+    including the stock example artifact to support
+    DHCP-less virtual media deployments out of the box.

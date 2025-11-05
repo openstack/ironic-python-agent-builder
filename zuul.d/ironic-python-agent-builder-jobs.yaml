@@ -126,22 +126,16 @@
       image_release: 'bookworm'
 
 - job:
-    name: ironic-python-agent-check-image-dib-debian-bullseye
-    parent: ironic-python-agent-check-image-dib-debian
-    vars:
-      image_release: 'bullseye'
-
-- job:
     name: ironic-python-agent-check-image-dib-debian-arm64
     parent: ironic-python-agent-check-image-dib-debian
-    nodeset: debian-bullseye-arm64
+    nodeset: debian-bookworm-arm64
     vars:
       image_target_name: debian-arm64
 
 - job:
     name: ironic-python-agent-build-image-dib-debian-arm64
     parent: ironic-python-agent-build-image-dib-debian
-    nodeset: debian-bullseye-arm64
+    nodeset: debian-bookworm-arm64
     vars:
       image_target_name: debian-arm64
 

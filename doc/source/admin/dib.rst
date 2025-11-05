@@ -10,7 +10,6 @@ real hardware. The recommended distributions are:
 The following should work but receive only limited testing and support:
 
 * Ubuntu 20.04 Focal
-* Debian Bullseye (``debian-minimal`` element)
 
 Building
 --------

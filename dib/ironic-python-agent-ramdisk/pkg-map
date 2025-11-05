@@ -11,11 +11,6 @@
         "python": "python3.12",
         "python-dev": "python3.12-devel"
       }
-    },
-    "debian": {
-      "bullseye": {
-          "lshw": "lshw/bullseye-backports"
-      }
     }
   },
   "family": {

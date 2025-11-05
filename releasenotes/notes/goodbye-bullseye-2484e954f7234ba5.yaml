@@ -1,0 +1,5 @@
+---
+upgrade:
+  - |
+    Debian Bullseye IPA ramdisk is not built anymore, the default Python
+    version (3.9) is incompatible with Ironic Python Agent.

@@ -5,11 +5,12 @@ Images built using diskimage-builder_ are recommended for production use on
 real hardware. The recommended distributions are:
 
 * CentOS Stream 9
-* Debian Bookworm (``debian-minimal`` element)
+* Debian Trixie (``debian-minimal`` element)
 
 The following should work but receive only limited testing and support:
 
 * Ubuntu 20.04 Focal
+* Debian Bookworm (``debian-minimal`` element)
 
 Building
 --------

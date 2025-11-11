@@ -6,8 +6,6 @@
     check:
       jobs:
         - openstack-tox-pep8
-        - ironic-standalone-ipa-src
-        - ipa-tempest-bios-ipmi-direct-tinyipa-src
         - ironic-python-agent-check-image-tinyipa
         - ironic-python-agent-check-image-dib-centos9
         - ironic-python-agent-check-image-dib-centos9-extra
@@ -21,17 +19,11 @@
             voting: false
         - ironic-python-agent-check-image-dib-ubuntu-arm64:
             voting: false
-        - ipa-tempest-bios-ipmi-direct-src:
-            voting: false
-        - ipa-tempest-ironic-inspector-src:
-            voting: false
         - ironic-python-agent-builder-tox-codespell:
             voting: false
     gate:
       jobs:
         - openstack-tox-pep8
-        - ironic-standalone-ipa-src
-        - ipa-tempest-bios-ipmi-direct-tinyipa-src
         - ironic-python-agent-check-image-tinyipa
         - ironic-python-agent-check-image-dib-centos9
         - ironic-python-agent-check-image-dib-centos9-extra

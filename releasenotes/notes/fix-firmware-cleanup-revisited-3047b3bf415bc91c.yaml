@@ -1,0 +1,9 @@
+---
+fixes:
+  - |
+    Fixes firmware cleanup to be a bit more defensive and also be more
+    open to allowing for "glob expansion" as it relates to cleaning up files.
+    Ultimately this change fixes firmware cleanup so remnents are not left
+    in the image where previously some artifacts were not deleted due to
+    prior defensiveness in the cleanup logic. The net result is smaller
+    images for booting IPA.

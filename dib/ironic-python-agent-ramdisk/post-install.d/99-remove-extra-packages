@@ -12,17 +12,40 @@ rm -rf /tmp/ironic-python-agent
 # below will keep it from erroring.
 KNOWN_FIRMWARE_PATH="/lib/firmware/ /usr/lib/firmware/"
 for folder in $KNOWN_FIRMWARE_PATH; do
+    if [[ ! -d $folder ]]; then
+        echo "Skipping firmware removal for $folder as it is not found."
+    fi
     for item in ${IPA_REMOVE_FIRMWARE//,/ }; do
-        # Attempt removal of item, but don't error
+        # NOTE(TheJulia): The original idea here has been delete whole folders
+        # but the patterns have shifted and evolved, and it we need to remove
+        # files in the main folder as well, or subsections their of. Also, due
+        # to perception of risk on the build process, the code is intended
+        # to be *very* defensive here.
+
+        # tl;dr Attempt removal of item, but don't error
         # if it is not present already.
-        if [[ "$item" != "" ]] && [[ "$item" =~ "/" ]]; then
-            # We're deleting targetted contents in a folder,
-            # and not an entire folder. Since we're checking for an
-            # an empty string, we should be fine letting it do the
-            # expansion.
-            rm -r -f $folder$item*
-        else
-            rm -rf $folder$item || true
+        if [[ "$item" != "" ]]; then
+            if [[ "$item" =~ "/" ]]; then
+                # We're deleting targetted contents in a folder,
+                # and not an entire folder. Since we're checking for an
+                # an empty string, we should be fine letting it do the
+                # expansion.
+                rm -r -f $folder$item*
+            elif [[ -d "$folder$item" ]]; then
+                # This was the original deletion code path where we
+                # are attempting to delete a folder.
+                # This is normally not handled with the glob expansion
+                # expansion even though it could be due to management
+                # the host's contents as it is constructed.
+                rm -rf $folder$item || true
+            elif [[ $(ls $folder$item* | wc -l) -gt 0 ]]; then
+                # In this case, we have to use glob expansion because we
+                # have objects which are only available via glob expansion.
+                # NOTE(TheJulia): Fun factoid, these folders can have
+		# subfolders as well, and recursive is thus required becuase
+		# otherwise rm errors and aborts the deletion.
+                rm -rf $folder$item*
+            fi
         fi
     done
 done

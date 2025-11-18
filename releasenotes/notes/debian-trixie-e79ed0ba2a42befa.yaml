@@ -1,0 +1,8 @@
+---
+upgrade:
+  - |
+    The default IPA debian image is now based on Debian Trixie.
+deprecations:
+  - |
+    The support for Debian Bookworm IPA ramdisks is deprecated
+    and it will be removed in a future release.

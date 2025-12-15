@@ -8,4 +8,3 @@ ensure-venv
 pkg-map
 source-repositories
 svc-map
-simple-init

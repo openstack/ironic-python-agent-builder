@@ -1,0 +1,11 @@
+---
+fixes:
+  - |
+    Fixes issues which could be encountered where prior configuration drives
+    were considered valid for use by the configuration drive lockout script.
+    This was discovered shortly after ``simple-init`` was added as a default
+    element instead of an opt-in element for disk images. Because of the use
+    of glean, this only resulted in incorrect network configuration of the
+    agent in some cases for users utilizing upstream code. That support was
+    promptly reverted, and this fix developed. We anticipate the simple-init
+    element to be re-introduced at some point in the future.

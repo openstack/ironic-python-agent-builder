@@ -9,11 +9,26 @@ PATH=/bin:/usr/bin:/sbin:/usr/sbin
 
 # Inspired by/based on glean-early.sh
 # https://opendev.org/opendev/glean/src/branch/master/glean/init/glean-early.sh
+#
+# What this script does, given we have disabled glean-early from executing,
+# it mounts the configuration drive contents *if* appropriate. Otherwise
+# everything falls into the default dhcp/address discovery path.
 
 # Identify if we have an a publisher id set
 publisher_id=""
 if grep -q "ir_pub_id" /proc/cmdline; then
     publisher_id=$(cat /proc/cmdline | sed -e 's/^.*ir_pub_id=//' -e 's/ .*$//')
+fi
+
+if grep -q "BOOTIF" /proc/cmdline; then
+    # This is clearly a network boot or agent boot operation, which means
+    # we should double check if we have a publisher_id from Ironic.
+    if [[ "${publisher_id,,}" == "" ]]; then
+        # No publisher ID is present on the command line, Stop here.
+        # No need to proceed.
+        echo "Non-vmedia based deploy detected - skipping configuration."
+        exit 1
+    fi
 fi
 
 # NOTE(TheJulia): We care about iso images, and would expect lower case as a
@@ -42,3 +57,4 @@ done
 # No device found
 echo "No valid configuration drive found for Ironic."
 lsblk -o PATH,LABEL
+exit 1

@@ -1,0 +1,8 @@
+---
+fixes:
+  - |
+    Fixes the DHCP-less usage path by default through the simple-init element
+    being enabled as a diskimage-builder dependency by default. This change was
+    previously reverted to allow time to resolve bugs in the guard rail
+    logic. Initalization of configuration drive configuration with simple-init
+    is now handled appropriately.

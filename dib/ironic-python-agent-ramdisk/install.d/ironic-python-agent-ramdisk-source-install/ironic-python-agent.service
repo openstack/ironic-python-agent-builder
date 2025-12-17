@@ -1,9 +1,9 @@
 [Unit]
 Description=Ironic Python Agent
 After=network-online.target
+ConditionPathExists=!/etc/.rescued
 
 [Service]
-ConditionPathExists=!/etc/.rescued
 ExecStartPre=/sbin/modprobe vfat
 ExecStart=/usr/local/bin/ironic-python-agent --config-dir /etc/ironic-python-agent.d/
 Restart=always

@@ -14,18 +14,14 @@
         - ironic-python-agent-check-image-dib-debian
         - ironic-python-agent-check-image-dib-debian-arm64
         - ironic-python-agent-check-image-dib-debian-extra
-        # NOTE(TheJulia): Make the advanced job voting at some point
-        # soon. It exercises virtual media based deploys and ops.
-        - ironic-tempest-standalone-advanced:
-            voting: false
+        - ironic-tempest-standalone-advanced
+        - ipa-tempest-bios-ipmi-direct-src
         # Non-voting jobs
         - ironic-python-agent-check-image-dib-debian-bookworm:
             voting: false
         - ironic-python-agent-check-image-dib-ubuntu:
             voting: false
         - ironic-python-agent-check-image-dib-ubuntu-arm64:
-            voting: false
-        - ipa-tempest-bios-ipmi-direct-src:
             voting: false
         - ironic-python-agent-builder-tox-codespell:
             voting: false
@@ -40,6 +36,8 @@
         - ironic-python-agent-check-image-dib-debian
         - ironic-python-agent-check-image-dib-debian-arm64
         - ironic-python-agent-check-image-dib-debian-extra
+        - ipa-tempest-bios-ipmi-direct-src
+        - ironic-tempest-standalone-advanced
     post:
       jobs:
         - publish-openstack-python-branch-tarball

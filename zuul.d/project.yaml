@@ -14,6 +14,10 @@
         - ironic-python-agent-check-image-dib-debian
         - ironic-python-agent-check-image-dib-debian-arm64
         - ironic-python-agent-check-image-dib-debian-extra
+        # NOTE(TheJulia): Make the advanced job voting at some point
+        # soon. It exercises virtual media based deploys and ops.
+        - ironic-tempest-standalone-advanced:
+            voting: false
         # Non-voting jobs
         - ironic-python-agent-check-image-dib-debian-bookworm:
             voting: false

@@ -13,3 +13,6 @@ RemainAfterExit=yes
 
 [Install]
 WantedBy=multi-user.target
+RequiredBy=glean.service
+RequiredBy=glean-networkd.service
+RequiredBy=glean-nm.service

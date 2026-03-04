@@ -2,6 +2,10 @@
 Ironic Python Agent Builder
 ===========================
 
+.. image:: https://governance.openstack.org/tc/badges/ironic-python-agent-builder.svg
+
+.. Change things from this point on
+
 Tools and scripts to build a deployment, cleaning or inspection ramdisk
 based on `Ironic Python Agent`_.
 

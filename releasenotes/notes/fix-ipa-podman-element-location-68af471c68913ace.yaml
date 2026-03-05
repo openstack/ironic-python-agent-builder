@@ -1,0 +1,6 @@
+fixes:
+  - |
+    The ironic-python-agent-podman element was in a nonstandard subdirectory,
+    ``dib/elements/`` when all of the other elements are in ``dib/`` directly.
+    
+    This element has been moved into the standard location.

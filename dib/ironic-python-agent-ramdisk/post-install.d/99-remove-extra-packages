@@ -42,8 +42,8 @@ for folder in $KNOWN_FIRMWARE_PATH; do
                 # In this case, we have to use glob expansion because we
                 # have objects which are only available via glob expansion.
                 # NOTE(TheJulia): Fun factoid, these folders can have
-		# subfolders as well, and recursive is thus required becuase
-		# otherwise rm errors and aborts the deletion.
+                # subfolders as well, and recursive is thus required becuase
+                # otherwise rm errors and aborts the deletion.
                 rm -rf $folder$item*
             fi
         fi

@@ -48,6 +48,7 @@ jobs:
           sudo apt-get update -q
           sudo apt-get install -y --no-install-recommends \
             curl \
+            debootstrap \
             dosfstools \
             gdisk \
             genisoimage \
@@ -103,8 +104,8 @@ jobs:
             EXTRA_ELEMENTS+=(--element "$el")
           done
 
-          # Include devuser element only when a debug key is provided
-          if [[ -s /tmp/ipa-debug-key.pub ]]; then
+          # Include devuser element only when a real key is provided
+          if grep -qE '^(ssh|ecdsa|sk-)' /tmp/ipa-debug-key.pub 2>/dev/null; then
             EXTRA_ELEMENTS+=(--element devuser)
           fi
 

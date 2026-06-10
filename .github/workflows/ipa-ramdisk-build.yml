@@ -30,9 +30,9 @@ jobs:
             image_prefix: ipa-centos9
             extra_elements: ""
           - name: ironwood
-            distro: debian
-            release: trixie
-            image_prefix: ipa-debian-trixie
+            distro: ubuntu
+            release: noble
+            image_prefix: ipa-ubuntu-noble-ironwood
             extra_elements: "fluidstack-ironwood"
           - name: gpu-noble
             distro: ubuntu

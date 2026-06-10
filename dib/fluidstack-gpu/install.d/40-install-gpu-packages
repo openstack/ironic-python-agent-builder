@@ -25,10 +25,12 @@ ln -sf x86 "/usr/src/linux-headers-${KERNEL_VERSION}/arch/amd64"
 DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     "nvidia-driver-pinning-${NVIDIA_VER}" \
     nvidia-open \
-    "cuda-toolkit-${CUDA_VER}" \
+    "cuda-compiler-${CUDA_VER}" \
+    "cuda-libraries-${CUDA_VER}" \
+    "cuda-libraries-dev-${CUDA_VER}" \
+    "cuda-cudart-${CUDA_VER}" \
     libnccl2 \
-    libnccl-dev \
-    "cuda-cudart-${CUDA_VER}"
+    libnccl-dev
 
 # --- DCGM ----------------------------------------------------------------
 if [ "${DIB_ENABLE_DCGM:-true}" = "true" ]; then

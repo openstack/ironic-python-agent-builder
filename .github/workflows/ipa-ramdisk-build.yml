@@ -15,12 +15,25 @@ concurrency:
 
 jobs:
   build-and-upload:
-    name: Build IPA ramdisk and upload to S3
+    name: Build IPA ramdisk (${{ matrix.name }}) and upload to S3
     runs-on: ubuntu-24.04
     timeout-minutes: 90
     permissions:
       contents: read
       id-token: write
+    strategy:
+      matrix:
+        include:
+          - name: fish
+            distro: centos
+            release: 9-stream
+            image_prefix: ipa-centos9
+            extra_elements: ""
+          - name: ironwood
+            distro: debian
+            release: trixie
+            image_prefix: ipa-debian-trixie
+            extra_elements: "fluidstack-ironwood"
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -44,7 +57,7 @@ jobs:
         run: |
           IPA_BRANCH="${{ vars.IPA_OPENSTACK_BRANCH }}"
           BRANCH_PATH="${IPA_BRANCH//\//-}"
-          IMAGE_NAME="ipa-centos9-${BRANCH_PATH}-fs"
+          IMAGE_NAME="${{ matrix.image_prefix }}-${BRANCH_PATH}-fs"
 
           # Map branch to OpenStack constraints series
           if [[ "${IPA_BRANCH}" == stable/* ]]; then
@@ -65,19 +78,39 @@ jobs:
             -c "${{ steps.meta.outputs.constraints }}"
           echo "${HOME}/.local/ipa-builder/bin" >> "${GITHUB_PATH}"
 
+      - name: Write debug SSH key
+        run: |
+          echo "${{ secrets.IPA_DEBUG_SSH_PUBKEY }}" > /tmp/ipa-debug-key.pub
+
       - name: Build IPA ramdisk
         env:
           # Increase from default 30s — mirrors the upstream Zuul job
           DIB_DHCP_TIMEOUT: "60"
           DIB_IPA_ENABLE_RESCUE: "false"
+          DIB_DEV_USER_USERNAME: debug
+          DIB_DEV_USER_AUTHORIZED_KEYS: /tmp/ipa-debug-key.pub
+          DIB_DEV_USER_PWDLESS_SUDO: "yes"
+          MATRIX_EXTRA_ELEMENTS: ${{ matrix.extra_elements }}
         run: |
+          EXTRA_ELEMENTS=()
+
+          for el in ${MATRIX_EXTRA_ELEMENTS}; do
+            EXTRA_ELEMENTS+=(--element "$el")
+          done
+
+          # Include devuser element only when a debug key is provided
+          if [[ -s /tmp/ipa-debug-key.pub ]]; then
+            EXTRA_ELEMENTS+=(--element devuser)
+          fi
+
           ironic-python-agent-builder \
             --lzma \
             --output "${{ steps.meta.outputs.image_name }}" \
-            --release 9-stream \
+            --release "${{ matrix.release }}" \
             --branch "${{ vars.IPA_OPENSTACK_BRANCH }}" \
             --verbose \
-            centos
+            "${EXTRA_ELEMENTS[@]}" \
+            "${{ matrix.distro }}"
 
           IMAGE="${{ steps.meta.outputs.image_name }}"
           tar czvf "${IMAGE}.tar.gz" "${IMAGE}.kernel" "${IMAGE}.initramfs" "${IMAGE}.sha256" "${IMAGE}.d"

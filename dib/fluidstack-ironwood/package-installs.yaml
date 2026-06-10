@@ -1,0 +1,4 @@
+# kexec-tools: allows kexec-ing into an installed OS from IPA without going
+# through firmware/LinuxBoot. Used for Ironwood TPU disk boot testing and
+# as an alternative provisioning mechanism.
+kexec-tools:

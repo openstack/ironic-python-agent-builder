@@ -1,0 +1,20 @@
+[Unit]
+Description=Auto kexec into installed OS if Ironic node is active
+# Run after network is up but before IPA starts. If kexec succeeds,
+# IPA never runs. If the node is not active, exit cleanly and IPA
+# continues normally.
+After=network-online.target
+Before=ironic-python-agent.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/ironwood-auto-kexec.sh
+RemainAfterExit=no
+StandardOutput=journal+console
+StandardError=journal+console
+# Don't block boot if the script fails
+SuccessExitStatus=0 1
+
+[Install]
+WantedBy=multi-user.target

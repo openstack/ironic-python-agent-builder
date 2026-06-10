@@ -1,0 +1,10 @@
+#!/bin/bash
+# Enable the ironwood-auto-kexec service and make the script executable.
+set -eu
+
+chmod +x /usr/local/bin/ironwood-auto-kexec.sh
+
+# Enable the service so it runs on every boot
+systemctl enable ironwood-auto-kexec.service
+
+echo "ironwood-auto-kexec service enabled."

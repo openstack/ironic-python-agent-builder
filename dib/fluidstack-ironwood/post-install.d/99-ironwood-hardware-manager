@@ -1,0 +1,52 @@
+#!/bin/bash
+# Register the Ironwood hardware manager with IPA by copying it directly
+# into the IPA virtualenv and patching the distribution entry_points.txt.
+# Avoids pkg_resources which is not available in Python 3.13+.
+set -eu
+
+SRC=/usr/lib/python3/dist-packages/ironwood_hardware_manager.py
+IPA_VENV=/opt/ironic-python-agent
+
+if [ ! -d "${IPA_VENV}/lib" ]; then
+    echo "IPA virtualenv not found at ${IPA_VENV}, skipping."
+    exit 0
+fi
+
+VENV_SITE=$(find "${IPA_VENV}/lib" -name "site-packages" -type d | head -1)
+if [ -z "${VENV_SITE}" ]; then
+    echo "Could not find IPA venv site-packages, skipping."
+    exit 0
+fi
+
+# Copy hardware manager directly into IPA's site-packages
+cp "${SRC}" "${VENV_SITE}/ironwood_hardware_manager.py"
+echo "Installed ironwood_hardware_manager.py -> ${VENV_SITE}/"
+
+# Remove any stale .pth file from previous attempts
+rm -f "${VENV_SITE}/ironwood_hardware_manager.pth"
+
+# Register as an IPA hardware manager entry point
+DIST_INFO=$(find "${VENV_SITE}" -maxdepth 1 -name "*.dist-info" -path "*ironic_python_agent*" | head -1)
+if [ -z "${DIST_INFO}" ]; then
+    echo "WARNING: IPA dist-info not found, hardware manager may not be discovered."
+    exit 0
+fi
+
+EP_FILE="${DIST_INFO}/entry_points.txt"
+if [ ! -f "${EP_FILE}" ]; then
+    echo "WARNING: ${EP_FILE} not found."
+    exit 0
+fi
+
+if grep -q "ironwood" "${EP_FILE}"; then
+    echo "Entry point already registered."
+    exit 0
+fi
+
+if grep -q "\[ironic_python_agent.hardware_managers\]" "${EP_FILE}"; then
+    sed -i '/\[ironic_python_agent.hardware_managers\]/a ironwood = ironwood_hardware_manager:IronwoodHardwareManager' "${EP_FILE}"
+else
+    printf '\n[ironic_python_agent.hardware_managers]\nironwood = ironwood_hardware_manager:IronwoodHardwareManager\n' >> "${EP_FILE}"
+fi
+
+echo "Registered IronwoodHardwareManager in ${EP_FILE}"

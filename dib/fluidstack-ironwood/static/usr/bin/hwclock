@@ -1,0 +1,8 @@
+#!/bin/sh
+# hwclock wrapper for Ironwood TPU machines.
+# The Ironwood BMC does not expose a hardware RTC via the USB management
+# interface, so hwclock --systohc always fails. IPA calls this before
+# poweroff with ignore_errors=True, but a bug in this IPA version causes
+# FileNotFoundError to bypass that handler. This wrapper prevents the
+# failure and allows provisioning to complete cleanly.
+exit 0

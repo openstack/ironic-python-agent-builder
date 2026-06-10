@@ -1,0 +1,16 @@
+# Suppress the default route advertised by the BMC USB NIC (enp0s20f0u8*).
+# The BMC controller provides a default route via RA, but it has no path to
+# the Ironic management network (fc00:ffff:ffff:f158::/48). Allowing it
+# causes kernel source-address selection to prefer the BMC NIC over the DCN
+# NIC (ens8f0/ens40f0 via fe80::1), breaking IPA-to-Ironic connectivity.
+#
+# This file matches before the auto-generated 71-default.network (10 < 71)
+# so it takes precedence for BMC USB NIC interfaces.
+[Match]
+Name=enp0s20f0u8*
+
+[Network]
+IPv6AcceptRA=yes
+
+[IPv6AcceptRA]
+UseGateway=no

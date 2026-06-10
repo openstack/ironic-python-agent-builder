@@ -1,0 +1,19 @@
+#!/bin/bash
+set -eux
+
+# --- nvidia-persistenced -------------------------------------------------
+# Create a dedicated system user (mirrors the Ansible role) and enable the
+# service with an override that runs with --persistence-mode.
+useradd --system --shell /usr/sbin/nologin \
+    --comment "NVIDIA Persistence Daemon user" \
+    nvidia-persistenced 2>/dev/null || true
+
+mkdir -p /etc/systemd/system/nvidia-persistenced.service.d
+# override.conf is laid down by install-static from static/
+systemctl enable nvidia-persistenced
+systemctl enable nvidia-gpu-reset
+
+# --- peermem -------------------------------------------------------------
+if [ "${DIB_ENABLE_PEERMEM:-false}" = "true" ]; then
+    echo "nvidia-peermem" > /etc/modules-load.d/nvidia-peermem.conf
+fi

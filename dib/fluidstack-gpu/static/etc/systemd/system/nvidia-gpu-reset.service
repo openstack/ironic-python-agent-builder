@@ -1,0 +1,14 @@
+[Unit]
+Description=Reset NVIDIA GPUs via PCIe FLR before driver load
+DefaultDependencies=no
+Before=systemd-modules-load.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/nvidia-gpu-reset.sh
+RemainAfterExit=yes
+StandardOutput=journal+console
+StandardError=journal+console
+
+[Install]
+WantedBy=sysinit.target

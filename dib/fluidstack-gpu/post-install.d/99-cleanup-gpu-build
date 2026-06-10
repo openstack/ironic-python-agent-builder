@@ -1,0 +1,20 @@
+#!/bin/bash
+set -eux
+
+# Remove the CUDA development toolkit that was needed only to compile nccl-tests.
+# Keep: cuda-cudart-*, libnccl2, nvidia-headless-no-dkms-*, nvidia-utils-*,
+#       libnvidia-compute-* (these are all needed at runtime).
+DEBIAN_FRONTEND=noninteractive apt-get remove -y --auto-remove \
+    libnccl-dev \
+    linux-headers-\* \
+    cuda-toolkit-\* \
+    cuda-compiler-\* \
+    cuda-cudart-dev-\* \
+    cuda-nvcc-\* \
+    cuda-libraries-dev-\* \
+    gdrcopy-tests \
+    || true
+
+apt-get autoremove -y
+apt-get clean
+rm -rf /var/lib/apt/lists/*

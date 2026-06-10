@@ -1,0 +1,11 @@
+#!/bin/bash
+set -eux
+
+# The gdrdrv-dkms postinst builds gdrdrv.ko via DKMS and places the .ko.zst
+# on disk, but does NOT record it in the DKMS state database ("dkms uninstall"
+# reports "not installed"). The DIB 97-dkms element then calls "dkms install",
+# which finds the orphaned .ko.zst at version "2.5" (module's internal version,
+# not the package version "2.5.1") and refuses to overwrite without --force.
+# Remove the orphaned file so 97-dkms can install cleanly.
+KERNEL_VERSION=$(ls /lib/modules | head -1)
+rm -f "/lib/modules/${KERNEL_VERSION}/updates/dkms/gdrdrv.ko.zst"

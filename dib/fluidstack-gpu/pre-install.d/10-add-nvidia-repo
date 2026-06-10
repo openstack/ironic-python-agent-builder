@@ -1,0 +1,12 @@
+#!/bin/bash
+set -eux
+
+# Add the NVIDIA CUDA apt repository using the official cuda-keyring package.
+# This repo provides nvidia-headless-no-dkms-*, libnccl2, cuda-cudart-*, etc.
+KEYRING_DEB=cuda-keyring_1.1-1_all.deb
+curl -fsSL \
+    "https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/${KEYRING_DEB}" \
+    -o /tmp/${KEYRING_DEB}
+dpkg -i /tmp/${KEYRING_DEB}
+rm /tmp/${KEYRING_DEB}
+apt-get update -q

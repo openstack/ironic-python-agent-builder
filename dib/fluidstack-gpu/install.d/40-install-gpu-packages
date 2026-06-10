@@ -1,0 +1,77 @@
+#!/bin/bash
+set -eux
+
+NVIDIA_VER="${DIB_NVIDIA_DRIVER_VERSION:-590.48.01}"
+CUDA_VER="${DIB_CUDA_VERSION:-13-1}"
+CUDA_MAJOR=$(echo "${CUDA_VER}" | cut -d'-' -f1)
+
+# --- Kernel headers first ------------------------------------------------
+# Install headers for the Ubuntu kernel in the image BEFORE any DKMS package.
+# When headers are present at DKMS package install time, the modules are built
+# immediately against the right kernel. Installing headers afterwards triggers
+# the postinst DKMS hook on already-registered modules, which fails in a chroot.
+KERNEL_VERSION=$(ls /lib/modules | head -1)
+DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    "linux-headers-${KERNEL_VERSION}"
+
+# DKMS 3.4.x from the NVIDIA CUDA repo passes ARCH=amd64 (Debian package arch)
+# to the kernel build system. The kernel has no arch/amd64/ — it only knows
+# x86_64 → x86. Create a symlink so the kernel Makefile finds its arch files.
+ln -sf x86 "/usr/src/linux-headers-${KERNEL_VERSION}/arch/amd64"
+
+# --- Drivers and CUDA toolkit -------------------------------------------
+# Pin the driver version first, then install nvidia-open. DKMS builds the
+# kernel module for the headers we just installed.
+DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    "nvidia-driver-pinning-${NVIDIA_VER}" \
+    nvidia-open \
+    "cuda-toolkit-${CUDA_VER}" \
+    libnccl2 \
+    libnccl-dev \
+    "cuda-cudart-${CUDA_VER}"
+
+# --- DCGM ----------------------------------------------------------------
+if [ "${DIB_ENABLE_DCGM:-true}" = "true" ]; then
+    if [ "${CUDA_MAJOR}" -ge 13 ]; then
+        DCGM_PKG="datacenter-gpu-manager-4-cuda${CUDA_MAJOR}"
+    else
+        DCGM_PKG="datacenter-gpu-manager"
+    fi
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+        "${DCGM_PKG}"
+    systemctl enable nvidia-dcgm
+fi
+
+# --- nvidia-fabricmanager: explicitly disabled ---------------------------
+# Fabric Manager requires NVSwitch hardware. Single-GPU and PCIe-attached
+# nodes don't have NVSwitch, so it will always fail to start.
+if systemctl list-unit-files nvidia-fabricmanager.service &>/dev/null; then
+    systemctl disable nvidia-fabricmanager
+fi
+
+# --- GDRCopy -------------------------------------------------------------
+if [ "${DIB_ENABLE_GDRCOPY:-true}" = "true" ]; then
+    GDRCOPY_VER="${DIB_GDRCOPY_VERSION:-2.5.1-1}"
+    GDRCOPY_SEMVER="${GDRCOPY_VER%-*}"          # 2.5.1-1 → 2.5.1
+    GDRCOPY_CUDA="${CUDA_MAJOR}.0"
+    GDRCOPY_BASE="https://developer.download.nvidia.com/compute/redist/gdrcopy/CUDA%20${GDRCOPY_CUDA}/ubuntu24_04/x64"
+
+    mkdir -p /tmp/gdrcopy
+
+    # Install all GDRCopy packages including gdrdrv-dkms. The postinst builds
+    # and installs gdrdrv.ko via DKMS (works because of the arch/amd64 symlink).
+    # post-install.d/96-reset-gdrdrv-dkms uninstalls it via DKMS before the
+    # DIB 97-dkms element runs, so 97-dkms can install it cleanly without the
+    # version mismatch (MODULE_VERSION "2.5" vs DKMS package version "2.5.1").
+    for deb in \
+        "gdrdrv-dkms_${GDRCOPY_VER}_amd64.Ubuntu24_04.deb" \
+        "libgdrapi_${GDRCOPY_VER}_amd64.Ubuntu24_04.deb" \
+        "gdrcopy-tests_${GDRCOPY_VER}_amd64.Ubuntu24_04+cuda${GDRCOPY_CUDA}.deb" \
+        "gdrcopy_${GDRCOPY_VER}_amd64.Ubuntu24_04.deb"
+    do
+        curl -fsSL "${GDRCOPY_BASE}/${deb}" -o "/tmp/gdrcopy/${deb}"
+        DEBIAN_FRONTEND=noninteractive dpkg -i "/tmp/gdrcopy/${deb}"
+    done
+
+    rm -rf /tmp/gdrcopy
+fi

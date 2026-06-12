@@ -144,6 +144,9 @@ $PYTHON_COMMAND setup.py sdist --dist-dir "$BUILDDIR/tmp/localpip" --quiet
 ls $BUILDDIR/tmp/localpip || true
 cp requirements.txt $BUILDDIR/tmp/ipa-requirements.txt
 
+# NOTE(clif): Modify ipa-requirements.txt to pin setuptools
+echo "setuptools>=64.0.0,<82.0.0 # MIT" >> $BUILDDIR/tmp/ipa-requirements.txt
+
 if [ -n "$IRONIC_LIB_SOURCE" ]; then
     pushd $IRONIC_LIB_SOURCE
     rm -rf *.egg-info

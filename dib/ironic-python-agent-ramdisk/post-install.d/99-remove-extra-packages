@@ -26,7 +26,7 @@ for folder in $KNOWN_FIRMWARE_PATH; do
         # if it is not present already.
         if [[ "$item" != "" ]]; then
             if [[ "$item" =~ "/" ]]; then
-                # We're deleting targetted contents in a folder,
+                # We're deleting targeted contents in a folder,
                 # and not an entire folder. Since we're checking for an
                 # an empty string, we should be fine letting it do the
                 # expansion.
@@ -42,7 +42,7 @@ for folder in $KNOWN_FIRMWARE_PATH; do
                 # In this case, we have to use glob expansion because we
                 # have objects which are only available via glob expansion.
                 # NOTE(TheJulia): Fun factoid, these folders can have
-                # subfolders as well, and recursive is thus required becuase
+                # subfolders as well, and recursive is thus required because
                 # otherwise rm errors and aborts the deletion.
                 rm -rf $folder$item*
             fi

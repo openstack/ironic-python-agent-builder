@@ -27,7 +27,7 @@ export IPA_REMOVE_FIRMWARE=${IPA_REMOVE_FIRMWARE:-amdgpu,netronome,qcom,ti-commu
 # ath9k = Qualcomm 802.11 PCI/PCI-E
 # ath12k = Qualcomm Wi-Fi 7
 # rtl_bt = Realtek Bluetooth
-# v4l = General catch-all for Video 4 Linux, mainly Conexant hardware.
+# v4l = General catch-all for Video 4 Linux, mainly Connexant hardware.
 # cirrus = CirrusLogic DSP and Amplifier firmware
 # dvb = General catch-all for digital tv adapter interfaces
 # mwl8k == Marvell wireless

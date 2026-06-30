@@ -1,0 +1,4 @@
+enable ironic-python-agent.service
+enable openstack-ironic-python-agent.service
+enable ironic-agent-create-rescue-user.path
+enable ironic-agent-resolve-config-drive.service

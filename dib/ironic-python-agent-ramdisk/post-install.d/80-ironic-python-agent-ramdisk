@@ -32,6 +32,7 @@ case "$DIB_INIT_SYSTEM" in
             systemctl enable ironic-agent-create-rescue-user.path
         fi
         systemctl enable ironic-agent-resolve-config-drive.service
+        systemctl set-default multi-user.target
         # NOTE(rpittau) disable caching remote package index to prevent
         # delays due to failures.
         # This is a new service for dnf-based systems (e.g. Centos8) to speed

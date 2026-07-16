@@ -1,0 +1,5 @@
+---
+features:
+  - |
+    The ``ironic-python-agent-ramdisk`` element now installs the podman
+    package to support deploying bootc images.

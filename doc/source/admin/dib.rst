@@ -276,6 +276,7 @@ Extends ``ironic-python-agent-ramdisk-base`` with the following:
 
 * Installs the ``dhcp-all-interfaces`` element so the node, upon booting,
   attempts to obtain an IP address on all available network interfaces.
+* Installs ``podman`` package to support deploying bootc images
 
 Use this element for the default IPA ramdisk build. Use
 ``ironic-python-agent-ramdisk-base`` instead if you want a minimal image

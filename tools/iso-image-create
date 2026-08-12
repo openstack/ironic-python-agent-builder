@@ -19,7 +19,6 @@
 
 SCRIPTNAME=`basename $0`
 TMP_BUILD_DIR="/tmp/$SCRIPTNAME.$$"
-QEMU_IMG="/usr/bin/qemu-img"
 MKISOFS="/usr/bin/mkisofs"
 
 

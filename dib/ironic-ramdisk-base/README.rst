@@ -11,4 +11,8 @@ Configurable Environment Variables
 - `DIB_IPA_MINIMAL_PRUNE` defaults to `0` (false). If set to `1`, will skip
   most ramdisk size optimizations. This may be helpful for use of packages
   with IPA that require otherwise-pruned directories or files.
+- `DIB_IPA_KEEP_RPMDB` defaults to `0` (false). If set to `1`, the RPM
+  package database and DNF transaction history will be retained in the
+  ramdisk. This allows ``rpm -q`` to be used to query installed packages
+  on the built image, at a cost of ~38 MiB.
 

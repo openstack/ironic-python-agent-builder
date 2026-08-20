@@ -60,6 +60,19 @@ else
     # in /usr/share/misc. Therefore we are removing only the
     # ./usr/share/misc/m* (will remove the magic and magic.mgc files).
     # on RHEL pci.ids is locate on /usr/share/hwdata/pci.ids.
+
+    # Build optional prune arguments for RPM/DNF package database.
+    # By default these are pruned to save ~38 MiB, but setting
+    # DIB_IPA_KEEP_RPMDB=1 will retain them so that rpm -q can be
+    # used to query the package database on the built image.
+    RPMDB_PRUNE=()
+    if [ "${DIB_IPA_KEEP_RPMDB:-0}" -eq 0 ]; then
+        RPMDB_PRUNE=(
+            -path './var/lib/dnf/*' -prune -o
+            -path './usr/lib/sysimage/rpm/*' -prune -o
+        )
+    fi
+
     sudo find . -xdev \
         -path './sys/*' -prune -o \
         -path './tmp/*' -prune -o \
@@ -77,9 +90,8 @@ else
         -path './usr/share/misc/m*' -prune -o \
         -path './usr/src/kernels/*' -prune -o \
         -path './var/cache/*' -prune -o \
-        -path './var/lib/dnf/*' -prune -o \
+        "${RPMDB_PRUNE[@]}" \
         -path './var/log/*' -prune -o \
-        -path './usr/lib/sysimage/rpm/*' -prune -o \
         -path './usr/share/anaconda/*' -prune -o \
         -path './usr/share/bash-completion/*' -prune -o \
         -path './usr/share/cockpit/*' -prune -o \

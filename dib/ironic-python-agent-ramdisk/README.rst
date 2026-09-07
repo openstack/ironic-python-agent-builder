@@ -11,6 +11,7 @@ with the following:
 
 * Installs the ``dhcp-all-interfaces`` so the node, upon booting, attempts to
   obtain an IP address on all available network interfaces.
+* Installs ``podman`` package to support deploying bootc images
 
 This element outputs three files:
 

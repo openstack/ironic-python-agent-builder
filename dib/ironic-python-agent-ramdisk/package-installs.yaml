@@ -1,0 +1,3 @@
+# podman, slirp4netnz is required for bootc installs using container images
+podman:
+slirp4netns:

@@ -2,12 +2,14 @@
   "release": {
     "rhel": {
       "9": {
+        "passwd": "passwd",
         "python": "python3.12",
         "python-dev": "python3.12-devel"
       }
     },
     "centos": {
       "9-stream": {
+        "passwd": "passwd",
         "python": "python3.12",
         "python-dev": "python3.12-devel"
       }
@@ -20,6 +22,7 @@
       "libffi-dev": "libffi-devel",
       "libssl-dev": "openssl-devel",
       "open-iscsi": "iscsi-initiator-utils",
+      "passwd": "shadow-utils",
       "python-dev": "python3-devel",
       "qemu-utils": "qemu-img"
     },

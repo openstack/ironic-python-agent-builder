@@ -16,6 +16,7 @@
   "family": {
     "redhat": {
       "genisoimage": "xorriso",
+      "iptables": "iptables-nft",
       "libffi-dev": "libffi-devel",
       "libssl-dev": "openssl-devel",
       "open-iscsi": "iscsi-initiator-utils",

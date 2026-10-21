@@ -11,6 +11,7 @@ lldpad:
 pciutils:
 smartmontools:
 sysbench:
+  when: DIB_IPA_HARDWARE_SYSBENCH = 1
 
 biosdevname:
     not-arch: aarch64,arm64,ppc64,ppc64el,ppc64le

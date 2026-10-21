@@ -114,6 +114,8 @@
     parent: ironic-python-agent-check-image-dib-centos10
     vars:
       extra_elements: ["extra-hardware"]
+      devstack_localrc:
+        DIB_IPA_HARDWARE_SYSBENCH: 0
 
 - job:
     name: ironic-python-agent-check-image-dib-debian

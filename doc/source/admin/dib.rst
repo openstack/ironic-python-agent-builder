@@ -9,7 +9,7 @@ real hardware. The recommended distributions are:
 
 The following should work but receive only limited testing and support:
 
-* Ubuntu 20.04 Focal
+* Ubuntu 24.04 Noble
 * Debian Bookworm (``debian-minimal`` element)
 
 Building
@@ -316,4 +316,3 @@ This element can also configure client certificate validation in IPA. If you
 wish to validate client certificates, set ``DIB_IPA_CA_FILE`` to a CA file
 you wish IPA client connections to be validated against. This CA file will
 be copied into the built ramdisk, and IPA will be configured to use it.
-

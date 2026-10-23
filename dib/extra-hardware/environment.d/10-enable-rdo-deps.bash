@@ -1,4 +1,10 @@
 
+# sysbench is installed by default to preserve existing behaviour, but it
+# is only used by the opt-in cpu/mem benchmarks and is only available in
+# EPEL on RHEL/CentOS Stream (not in the base repos), so it can be
+# disabled with DIB_IPA_HARDWARE_SYSBENCH=0
+export DIB_IPA_HARDWARE_SYSBENCH=${DIB_IPA_HARDWARE_SYSBENCH:-1}
+
 if [[ "${DISTRO_NAME}" =~ "centos" ]]; then
 
     if [ -n "${DIB_YUM_REPO_CONF:-}" ] ; then

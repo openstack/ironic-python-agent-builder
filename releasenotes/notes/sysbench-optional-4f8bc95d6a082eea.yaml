@@ -1,0 +1,9 @@
+---
+features:
+  - |
+    Ramdisk builds with the ``extra-hardware`` element can now be performed on
+    platforms where ``sysbench`` is unavailable: on RHEL/CentOS Stream it is
+    only found in EPEL and not in the base repositories. Set
+    ``DIB_IPA_HARDWARE_SYSBENCH=0`` to skip installing it. sysbench is still
+    installed by default and is only used by the opt-in cpu and memory
+    benchmarks, so default inspection data is not affected.

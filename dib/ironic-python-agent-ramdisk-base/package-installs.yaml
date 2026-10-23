@@ -12,6 +12,8 @@ python:
 parted:
 hdparm:
 util-linux:
+# Debian packages fdisk and sfdisk separately from util-linux.
+fdisk:
 genisoimage:
 gdisk:
 kmod:

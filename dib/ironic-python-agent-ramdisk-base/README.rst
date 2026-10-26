@@ -11,7 +11,8 @@ Beyond installing the ironic-python-agent, this element does the following:
 * Disables the ``iptables`` service on SysV and systemd based systems.
 * Disables the ``ufw`` service on Upstart based systems.
 * Installs packages required for the operation of the ironic-python-agent::
-    ``qemu-utils`` ``parted`` ``hdparm`` ``util-linux`` ``genisoimage``
+    ``qemu-utils`` ``parted`` ``hdparm`` ``util-linux`` ``fdisk``
+    ``genisoimage``
 * When installing from source, ``python-dev`` and ``gcc`` are also installed
   in order to support source based installation of ironic-python-agent and its
   dependencies.

@@ -18,6 +18,7 @@
   "family": {
     "redhat": {
       "genisoimage": "xorriso",
+      "fdisk": "util-linux",
       "iptables": "iptables-nft",
       "libffi-dev": "libffi-devel",
       "libssl-dev": "openssl-devel",

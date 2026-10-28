@@ -16,6 +16,9 @@ Beyond installing the ironic-python-agent, this element does the following:
 * When installing from source, ``python-dev`` and ``gcc`` are also installed
   in order to support source based installation of ironic-python-agent and its
   dependencies.
+* Installs the ``gdisk`` package, providing the ``sgdisk`` tool which older
+  ironic-python-agent releases use to manipulate GPT partitions. Set
+  ``DIB_IPA_HARDWARE_GDISK`` to ``0`` to skip installing it.
 * Install the certificate if any, which is set to the environment variable
   ``DIB_IPA_CERT`` for validating the authenticity by ironic-python-agent. The
   certificate can be self-signed certificate or CA certificate.

@@ -16,6 +16,7 @@ util-linux:
 fdisk:
 genisoimage:
 gdisk:
+  when: DIB_IPA_HARDWARE_GDISK = 1
 kmod:
 psmisc:
 dosfstools:

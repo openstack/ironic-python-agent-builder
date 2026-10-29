@@ -1,0 +1,8 @@
+---
+fixes:
+  - |
+    Rocky Linux and AlmaLinux ramdisks are now treated as part of the Red Hat
+    family. This means that Red Hat family specific steps are now applied to
+    them, including installing ``linux-firmware``, removing packages that
+    should not be present on IPA images, and masking the ``dnf-makecache`` and
+    ``fwupd-refresh`` units.

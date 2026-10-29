@@ -9,6 +9,7 @@ https://docs.openstack.org/ironic-python-agent/latest/
 Beyond installing the ironic-python-agent, this element does the following:
 
 * Disables the ``iptables`` service on SysV and systemd based systems.
+* Removes ``firewalld`` on Red Hat family systems.
 * Disables the ``ufw`` service on Upstart based systems.
 * Installs packages required for the operation of the ironic-python-agent::
     ``qemu-utils`` ``parted`` ``hdparm`` ``util-linux`` ``fdisk``

@@ -1,0 +1,7 @@
+---
+fixes:
+  - |
+    Removes ``firewalld`` from Red Hat family ramdisks. It is enabled by
+    default on some images, for example those built using the
+    ``rocky-container`` element, and blocks connections from Ironic to the
+    agent API on port 9999.

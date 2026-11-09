@@ -1,4 +1,4 @@
-if [[ $DISTRO_NAME =~ (fedora|centos|rhel) ]]; then
+if [[ $DISTRO_NAME =~ (fedora|centos|rhel|rocky|almalinux) ]]; then
     export IPA_DISTRO_FAMILY=rh
 else
     export IPA_DISTRO_FAMILY=other

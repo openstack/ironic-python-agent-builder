@@ -80,6 +80,14 @@ tuned:
     uninstall: true
     when: IPA_DISTRO_FAMILY = rh
 
+# NOTE: Removing python3-gobject-base also removes firewalld, if installed.
+# This would remove ipset as an unused dependency, but its %preun scriptlet
+# fails in the chroot if the xt_set module is loaded on the build host.
+# Installing it before the removals marks it as user installed, so it is kept.
+ipset:
+    phase: pre-install.d
+    when: IPA_DISTRO_FAMILY = rh
+
 # Unnecessary packages to remove. We run all removals in pre-install phase, to
 # avoid breaking installs that happen in install phase.
 man-db:

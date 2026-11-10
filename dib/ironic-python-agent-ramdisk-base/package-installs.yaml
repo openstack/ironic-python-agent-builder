@@ -107,6 +107,13 @@ cockpit:
     phase: post-install.d
     uninstall: true
     when: IPA_DISTRO_FAMILY = rh
+# NOTE: firewalld is enabled by default on some RH family images, such as
+# those built using the rocky-container element. It blocks connections to the
+# agent API, so remove it.
+firewalld:
+    phase: post-install.d
+    uninstall: true
+    when: IPA_DISTRO_FAMILY = rh
 kernel-debug-devel:
     phase: pre-install.d
     uninstall: true
